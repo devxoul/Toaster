@@ -25,6 +25,7 @@
 	_textLabel.textColor = [UIColor whiteColor];
 	_textLabel.backgroundColor = [UIColor clearColor];
 	_textLabel.font = [UIFont systemFontOfSize:12];
+	_textLabel.numberOfLines = 0;
 	[self addSubview:_textLabel];
 	
 	_textInsets = UIEdgeInsetsMake( 6, 10, 6, 10 );

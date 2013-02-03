@@ -46,7 +46,10 @@
 - (id)init
 {
 	self = [super init];
-	_view = [[JLToastView alloc] init];
+    if( self )
+    {
+        _view = [[JLToastView alloc] init];
+    }
 	return self;
 }
 
@@ -72,7 +75,7 @@
 - (void)setText:(NSString *)text
 {
 	_view.textLabel.text = text;
-//	[_view layoutSubviews];
+    //	[_view layoutSubviews];
 }
 
 

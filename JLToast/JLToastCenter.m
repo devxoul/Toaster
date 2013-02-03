@@ -33,8 +33,11 @@
 - (id)init
 {
 	self = [super init];
-	_queue = [[NSOperationQueue alloc] init];
-	_queue.maxConcurrentOperationCount = 1;
+    if( self )
+    {
+        _queue = [[NSOperationQueue alloc] init];
+        _queue.maxConcurrentOperationCount = 1;
+    }
 	return self;
 }
 

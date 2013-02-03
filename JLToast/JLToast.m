@@ -94,7 +94,10 @@
 		[self performSelectorOnMainThread:@selector(start) withObject:nil waitUntilDone:NO];
 		return;
 	}
-	
+    [super start];
+}
+
+- (void)main{
 	[self willChangeValueForKey:@"isExecuting"];
 	
 	_isExecuting = YES;

@@ -25,22 +25,23 @@
 - (id)init
 {
 	self = [super init];
-	
-	_backgroundView = [[UIView alloc] initWithFrame:CGRectMake( 0, 0, 100, 100 )];
-	_backgroundView.backgroundColor = [UIColor colorWithWhite:0 alpha:0.7];
-	_backgroundView.layer.cornerRadius = 5;
-	_backgroundView.clipsToBounds = YES;
-	[self addSubview:_backgroundView];
-	
-	_textLabel = [[UILabel alloc] initWithFrame:CGRectMake( 0, 0, 100, 100 )];
-	_textLabel.textColor = [UIColor whiteColor];
-	_textLabel.backgroundColor = [UIColor clearColor];
-	_textLabel.font = [UIFont systemFontOfSize:12];
-	_textLabel.numberOfLines = 0;
-	[self addSubview:_textLabel];
-	
-	_textInsets = UIEdgeInsetsMake( 6, 10, 6, 10 );
-	
+    if( self )
+    {
+        _backgroundView = [[UIView alloc] initWithFrame:CGRectMake( 0, 0, 100, 100 )];
+        _backgroundView.backgroundColor = [UIColor colorWithWhite:0 alpha:0.7];
+        _backgroundView.layer.cornerRadius = 5;
+        _backgroundView.clipsToBounds = YES;
+        [self addSubview:_backgroundView];
+        
+        _textLabel = [[UILabel alloc] initWithFrame:CGRectMake( 0, 0, 100, 100 )];
+        _textLabel.textColor = [UIColor whiteColor];
+        _textLabel.backgroundColor = [UIColor clearColor];
+        _textLabel.font = [UIFont systemFontOfSize:12];
+        _textLabel.numberOfLines = 0;
+        [self addSubview:_textLabel];
+        
+        _textInsets = UIEdgeInsetsMake( 6, 10, 6, 10 );
+	}
 	return self;
 }
 

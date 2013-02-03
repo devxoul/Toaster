@@ -26,42 +26,42 @@
 
 + (id)makeText:(NSString *)text
 {
-	return [JLToast makeText:text delay:0 duration:JLToastShortDelay];
+    return [JLToast makeText:text delay:0 duration:JLToastShortDelay];
 }
 
 + (id)makeText:(NSString *)text duration:(NSTimeInterval)duration
 {
-	return [JLToast makeText:text delay:0 duration:duration];
+    return [JLToast makeText:text delay:0 duration:duration];
 }
 
 + (id)makeText:(NSString *)text delay:(NSTimeInterval)delay duration:(NSTimeInterval)duration
 {
-	JLToast *toast = [[JLToast alloc] init];
-	toast.text = text;
-	toast.delay = delay;
-	toast.duration = duration;
-	
-	return toast;
+    JLToast *toast = [[JLToast alloc] init];
+    toast.text = text;
+    toast.delay = delay;
+    toast.duration = duration;
+    
+    return toast;
 }
 
 - (id)init
 {
-	self = [super init];
+    self = [super init];
     if( self )
     {
         _view = [[JLToastView alloc] init];
     }
-	return self;
+    return self;
 }
 
 - (void)show
 {
-	[[JLToastCenter defaultCenter] addToast:self];
+    [[JLToastCenter defaultCenter] addToast:self];
 }
 
 - (void)cancel
 {
-	
+    
 }
 
 
@@ -70,12 +70,12 @@
 
 - (NSString *)text
 {
-	return _view.textLabel.text;
+    return _view.textLabel.text;
 }
 
 - (void)setText:(NSString *)text
 {
-	_view.textLabel.text = text;
+    _view.textLabel.text = text;
     //	[_view layoutSubviews];
 }
 
@@ -85,26 +85,26 @@
 
 - (BOOL)isConcurrent
 {
-	return YES;
+    return YES;
 }
 
 - (void)start
 {
-	if( ![NSThread isMainThread] )
-	{
-		[self performSelectorOnMainThread:@selector(start) withObject:nil waitUntilDone:NO];
-		return;
-	}
+    if( ![NSThread isMainThread] )
+    {
+        [self performSelectorOnMainThread:@selector(start) withObject:nil waitUntilDone:NO];
+        return;
+    }
     [super start];
 }
 
 - (void)main{
-	[self willChangeValueForKey:@"isExecuting"];
-	
-	_isExecuting = YES;
-	
-	[self didChangeValueForKey:@"isExecuting"];
-	
+    [self willChangeValueForKey:@"isExecuting"];
+    
+    _isExecuting = YES;
+    
+    [self didChangeValueForKey:@"isExecuting"];
+    
     dispatch_async(dispatch_get_main_queue(), ^{ // Non-main thread cannot modify user interface
         _view.alpha = 0;
         [[[UIApplication sharedApplication] keyWindow] addSubview:_view];
@@ -125,24 +125,24 @@
 
 - (void)finish
 {
-	[self willChangeValueForKey:@"isExecuting"];
-	[self willChangeValueForKey:@"isFinished"];
-	
-	_isExecuting = NO;
-	_isFinished = YES;
-	
-	[self didChangeValueForKey:@"isExecuting"];
-	[self didChangeValueForKey:@"isFinished"];
+    [self willChangeValueForKey:@"isExecuting"];
+    [self willChangeValueForKey:@"isFinished"];
+    
+    _isExecuting = NO;
+    _isFinished = YES;
+    
+    [self didChangeValueForKey:@"isExecuting"];
+    [self didChangeValueForKey:@"isFinished"];
 }
 
 - (BOOL)isExecuting
 {
-	return _isExecuting;
+    return _isExecuting;
 }
 
 - (BOOL)isFinished
 {
-	return _isFinished;
+    return _isFinished;
 }
 
 @end

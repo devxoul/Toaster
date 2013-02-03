@@ -26,8 +26,8 @@
 
 @interface JLToast : NSOperation
 {
-	BOOL _isExecuting;
-	BOOL _isFinished;
+    BOOL _isExecuting;
+    BOOL _isFinished;
 }
 
 @property (nonatomic, strong) JLToastView *view;

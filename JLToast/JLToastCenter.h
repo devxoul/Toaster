@@ -23,7 +23,7 @@
 
 @interface JLToastCenter : NSObject
 {
-	NSOperationQueue *_queue;
+    NSOperationQueue *_queue;
 }
 
 + (id)defaultCenter;

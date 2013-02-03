@@ -20,6 +20,7 @@
 #import "JLToast.h"
 #import "JLToastView.h"
 #import "JLToastCenter.h"
+#import <dispatch/dispatch.h>
 
 @implementation JLToast
 
@@ -46,7 +47,10 @@
 - (id)init
 {
 	self = [super init];
-	_view = [[JLToastView alloc] init];
+    if( self )
+    {
+        _view = [[JLToastView alloc] init];
+    }
 	return self;
 }
 
@@ -72,7 +76,7 @@
 - (void)setText:(NSString *)text
 {
 	_view.textLabel.text = text;
-//	[_view layoutSubviews];
+    //	[_view layoutSubviews];
 }
 
 
@@ -91,27 +95,32 @@
 		[self performSelectorOnMainThread:@selector(start) withObject:nil waitUntilDone:NO];
 		return;
 	}
-	
+    [super start];
+}
+
+- (void)main{
 	[self willChangeValueForKey:@"isExecuting"];
 	
 	_isExecuting = YES;
 	
 	[self didChangeValueForKey:@"isExecuting"];
 	
-	_view.alpha = 0;
-	[[[UIApplication sharedApplication] keyWindow] addSubview:_view];
-	[UIView animateWithDuration:0.5 delay:_delay options:UIViewAnimationOptionBeginFromCurrentState animations:^{
-		_view.alpha = 1;
-	} completion:^(BOOL finished) {
-		[UIView animateWithDuration:_duration animations:^{
-			_view.alpha = 1.0001;
-		} completion:^(BOOL finished) {
-			[self finish];
-			[UIView animateWithDuration:0.5 animations:^{
-				_view.alpha = 0;
-			}];
-		}];
-	}];
+    dispatch_async(dispatch_get_main_queue(), ^{ // Non-main thread cannot modify user interface
+        _view.alpha = 0;
+        [[[UIApplication sharedApplication] keyWindow] addSubview:_view];
+        [UIView animateWithDuration:0.5 delay:_delay options:UIViewAnimationOptionBeginFromCurrentState animations:^{
+            _view.alpha = 1;
+        } completion:^(BOOL finished) {
+            [UIView animateWithDuration:_duration animations:^{
+                _view.alpha = 1.0001;
+            } completion:^(BOOL finished) {
+                [self finish];
+                [UIView animateWithDuration:0.5 animations:^{
+                    _view.alpha = 0;
+                }];
+            }];
+        }];
+    });
 }
 
 - (void)finish

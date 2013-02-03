@@ -25,16 +25,21 @@
 + (id)defaultCenter
 {
 	static id center = nil;
-	if( !center )
+    static dispatch_once_t onceToken; // It makes singleton object thread-safe
+    dispatch_once(&onceToken, ^{
 		center = [[JLToastCenter alloc] init];
+    });
 	return center;
 }
 
 - (id)init
 {
 	self = [super init];
-	_queue = [[NSOperationQueue alloc] init];
-	_queue.maxConcurrentOperationCount = 1;
+    if( self )
+    {
+        _queue = [[NSOperationQueue alloc] init];
+        _queue.maxConcurrentOperationCount = 1;
+    }
 	return self;
 }
 

@@ -28,6 +28,7 @@
     static dispatch_once_t onceToken; // It makes singleton object thread-safe
     dispatch_once(&onceToken, ^{
 		center = [[JLToastCenter alloc] init];
+		[[NSNotificationCenter defaultCenter] addObserver:center selector:@selector(deviceOrientationDidChange:) name:UIDeviceOrientationDidChangeNotification object:nil];
     });
 	return center;
 }
@@ -46,6 +47,14 @@
 - (void)addToast:(JLToast *)toast
 {
 	[_queue addOperation:toast];
+}
+
+- (void)deviceOrientationDidChange:(id)sender
+{
+	if( _queue.operations.count )
+	{
+		[[[_queue.operations objectAtIndex:0] view] layoutSubviews];
+	}
 }
 
 @end

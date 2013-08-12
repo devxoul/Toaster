@@ -52,11 +52,52 @@
 	UIFont *font = _textLabel.font;
 	CGSize constraintSize = CGSizeMake( 280, INT_MAX );
 	CGSize textLabelSize = [_textLabel.text sizeWithFont:font constrainedToSize:constraintSize lineBreakMode:NSLineBreakByWordWrapping];
-	_textLabel.frame = (CGRect){{(NSInteger)( 320 - textLabelSize.width ) / 2, [UIScreen mainScreen].bounds.size.height - textLabelSize.height - 30}, textLabelSize};
-	_backgroundView.frame = CGRectMake( _textLabel.frame.origin.x - _textInsets.left,
-									   _textLabel.frame.origin.y - _textInsets.top,
+	
+	_textLabel.frame = CGRectMake( _textInsets.left, _textInsets.top, textLabelSize.width, textLabelSize.height );
+	_backgroundView.frame = CGRectMake( 0, 0,
 									   _textLabel.frame.size.width + _textInsets.left + _textInsets.right,
 									   _textLabel.frame.size.height + _textInsets.top + _textInsets.bottom );
+	
+	NSInteger x, y, width, height;
+	CGFloat angle;
+	switch( [UIDevice currentDevice].orientation )
+	{
+		case UIDeviceOrientationPortraitUpsideDown:
+			width = _backgroundView.frame.size.width;
+			height = _backgroundView.frame.size.height;
+			x = ([UIScreen mainScreen].bounds.size.width - width) / 2;
+			y = 30;
+			angle = M_PI;
+			break;
+			
+		case UIDeviceOrientationLandscapeLeft:
+			width = _backgroundView.frame.size.height;
+			height = _backgroundView.frame.size.width;
+			x = 20;
+			y = ([UIScreen mainScreen].bounds.size.height - height) / 2;
+			angle = M_PI_2;
+			break;
+			
+		case UIDeviceOrientationLandscapeRight:
+			width = _backgroundView.frame.size.height;
+			height = _backgroundView.frame.size.width;
+			x = [UIScreen mainScreen].bounds.size.width - width - 20;
+			y = ([UIScreen mainScreen].bounds.size.height - height) / 2;
+			angle = -M_PI_2;
+			break;
+			
+		default:
+			width = _backgroundView.frame.size.width;
+			height = _backgroundView.frame.size.height;
+			x = ([UIScreen mainScreen].bounds.size.width - width) / 2;
+			y = [UIScreen mainScreen].bounds.size.height - height - 30;
+			angle = 0;
+			break;
+			
+	}
+	
+	self.transform = CGAffineTransformMakeRotation( angle );
+	self.frame = CGRectMake( x, y, width, height );
 }
 
 @end

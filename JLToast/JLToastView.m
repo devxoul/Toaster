@@ -20,9 +20,9 @@
 #import "JLToastView.h"
 #import <QuartzCore/CALayer.h>
 
-#define JLTOAST_LABEL_FONT_SIZE ((UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) ? 12 : 20)
-#define JLTOAST_OFFSET_PORTRAIT_Y ((UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) ? 100 : 80)
-#define JLTOAST_OFFSET_LANDSCAPE_Y ((UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) ? 70 : 80)
+#define JLTOAST_LABEL_FONT_SIZE ((UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) ? 12 : 16)
+#define JLTOAST_OFFSET_PORTRAIT_Y ((UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) ? 30 : 60)
+#define JLTOAST_OFFSET_LANDSCAPE_Y ((UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) ? 20 : 40)
 
 @implementation JLToastView
 
@@ -53,30 +53,10 @@
 {
 	[super layoutSubviews];
 	
-    // 280과 320을 기기 설정에 맞게 바꾸어야 할듯
-    // 코드를 보니 320은 기기 width, 280은 토스트 길이로 보인다. 비율로 구하면 될듯
-    // 기존 소스
-    /*
-    CGFloat deviceWidth = [UIScreen mainScreen].bounds.size.width;
-    
-	UIFont *font = _textLabel.font;
-	CGSize constraintSize = CGSizeMake( deviceWidth * (280.0f/320.0f), INT_MAX );
-	CGSize textLabelSize = [_textLabel.text sizeWithFont:font constrainedToSize:constraintSize lineBreakMode:NSLineBreakByWordWrapping];
-	_textLabel.frame = (CGRect){{(NSInteger)( deviceWidth - textLabelSize.width ) / 2,
-        [UIScreen mainScreen].bounds.size.height - textLabelSize.height - 100},
-        textLabelSize};
-    
-	_backgroundView.frame = CGRectMake( _textLabel.frame.origin.x - _textInsets.left,
-									   _textLabel.frame.origin.y - _textInsets.top,
-									   _textLabel.frame.size.width + _textInsets.left + _textInsets.right,
-									   _textLabel.frame.size.height + _textInsets.top + _textInsets.bottom );
-     */
-    
-    // 수열이가 회전 관련 새로 짠 소스
     CGFloat deviceWidth = [UIScreen mainScreen].bounds.size.width;
     
     UIFont *font = _textLabel.font;
-	CGSize constraintSize = CGSizeMake( deviceWidth * (280.0f/320.0f), INT_MAX ); // 280
+	CGSize constraintSize = CGSizeMake( deviceWidth * (280.0f/320.0f), INT_MAX );
 	CGSize textLabelSize = [_textLabel.text sizeWithFont:font constrainedToSize:constraintSize lineBreakMode:NSLineBreakByWordWrapping];
     
 	_textLabel.frame = CGRectMake( _textInsets.left, _textInsets.top, textLabelSize.width, textLabelSize.height );

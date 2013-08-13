@@ -106,4 +106,12 @@
 	self.frame = CGRectMake( x, y, width, height );
 }
 
+#pragma mark - hit test
+
+- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event
+{
+    //    NSLog(@"%@ hitTest", [self class]);
+    return nil;
+}
+
 @end

@@ -106,6 +106,7 @@
 	[self didChangeValueForKey:@"isExecuting"];
 	
     dispatch_async(dispatch_get_main_queue(), ^{ // Non-main thread cannot modify user interface
+		[_view layoutSubviews];
         _view.alpha = 0;
         [[[UIApplication sharedApplication] keyWindow] addSubview:_view];
         [UIView animateWithDuration:0.5 delay:_delay options:UIViewAnimationOptionBeginFromCurrentState animations:^{

@@ -14,3 +14,5 @@ build/
 Documentation/Generated
 doxygenWarnings.txt
 *.xcuserdatad
+
+*.xccheckout

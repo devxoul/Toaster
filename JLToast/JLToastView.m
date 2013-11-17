@@ -66,9 +66,9 @@
     
 	NSInteger x, y, width, height;
 	CGFloat angle;
-	switch( [UIDevice currentDevice].orientation )
+	switch( [[UIApplication sharedApplication] statusBarOrientation] )
 	{
-		case UIDeviceOrientationPortraitUpsideDown:
+		case UIInterfaceOrientationPortraitUpsideDown:
 			width = _backgroundView.frame.size.width;
 			height = _backgroundView.frame.size.height;
 			x = ([UIScreen mainScreen].bounds.size.width - width) / 2;
@@ -76,7 +76,7 @@
 			angle = M_PI;
 			break;
             
-		case UIDeviceOrientationLandscapeLeft:
+		case UIInterfaceOrientationLandscapeRight:
 			width = _backgroundView.frame.size.height;
 			height = _backgroundView.frame.size.width;
 			x = JLTOAST_OFFSET_LANDSCAPE_Y;
@@ -84,7 +84,7 @@
 			angle = M_PI_2;
 			break;
             
-		case UIDeviceOrientationLandscapeRight:
+		case UIInterfaceOrientationLandscapeLeft:
 			width = _backgroundView.frame.size.height;
 			height = _backgroundView.frame.size.width;
 			x = [UIScreen mainScreen].bounds.size.width - width - JLTOAST_OFFSET_LANDSCAPE_Y;

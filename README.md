@@ -1,14 +1,36 @@
-# JLToast
+# JLToast - Written in Swift
 
-*JLToast* makes it easy to use Toast in iOS with very simple interface.
+**JLToast** makes it easy to use Toast in iOS with very simple interface.
 
-Just type `[[JLToast makeText:@"Some text"] show]`.
 
-<br />
+## At a glance
 
-You can set duration and delay by using these methods : `- [JLToast makeText:duration:]` and `- [JLToast makeText:delay:duration:]`
+Just see below:
 
-<br />
+```swift
+JLToast.makeText("Some text").show()
+```
+
+
+## Installation
+
+Use [CocoaPods](http://cocoapods.org). Required `Swift`.
+
+```pod
+pod 'JLToast'
+```
+
+
+## Setting duration and delay
+
+```swift
+JLToast.makeText("Some text", duration: JLToastDelay.LongDelay)
+JLToast.makeText("Some text", delay: 1, duration: JLToastDelay.ShortDelay)
+```
+
+How easy!
+
+## Screenshots
 
 ![First Screenshot](https://raw.github.com/Joyfl/JLToast/master/Screenshots/JLToast-Screenshot-1.png)
 <br />

@@ -31,7 +31,6 @@
 		0306E8E616BD0839006C9FFF /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		0306E8E816BD0839006C9FFF /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		0306E8EA16BD0839006C9FFF /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		03A8BFEF193DB9E5008F6DDF /* JLToastSample-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JLToastSample-Bridging-Header.h"; sourceTree = "<group>"; };
 		03A8BFF0193DB9E5008F6DDF /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		03A8BFF2193DBAEA008F6DDF /* RootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		03A8C023193DC510008F6DDF /* JLToast.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JLToast.swift; sourceTree = "<group>"; };
@@ -87,7 +86,6 @@
 				03A8BFF2193DBAEA008F6DDF /* RootViewController.swift */,
 				0306E8F416BD08D1006C9FFF /* JLToast */,
 				0306E8DB16BD0839006C9FFF /* Supporting Files */,
-				03A8BFEF193DB9E5008F6DDF /* JLToastSample-Bridging-Header.h */,
 			);
 			path = JLToastSample;
 			sourceTree = "<group>";

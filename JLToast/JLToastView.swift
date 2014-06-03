@@ -37,6 +37,7 @@ class JLToastView: UIView {
         _textLabel!.textColor = UIColor.whiteColor()
         _textLabel!.backgroundColor = UIColor.clearColor()
         _textLabel!.font = UIFont.systemFontOfSize(JLToastViewValue.FontSize)
+        _textLabel!.numberOfLines = 0
         self.addSubview(_textLabel!)
 
         _textInsets = UIEdgeInsetsMake(6, 10, 6, 10)

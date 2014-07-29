@@ -44,9 +44,9 @@ class JLToastView: UIView {
     }
 
     func updateView() {
-        let deviceWidth = UIScreen.mainScreen().bounds.size.width
+        let deviceWidth = CGRectGetWidth(UIScreen.mainScreen().bounds)
         let font = self._textLabel!.font
-        let constraintSize = CGSizeMake(deviceWidth * (280.0 / 320.0), CGFloat(INT_MAX))
+        let constraintSize = CGSizeMake(deviceWidth * (280.0 / 320.0), CGFloat.max)
         var textLabelSize = self._textLabel!.sizeThatFits(constraintSize)
         self._textLabel!.frame = CGRect(
             x: self._textInsets!.left,

@@ -25,7 +25,7 @@ class JLToastView: UIView {
     var _textLabel: UILabel?
     var _textInsets: UIEdgeInsets?
 
-    init() {
+    override init() {
         super.init(frame: CGRectMake(0, 0, 100, 100))
         _backgroundView = UIView(frame: self.bounds)
         _backgroundView!.backgroundColor = UIColor(white: 0, alpha: 0.7)
@@ -41,6 +41,10 @@ class JLToastView: UIView {
         self.addSubview(_textLabel!)
 
         _textInsets = UIEdgeInsetsMake(6, 10, 6, 10)
+    }
+    
+    required convenience init(coder aDecoder: NSCoder!) {
+        self.init()
     }
 
     func updateView() {

@@ -101,7 +101,7 @@ class JLToast: NSOperation {
         return toast
     }
 
-    init() {
+    override init() {
         _view = JLToastView()
     }
 
@@ -110,7 +110,7 @@ class JLToast: NSOperation {
     }
 
     override func start() {
-        if !NSThread.mainThread()? {
+        if NSThread.mainThread()? == nil {
             dispatch_async(dispatch_get_main_queue(), { () -> Void in self.start() })
         } else {
             super.start()

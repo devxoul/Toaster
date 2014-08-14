@@ -38,7 +38,7 @@ class JLToastCenter: NSObject {
         return SingleInstance.defaultCenter
     }
 
-    init() {
+    override init() {
         _queue.maxConcurrentOperationCount = 1
     }
 

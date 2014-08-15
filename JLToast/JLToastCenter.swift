@@ -19,7 +19,7 @@
 
 import UIKit
 
-class JLToastCenter: NSObject {
+@objc class JLToastCenter: NSObject {
     
     var _queue = NSOperationQueue()
     

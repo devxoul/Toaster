@@ -56,7 +56,7 @@ struct JLToastViewValue {
     }
 }
 
-class JLToast: NSOperation {
+@objc class JLToast: NSOperation {
     var _view: JLToastView?
     
     var text: String {

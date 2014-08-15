@@ -19,7 +19,7 @@
 
 import UIKit
 
-class JLToastView: UIView {
+@objc class JLToastView: UIView {
     
     var _backgroundView: UIView?
     var _textLabel: UILabel?

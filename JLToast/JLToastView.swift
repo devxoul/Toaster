@@ -20,11 +20,11 @@
 import UIKit
 
 class JLToastView: UIView {
-
+    
     var _backgroundView: UIView?
     var _textLabel: UILabel?
     var _textInsets: UIEdgeInsets?
-
+    
     override init() {
         super.init(frame: CGRectMake(0, 0, 100, 100))
         _backgroundView = UIView(frame: self.bounds)
@@ -32,7 +32,7 @@ class JLToastView: UIView {
         _backgroundView!.layer.cornerRadius = 5
         _backgroundView!.clipsToBounds = true
         self.addSubview(_backgroundView!)
-
+        
         _textLabel = UILabel(frame: CGRectMake(0, 0, 100, 100))
         _textLabel!.textColor = UIColor.whiteColor()
         _textLabel!.backgroundColor = UIColor.clearColor()
@@ -40,14 +40,14 @@ class JLToastView: UIView {
         _textLabel!.numberOfLines = 0
         _textLabel!.textAlignment = NSTextAlignment.Center;
         self.addSubview(_textLabel!)
-
+        
         _textInsets = UIEdgeInsetsMake(6, 10, 6, 10)
     }
     
     required convenience init(coder aDecoder: NSCoder!) {
         self.init()
     }
-
+    
     func updateView() {
         let deviceWidth = CGRectGetWidth(UIScreen.mainScreen().bounds)
         let font = self._textLabel!.font
@@ -65,42 +65,42 @@ class JLToastView: UIView {
             width: self._textLabel!.frame.size.width + self._textInsets!.left + self._textInsets!.right,
             height: self._textLabel!.frame.size.height + self._textInsets!.top + self._textInsets!.bottom
         )
-
+        
         var x: CGFloat
         var y: CGFloat
         var width: CGFloat
         var height: CGFloat
         var angle: CGFloat
-
+        
         switch UIApplication.sharedApplication().statusBarOrientation {
-            case UIInterfaceOrientation.PortraitUpsideDown:
-                width = self._backgroundView!.frame.size.width
-                height = self._backgroundView!.frame.size.height
-                x = (UIScreen.mainScreen().bounds.size.width - width) / 2
-                y = JLToastViewValue.PortraitOffsetY
-
-            case UIInterfaceOrientation.LandscapeRight:
-                width = self._backgroundView!.frame.size.height
-                height = self._backgroundView!.frame.size.width
-                x = (UIScreen.mainScreen().bounds.size.width - height) / 2;
-                y = UIScreen.mainScreen().bounds.size.height - width - JLToastViewValue.LandscapeOffsetY
-
-            case UIInterfaceOrientation.LandscapeLeft:
-                width = self._backgroundView!.frame.size.height
-                height = self._backgroundView!.frame.size.width
-                x = (UIScreen.mainScreen().bounds.size.width - height) / 2;
-                y = UIScreen.mainScreen().bounds.size.height - width - JLToastViewValue.LandscapeOffsetY
-
-            default:
-                width = self._backgroundView!.frame.size.width
-                height = self._backgroundView!.frame.size.height
-                x = (UIScreen.mainScreen().bounds.size.width - width) / 2
-                y = UIScreen.mainScreen().bounds.size.height - height - JLToastViewValue.PortraitOffsetY
+        case UIInterfaceOrientation.PortraitUpsideDown:
+            width = self._backgroundView!.frame.size.width
+            height = self._backgroundView!.frame.size.height
+            x = (UIScreen.mainScreen().bounds.size.width - width) / 2
+            y = JLToastViewValue.PortraitOffsetY
+            
+        case UIInterfaceOrientation.LandscapeRight:
+            width = self._backgroundView!.frame.size.height
+            height = self._backgroundView!.frame.size.width
+            x = (UIScreen.mainScreen().bounds.size.width - height) / 2;
+            y = UIScreen.mainScreen().bounds.size.height - width - JLToastViewValue.LandscapeOffsetY
+            
+        case UIInterfaceOrientation.LandscapeLeft:
+            width = self._backgroundView!.frame.size.height
+            height = self._backgroundView!.frame.size.width
+            x = (UIScreen.mainScreen().bounds.size.width - height) / 2;
+            y = UIScreen.mainScreen().bounds.size.height - width - JLToastViewValue.LandscapeOffsetY
+            
+        default:
+            width = self._backgroundView!.frame.size.width
+            height = self._backgroundView!.frame.size.height
+            x = (UIScreen.mainScreen().bounds.size.width - width) / 2
+            y = UIScreen.mainScreen().bounds.size.height - height - JLToastViewValue.PortraitOffsetY
         }
-
+        
         self.frame = CGRectMake(x, y, width, height);
     }
-
+    
     override func hitTest(point: CGPoint, withEvent event: UIEvent!) -> UIView? {
         return nil
     }

@@ -26,73 +26,73 @@ struct JLToastDelay {
 
 struct JLToastViewValue {
     static var FontSize: CGFloat {
-    get {
-        if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Phone {
-            return 12
-        } else {
-            return 16
+        get {
+            if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Phone {
+                return 12
+            } else {
+                return 16
+            }
         }
     }
-    }
-
+    
     static var PortraitOffsetY:CGFloat {
-    get {
-        if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Phone {
-            return 30
-        } else {
-            return 60
+        get {
+            if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Phone {
+                return 30
+            } else {
+                return 60
+            }
         }
     }
-    }
-
+    
     static var LandscapeOffsetY:CGFloat {
-    get {
-        if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Phone {
-            return 20
-        } else {
-            return 40
+        get {
+            if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Phone {
+                return 20
+            } else {
+                return 40
+            }
         }
-    }
     }
 }
 
 class JLToast: NSOperation {
     var _view: JLToastView?
-
+    
     var text: String {
-    get {
-        return _view!._textLabel!.text
-    }
-    set(text) {
-        _view!._textLabel!.text = text
-    }
+        get {
+            return _view!._textLabel!.text
+        }
+        set(text) {
+            _view!._textLabel!.text = text
+        }
     }
     var delay: NSTimeInterval?
     var duration: NSTimeInterval?
-
+    
     var _executing: Bool = false
     override var executing: Bool {
-    get {
-        return self._executing
+        get {
+            return self._executing
+        }
     }
-    }
-
+    
     var _finished: Bool = false
     override var finished: Bool {
-    get {
-        return self._finished
+        get {
+            return self._finished
+        }
     }
-    }
-
-
+    
+    
     class func makeText(text: String) -> JLToast {
         return JLToast.makeText(text, delay: 0, duration: JLToastDelay.ShortDelay)
     }
-
+    
     class func makeText(text: String, duration: NSTimeInterval) -> JLToast {
         return JLToast.makeText(text, delay: 0, duration: duration)
     }
-
+    
     class func makeText(text: String, delay: NSTimeInterval, duration: NSTimeInterval) -> JLToast {
         var toast = JLToast()
         toast.text = text
@@ -100,15 +100,15 @@ class JLToast: NSOperation {
         toast.duration = duration
         return toast
     }
-
+    
     override init() {
         _view = JLToastView()
     }
-
+    
     func show() {
         JLToastCenter.defaultCenter().addToast(self)
     }
-
+    
     override func start() {
         if NSThread.mainThread()? == nil {
             dispatch_async(dispatch_get_main_queue(), { () -> Void in self.start() })
@@ -116,12 +116,12 @@ class JLToast: NSOperation {
             super.start()
         }
     }
-
+    
     override func main() {
         self.willChangeValueForKey("executing")
         self._executing = true
         self.didChangeValueForKey("executing")
-
+        
         dispatch_async(dispatch_get_main_queue(), {
             () -> Void in
             self._view!.updateView()
@@ -138,17 +138,17 @@ class JLToast: NSOperation {
                             self.finish()
                             UIView.animateWithDuration(0.5, animations: { () -> Void in
                                 self._view!.alpha = 0
-                                })
-                        })
-                })
+                            })
+                    })
             })
+        })
     }
-
+    
     func finish() {
         self.willChangeValueForKey("isExecuting")
         self._executing = false
         self.didChangeValueForKey("isExecuting")
-
+        
         self.willChangeValueForKey("isFinished")
         self._finished = true
         self.didChangeValueForKey("isFinished")

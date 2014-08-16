@@ -1,0 +1,419 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		03106A09199E0347002886D2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 03106A08199E0347002886D2 /* main.m */; };
+		03106A0C199E0347002886D2 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 03106A0B199E0347002886D2 /* AppDelegate.m */; };
+		03106A20199E0347002886D2 /* JLToastObjcSampleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 03106A1F199E0347002886D2 /* JLToastObjcSampleTests.m */; };
+		03106A2D199E04D0002886D2 /* JLToast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03106A2A199E04D0002886D2 /* JLToast.swift */; };
+		03106A2E199E04D0002886D2 /* JLToastCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03106A2B199E04D0002886D2 /* JLToastCenter.swift */; };
+		03106A2F199E04D0002886D2 /* JLToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03106A2C199E04D0002886D2 /* JLToastView.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		03106A1A199E0347002886D2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 031069FB199E0347002886D2 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 03106A02199E0347002886D2;
+			remoteInfo = JLToastObjcSample;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		03106A03199E0347002886D2 /* JLToastObjcSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JLToastObjcSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		03106A07199E0347002886D2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		03106A08199E0347002886D2 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		03106A0A199E0347002886D2 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		03106A0B199E0347002886D2 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		03106A19199E0347002886D2 /* JLToastObjcSampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JLToastObjcSampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		03106A1E199E0347002886D2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		03106A1F199E0347002886D2 /* JLToastObjcSampleTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JLToastObjcSampleTests.m; sourceTree = "<group>"; };
+		03106A2A199E04D0002886D2 /* JLToast.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JLToast.swift; sourceTree = "<group>"; };
+		03106A2B199E04D0002886D2 /* JLToastCenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JLToastCenter.swift; sourceTree = "<group>"; };
+		03106A2C199E04D0002886D2 /* JLToastView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JLToastView.swift; sourceTree = "<group>"; };
+		03925CFD199F23EA0095A3CA /* JLToast.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JLToast.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		03106A00199E0347002886D2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		03106A16199E0347002886D2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		031069FA199E0347002886D2 = {
+			isa = PBXGroup;
+			children = (
+				03106A05199E0347002886D2 /* JLToastObjcSample */,
+				03106A1C199E0347002886D2 /* JLToastObjcSampleTests */,
+				03106A04199E0347002886D2 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		03106A04199E0347002886D2 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				03106A03199E0347002886D2 /* JLToastObjcSample.app */,
+				03106A19199E0347002886D2 /* JLToastObjcSampleTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		03106A05199E0347002886D2 /* JLToastObjcSample */ = {
+			isa = PBXGroup;
+			children = (
+				03106A0A199E0347002886D2 /* AppDelegate.h */,
+				03106A0B199E0347002886D2 /* AppDelegate.m */,
+				03106A29199E04D0002886D2 /* JLToast */,
+				03106A06199E0347002886D2 /* Supporting Files */,
+			);
+			path = JLToastObjcSample;
+			sourceTree = "<group>";
+		};
+		03106A06199E0347002886D2 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				03106A07199E0347002886D2 /* Info.plist */,
+				03106A08199E0347002886D2 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		03106A1C199E0347002886D2 /* JLToastObjcSampleTests */ = {
+			isa = PBXGroup;
+			children = (
+				03106A1F199E0347002886D2 /* JLToastObjcSampleTests.m */,
+				03106A1D199E0347002886D2 /* Supporting Files */,
+			);
+			path = JLToastObjcSampleTests;
+			sourceTree = "<group>";
+		};
+		03106A1D199E0347002886D2 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				03106A1E199E0347002886D2 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		03106A29199E04D0002886D2 /* JLToast */ = {
+			isa = PBXGroup;
+			children = (
+				03925CFD199F23EA0095A3CA /* JLToast.h */,
+				03106A2A199E04D0002886D2 /* JLToast.swift */,
+				03106A2B199E04D0002886D2 /* JLToastCenter.swift */,
+				03106A2C199E04D0002886D2 /* JLToastView.swift */,
+			);
+			name = JLToast;
+			path = ../../../JLToast;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		03106A02199E0347002886D2 /* JLToastObjcSample */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 03106A23199E0347002886D2 /* Build configuration list for PBXNativeTarget "JLToastObjcSample" */;
+			buildPhases = (
+				031069FF199E0347002886D2 /* Sources */,
+				03106A00199E0347002886D2 /* Frameworks */,
+				03106A01199E0347002886D2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = JLToastObjcSample;
+			productName = JLToastObjcSample;
+			productReference = 03106A03199E0347002886D2 /* JLToastObjcSample.app */;
+			productType = "com.apple.product-type.application";
+		};
+		03106A18199E0347002886D2 /* JLToastObjcSampleTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 03106A26199E0347002886D2 /* Build configuration list for PBXNativeTarget "JLToastObjcSampleTests" */;
+			buildPhases = (
+				03106A15199E0347002886D2 /* Sources */,
+				03106A16199E0347002886D2 /* Frameworks */,
+				03106A17199E0347002886D2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				03106A1B199E0347002886D2 /* PBXTargetDependency */,
+			);
+			name = JLToastObjcSampleTests;
+			productName = JLToastObjcSampleTests;
+			productReference = 03106A19199E0347002886D2 /* JLToastObjcSampleTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		031069FB199E0347002886D2 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0600;
+				ORGANIZATIONNAME = "Suyeol Jeon";
+				TargetAttributes = {
+					03106A02199E0347002886D2 = {
+						CreatedOnToolsVersion = 6.0;
+					};
+					03106A18199E0347002886D2 = {
+						CreatedOnToolsVersion = 6.0;
+						TestTargetID = 03106A02199E0347002886D2;
+					};
+				};
+			};
+			buildConfigurationList = 031069FE199E0347002886D2 /* Build configuration list for PBXProject "JLToastObjcSample" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 031069FA199E0347002886D2;
+			productRefGroup = 03106A04199E0347002886D2 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				03106A02199E0347002886D2 /* JLToastObjcSample */,
+				03106A18199E0347002886D2 /* JLToastObjcSampleTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		03106A01199E0347002886D2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		03106A17199E0347002886D2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		031069FF199E0347002886D2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				03106A2E199E04D0002886D2 /* JLToastCenter.swift in Sources */,
+				03106A0C199E0347002886D2 /* AppDelegate.m in Sources */,
+				03106A09199E0347002886D2 /* main.m in Sources */,
+				03106A2D199E04D0002886D2 /* JLToast.swift in Sources */,
+				03106A2F199E04D0002886D2 /* JLToastView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		03106A15199E0347002886D2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				03106A20199E0347002886D2 /* JLToastObjcSampleTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		03106A1B199E0347002886D2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 03106A02199E0347002886D2 /* JLToastObjcSample */;
+			targetProxy = 03106A1A199E0347002886D2 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		03106A21199E0347002886D2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		03106A22199E0347002886D2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		03106A24199E0347002886D2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				INFOPLIST_FILE = JLToastObjcSample/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		03106A25199E0347002886D2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				INFOPLIST_FILE = JLToastObjcSample/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		03106A27199E0347002886D2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = JLToastObjcSampleTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/JLToastObjcSample.app/JLToastObjcSample";
+			};
+			name = Debug;
+		};
+		03106A28199E0347002886D2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = JLToastObjcSampleTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/JLToastObjcSample.app/JLToastObjcSample";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		031069FE199E0347002886D2 /* Build configuration list for PBXProject "JLToastObjcSample" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				03106A21199E0347002886D2 /* Debug */,
+				03106A22199E0347002886D2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		03106A23199E0347002886D2 /* Build configuration list for PBXNativeTarget "JLToastObjcSample" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				03106A24199E0347002886D2 /* Debug */,
+				03106A25199E0347002886D2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		03106A26199E0347002886D2 /* Build configuration list for PBXNativeTarget "JLToastObjcSampleTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				03106A27199E0347002886D2 /* Debug */,
+				03106A28199E0347002886D2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 031069FB199E0347002886D2 /* Project object */;
+}

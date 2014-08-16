@@ -19,7 +19,7 @@
 
 import UIKit
 
-@objc class JLToastView: UIView {
+@objc public class JLToastView: UIView {
     
     var _backgroundView: UIView?
     var _textLabel: UILabel?
@@ -44,7 +44,7 @@ import UIKit
         _textInsets = UIEdgeInsetsMake(6, 10, 6, 10)
     }
     
-    required convenience init(coder aDecoder: NSCoder!) {
+    required convenience public init(coder aDecoder: NSCoder!) {
         self.init()
     }
     
@@ -101,7 +101,7 @@ import UIKit
         self.frame = CGRectMake(x, y, width, height);
     }
     
-    override func hitTest(point: CGPoint, withEvent event: UIEvent!) -> UIView? {
+    override public func hitTest(point: CGPoint, withEvent event: UIEvent!) -> UIView? {
         return nil
     }
 }

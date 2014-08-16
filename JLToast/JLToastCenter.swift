@@ -19,7 +19,7 @@
 
 import UIKit
 
-@objc class JLToastCenter: NSObject {
+@objc public class JLToastCenter: NSObject {
     
     var _queue = NSOperationQueue()
     
@@ -34,7 +34,7 @@ import UIKit
             }()
     }
     
-    class func defaultCenter() -> JLToastCenter {
+    public class func defaultCenter() -> JLToastCenter {
         return SingleInstance.defaultCenter
     }
     
@@ -42,7 +42,7 @@ import UIKit
         _queue.maxConcurrentOperationCount = 1
     }
     
-    func addToast(toast: JLToast) {
+    public func addToast(toast: JLToast) {
         _queue.addOperation(toast)
     }
     

@@ -95,7 +95,7 @@ public struct JLToastViewValue {
     }
     
     override public func start() {
-        if NSThread.mainThread()? == nil {
+        if !NSThread.isMainThread() {
             dispatch_async(dispatch_get_main_queue(), { () in self.start() })
         } else {
             super.start()

@@ -66,19 +66,31 @@ import UIKit
             height: self._textLabel!.frame.size.height + self._textInsets!.top + self._textInsets!.bottom
         )
         
-		let sz = UIScreen.mainScreen().bounds.size
-		let orientation = UIApplication.sharedApplication().statusBarOrientation
+		var x: CGFloat
+		var y: CGFloat
+		var wd:CGFloat
+		var ht:CGFloat
+		
 		var width = self._backgroundView!.frame.size.width
 		var height = self._backgroundView!.frame.size.height
-		var wd = sz.width
-		var ht = sz.height
-		var y:CGFloat
-		if UIInterfaceOrientationIsLandscape(orientation) {
+		let sz = UIScreen.mainScreen().bounds.size
+		let orientation = UIApplication.sharedApplication().statusBarOrientation
+		let sver = UIDevice.currentDevice().systemVersion as NSString
+		let ver = sver.floatValue
+		if UIInterfaceOrientationIsLandscape(orientation) && ver < 8.0 {
+			wd = sz.height
+			ht = sz.width
 			y = JLToastViewValue.LandscapeOffsetY
 		} else {
-			y = JLToastViewValue.PortraitOffsetY
+			wd = sz.width
+			ht = sz.height
+			if UIInterfaceOrientationIsLandscape(orientation) {
+				y = JLToastViewValue.LandscapeOffsetY
+			} else {
+				y = JLToastViewValue.PortraitOffsetY
+			}
 		}
-		let x = (wd - width) * 0.5
+		x = (wd - width) * 0.5
 		y = ht - (height + y)
         self.frame = CGRectMake(x, y, width, height);
     }

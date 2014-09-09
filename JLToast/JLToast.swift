@@ -42,7 +42,7 @@ public struct JLToastViewValue {
     var _view: JLToastView?
     
     var text: String {
-        get { return _view!._textLabel!.text }
+        get { return _view!._textLabel!.text! }
         set { _view!._textLabel!.text = newValue }
     }
 

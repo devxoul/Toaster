@@ -44,7 +44,7 @@ import UIKit
         _textInsets = UIEdgeInsetsMake(6, 10, 6, 10)
     }
     
-    required convenience public init(coder aDecoder: NSCoder!) {
+    required convenience public init(coder aDecoder: NSCoder) {
         self.init()
     }
     

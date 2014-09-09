@@ -66,38 +66,20 @@ import UIKit
             height: self._textLabel!.frame.size.height + self._textInsets!.top + self._textInsets!.bottom
         )
         
-        var x: CGFloat
-        var y: CGFloat
-        var width: CGFloat
-        var height: CGFloat
-        var angle: CGFloat
-        
-        switch UIApplication.sharedApplication().statusBarOrientation {
-        case UIInterfaceOrientation.PortraitUpsideDown:
-            width = self._backgroundView!.frame.size.width
-            height = self._backgroundView!.frame.size.height
-            x = (UIScreen.mainScreen().bounds.size.width - width) / 2
-            y = JLToastViewValue.PortraitOffsetY
-            
-        case UIInterfaceOrientation.LandscapeRight:
-            width = self._backgroundView!.frame.size.height
-            height = self._backgroundView!.frame.size.width
-            x = (UIScreen.mainScreen().bounds.size.width - height) / 2;
-            y = UIScreen.mainScreen().bounds.size.height - width - JLToastViewValue.LandscapeOffsetY
-            
-        case UIInterfaceOrientation.LandscapeLeft:
-            width = self._backgroundView!.frame.size.height
-            height = self._backgroundView!.frame.size.width
-            x = (UIScreen.mainScreen().bounds.size.width - height) / 2;
-            y = UIScreen.mainScreen().bounds.size.height - width - JLToastViewValue.LandscapeOffsetY
-            
-        default:
-            width = self._backgroundView!.frame.size.width
-            height = self._backgroundView!.frame.size.height
-            x = (UIScreen.mainScreen().bounds.size.width - width) / 2
-            y = UIScreen.mainScreen().bounds.size.height - height - JLToastViewValue.PortraitOffsetY
-        }
-        
+		let sz = UIScreen.mainScreen().bounds.size
+		let orientation = UIApplication.sharedApplication().statusBarOrientation
+		var width = self._backgroundView!.frame.size.width
+		var height = self._backgroundView!.frame.size.height
+		var wd = sz.width
+		var ht = sz.height
+		var y:CGFloat
+		if UIInterfaceOrientationIsLandscape(orientation) {
+			y = JLToastViewValue.LandscapeOffsetY
+		} else {
+			y = JLToastViewValue.PortraitOffsetY
+		}
+		let x = (wd - width) * 0.5
+		y = ht - (height + y)
         self.frame = CGRectMake(x, y, width, height);
     }
     

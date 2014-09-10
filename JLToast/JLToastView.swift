@@ -65,33 +65,34 @@ import UIKit
             width: self._textLabel!.frame.size.width + self._textInsets!.left + self._textInsets!.right,
             height: self._textLabel!.frame.size.height + self._textInsets!.top + self._textInsets!.bottom
         )
-        
-		var x: CGFloat
-		var y: CGFloat
-		var wd:CGFloat
-		var ht:CGFloat
-		
-		var width = self._backgroundView!.frame.size.width
-		var height = self._backgroundView!.frame.size.height
-		let sz = UIScreen.mainScreen().bounds.size
-		let orientation = UIApplication.sharedApplication().statusBarOrientation
-		let sver = UIDevice.currentDevice().systemVersion as NSString
-		let ver = sver.floatValue
-		if UIInterfaceOrientationIsLandscape(orientation) && ver < 8.0 {
-			wd = sz.height
-			ht = sz.width
-			y = JLToastViewValue.LandscapeOffsetY
-		} else {
-			wd = sz.width
-			ht = sz.height
-			if UIInterfaceOrientationIsLandscape(orientation) {
-				y = JLToastViewValue.LandscapeOffsetY
-			} else {
-				y = JLToastViewValue.PortraitOffsetY
-			}
-		}
-		x = (wd - width) * 0.5
-		y = ht - (height + y)
+
+        var x: CGFloat
+        var y: CGFloat
+        var width:CGFloat
+        var height:CGFloat
+
+        let screenSize = UIScreen.mainScreen().bounds.size
+        let backgroundViewSize = self._backgroundView!.frame.size
+
+        let orientation = UIApplication.sharedApplication().statusBarOrientation
+        let systemVersion = (UIDevice.currentDevice().systemVersion as NSString).floatValue
+
+        if UIInterfaceOrientationIsLandscape(orientation) && systemVersion < 8.0 {
+            width = screenSize.height
+            height = screenSize.width
+            y = JLToastViewValue.LandscapeOffsetY
+        } else {
+            width = screenSize.width
+            height = screenSize.height
+            if UIInterfaceOrientationIsLandscape(orientation) {
+                y = JLToastViewValue.LandscapeOffsetY
+            } else {
+                y = JLToastViewValue.PortraitOffsetY
+            }
+        }
+
+        x = (width - backgroundViewSize.width) * 0.5
+        y = height - (backgroundViewSize.height + y)
         self.frame = CGRectMake(x, y, width, height);
     }
     

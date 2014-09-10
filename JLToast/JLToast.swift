@@ -106,9 +106,9 @@ public struct JLToastViewValue {
         executing = true
         
         dispatch_async(dispatch_get_main_queue(), { () in
-			self._view!.updateView()
-			self._view!.alpha = 0
-			UIApplication.sharedApplication().keyWindow.subviews.first?.addSubview(self._view!)
+            self._view!.updateView()
+            self._view!.alpha = 0
+            UIApplication.sharedApplication().keyWindow.subviews.first?.addSubview(self._view!)
             UIView.animateWithDuration(0.5,
                 delay: self.delay!,
                 options: UIViewAnimationOptions.BeginFromCurrentState,

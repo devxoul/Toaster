@@ -44,7 +44,7 @@ import UIKit
         _textInsets = UIEdgeInsetsMake(6, 10, 6, 10)
     }
     
-    required convenience public init(coder aDecoder: NSCoder!) {
+    required convenience public init(coder aDecoder: NSCoder) {
         self.init()
     }
     
@@ -66,38 +66,32 @@ import UIKit
             height: self._textLabel!.frame.size.height + self._textInsets!.top + self._textInsets!.bottom
         )
         
-        var x: CGFloat
-        var y: CGFloat
-        var width: CGFloat
-        var height: CGFloat
-        var angle: CGFloat
-        
-        switch UIApplication.sharedApplication().statusBarOrientation {
-        case UIInterfaceOrientation.PortraitUpsideDown:
-            width = self._backgroundView!.frame.size.width
-            height = self._backgroundView!.frame.size.height
-            x = (UIScreen.mainScreen().bounds.size.width - width) / 2
-            y = JLToastViewValue.PortraitOffsetY
-            
-        case UIInterfaceOrientation.LandscapeRight:
-            width = self._backgroundView!.frame.size.height
-            height = self._backgroundView!.frame.size.width
-            x = (UIScreen.mainScreen().bounds.size.width - height) / 2;
-            y = UIScreen.mainScreen().bounds.size.height - width - JLToastViewValue.LandscapeOffsetY
-            
-        case UIInterfaceOrientation.LandscapeLeft:
-            width = self._backgroundView!.frame.size.height
-            height = self._backgroundView!.frame.size.width
-            x = (UIScreen.mainScreen().bounds.size.width - height) / 2;
-            y = UIScreen.mainScreen().bounds.size.height - width - JLToastViewValue.LandscapeOffsetY
-            
-        default:
-            width = self._backgroundView!.frame.size.width
-            height = self._backgroundView!.frame.size.height
-            x = (UIScreen.mainScreen().bounds.size.width - width) / 2
-            y = UIScreen.mainScreen().bounds.size.height - height - JLToastViewValue.PortraitOffsetY
-        }
-        
+		var x: CGFloat
+		var y: CGFloat
+		var wd:CGFloat
+		var ht:CGFloat
+		
+		var width = self._backgroundView!.frame.size.width
+		var height = self._backgroundView!.frame.size.height
+		let sz = UIScreen.mainScreen().bounds.size
+		let orientation = UIApplication.sharedApplication().statusBarOrientation
+		let sver = UIDevice.currentDevice().systemVersion as NSString
+		let ver = sver.floatValue
+		if UIInterfaceOrientationIsLandscape(orientation) && ver < 8.0 {
+			wd = sz.height
+			ht = sz.width
+			y = JLToastViewValue.LandscapeOffsetY
+		} else {
+			wd = sz.width
+			ht = sz.height
+			if UIInterfaceOrientationIsLandscape(orientation) {
+				y = JLToastViewValue.LandscapeOffsetY
+			} else {
+				y = JLToastViewValue.PortraitOffsetY
+			}
+		}
+		x = (wd - width) * 0.5
+		y = ht - (height + y)
         self.frame = CGRectMake(x, y, width, height);
     }
     

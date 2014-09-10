@@ -24,6 +24,7 @@ import UIKit
     var _backgroundView: UIView?
     var _textLabel: UILabel?
     var _textInsets: UIEdgeInsets?
+	var _position = JLToastPosition.Top
     
     override init() {
         super.init(frame: CGRectMake(0, 0, 100, 100))
@@ -91,7 +92,9 @@ import UIKit
 			}
 		}
 		x = (wd - width) * 0.5
-		y = ht - (height + y)
+		if _position == JLToastPosition.Bottom {
+			y = ht - (height + y)
+		}
         self.frame = CGRectMake(x, y, width, height);
     }
     

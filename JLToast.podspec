@@ -9,6 +9,6 @@ Pod::Spec.new do |s|
                      :tag => "#{s.version}" }
   s.platform     = :ios, '7.0'
   s.source_files = 'JLToast/*.swift'
-  s.frameworks = 'UIKit', 'Foundation', 'QuartzCore'
+  s.frameworks   = 'UIKit', 'Foundation', 'QuartzCore'
   s.requires_arc = true
 end

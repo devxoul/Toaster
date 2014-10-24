@@ -21,27 +21,26 @@ import UIKit
 
 @objc public class JLToastView: UIView {
     
-    var _backgroundView: UIView?
-    var _textLabel: UILabel?
-    var _textInsets: UIEdgeInsets?
+    var backgroundView = UIView()
+    var textLabel = UILabel()
+    var textInsets = UIEdgeInsetsMake(6, 10, 6, 10)
     
     override init() {
         super.init(frame: CGRectMake(0, 0, 100, 100))
-        _backgroundView = UIView(frame: self.bounds)
-        _backgroundView!.backgroundColor = UIColor(white: 0, alpha: 0.7)
-        _backgroundView!.layer.cornerRadius = 5
-        _backgroundView!.clipsToBounds = true
-        self.addSubview(_backgroundView!)
+
+        self.backgroundView.frame = self.bounds
+        self.backgroundView.backgroundColor = UIColor(white: 0, alpha: 0.7)
+        self.backgroundView.layer.cornerRadius = 5
+        self.backgroundView.clipsToBounds = true
+        self.addSubview(self.backgroundView)
         
-        _textLabel = UILabel(frame: CGRectMake(0, 0, 100, 100))
-        _textLabel!.textColor = UIColor.whiteColor()
-        _textLabel!.backgroundColor = UIColor.clearColor()
-        _textLabel!.font = UIFont.systemFontOfSize(JLToastViewValue.FontSize)
-        _textLabel!.numberOfLines = 0
-        _textLabel!.textAlignment = NSTextAlignment.Center;
-        self.addSubview(_textLabel!)
-        
-        _textInsets = UIEdgeInsetsMake(6, 10, 6, 10)
+        self.textLabel.frame = CGRectMake(0, 0, 100, 100)
+        self.textLabel.textColor = UIColor.whiteColor()
+        self.textLabel.backgroundColor = UIColor.clearColor()
+        self.textLabel.font = UIFont.systemFontOfSize(JLToastViewValue.FontSize)
+        self.textLabel.numberOfLines = 0
+        self.textLabel.textAlignment = .Center;
+        self.addSubview(self.textLabel)
     }
     
     required convenience public init(coder aDecoder: NSCoder) {
@@ -50,20 +49,20 @@ import UIKit
     
     func updateView() {
         let deviceWidth = CGRectGetWidth(UIScreen.mainScreen().bounds)
-        let font = self._textLabel!.font
+        let font = self.textLabel.font
         let constraintSize = CGSizeMake(deviceWidth * (280.0 / 320.0), CGFloat.max)
-        var textLabelSize = self._textLabel!.sizeThatFits(constraintSize)
-        self._textLabel!.frame = CGRect(
-            x: self._textInsets!.left,
-            y: self._textInsets!.top,
+        var textLabelSize = self.textLabel.sizeThatFits(constraintSize)
+        self.textLabel.frame = CGRect(
+            x: self.textInsets.left,
+            y: self.textInsets.top,
             width: textLabelSize.width,
             height: textLabelSize.height
         )
-        self._backgroundView!.frame = CGRect(
+        self.backgroundView.frame = CGRect(
             x: 0,
             y: 0,
-            width: self._textLabel!.frame.size.width + self._textInsets!.left + self._textInsets!.right,
-            height: self._textLabel!.frame.size.height + self._textInsets!.top + self._textInsets!.bottom
+            width: self.textLabel.frame.size.width + self.textInsets.left + self.textInsets.right,
+            height: self.textLabel.frame.size.height + self.textInsets.top + self.textInsets.bottom
         )
 
         var x: CGFloat
@@ -72,7 +71,7 @@ import UIKit
         var height:CGFloat
 
         let screenSize = UIScreen.mainScreen().bounds.size
-        let backgroundViewSize = self._backgroundView!.frame.size
+        let backgroundViewSize = self.backgroundView.frame.size
 
         let orientation = UIApplication.sharedApplication().statusBarOrientation
         let systemVersion = (UIDevice.currentDevice().systemVersion as NSString).floatValue

@@ -19,24 +19,19 @@
 
 import UIKit
 
+private let _defaultCenter = JLToastCenter()
+
 @objc public class JLToastCenter: NSObject {
 
     private var _queue = NSOperationQueue()
-
-    private class var _defaultCenter: JLToastCenter {
-        struct Singleton {
-            static let instance = JLToastCenter()
-        }
-        return Singleton.instance
-    }
     
     public class func defaultCenter() -> JLToastCenter {
-        return JLToastCenter._defaultCenter
+        return _defaultCenter
     }
     
     override init() {
         super.init()
-        _queue.maxConcurrentOperationCount = 1
+        self._queue.maxConcurrentOperationCount = 1
         NSNotificationCenter.defaultCenter().addObserver(
             self,
             selector: "deviceOrientationDidChange:",
@@ -46,13 +41,13 @@ import UIKit
     }
     
     public func addToast(toast: JLToast) {
-        _queue.addOperation(toast)
+        self._queue.addOperation(toast)
     }
     
     func deviceOrientationDidChange(sender: AnyObject?) {
-        if _queue.operations.count > 0 {
+        if self._queue.operations.count > 0 {
             let lastToast: JLToast = _queue.operations[0] as JLToast
-            lastToast._view!.updateView()
+            lastToast.view.updateView()
         }
     }
 }

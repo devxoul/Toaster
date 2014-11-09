@@ -1,5 +1,7 @@
 # JLToast - Written in Swift
 
+[![CocoaPods](http://img.shields.io/cocoapods/v/JLToast.svg)](http://cocoapods.org/?q=name%3AJLToast%20author%3Adevxoul)
+
 **JLToast** makes it easy to use Toast in iOS with very simple interface.
 
 

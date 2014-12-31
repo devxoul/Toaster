@@ -21,20 +21,22 @@ import UIKit
 
 @objc public class JLToastView: UIView {
     
-    var backgroundView = UIView()
-    var textLabel = UILabel()
-    var textInsets = UIEdgeInsetsMake(6, 10, 6, 10)
+    var backgroundView: UIView!
+    var textLabel: UILabel!
+    var textInsets = UIEdgeInsets(top: 6, left: 10, bottom: 6, right: 10)
     
     override init() {
-        super.init(frame: CGRectMake(0, 0, 100, 100))
+        super.init(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
 
+        self.backgroundView = UIView()
         self.backgroundView.frame = self.bounds
         self.backgroundView.backgroundColor = UIColor(white: 0, alpha: 0.7)
         self.backgroundView.layer.cornerRadius = 5
         self.backgroundView.clipsToBounds = true
         self.addSubview(self.backgroundView)
-        
-        self.textLabel.frame = CGRectMake(0, 0, 100, 100)
+
+        self.textLabel = UILabel()
+        self.textLabel.frame = self.bounds
         self.textLabel.textColor = UIColor.whiteColor()
         self.textLabel.backgroundColor = UIColor.clearColor()
         self.textLabel.font = UIFont.systemFontOfSize(JLToastViewValue.FontSize)
@@ -50,7 +52,7 @@ import UIKit
     func updateView() {
         let deviceWidth = CGRectGetWidth(UIScreen.mainScreen().bounds)
         let font = self.textLabel.font
-        let constraintSize = CGSizeMake(deviceWidth * (280.0 / 320.0), CGFloat.max)
+        let constraintSize = CGSize(width: deviceWidth * (280.0 / 320.0), height: CGFloat.max)
         var textLabelSize = self.textLabel.sizeThatFits(constraintSize)
         self.textLabel.frame = CGRect(
             x: self.textInsets.left,
@@ -92,7 +94,7 @@ import UIKit
 
         x = (width - backgroundViewSize.width) * 0.5
         y = height - (backgroundViewSize.height + y)
-        self.frame = CGRectMake(x, y, width, height);
+        self.frame = CGRect(x: x, y: y, width: width, height: height);
     }
     
     override public func hitTest(point: CGPoint, withEvent event: UIEvent!) -> UIView? {

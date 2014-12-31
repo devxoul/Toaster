@@ -44,7 +44,7 @@ public struct JLToastViewValue {
     
     public var text: String? {
         get {
-            return self.view.textLabel.text?
+            return self.view.textLabel.text
         }
         set {
             self.view.textLabel.text = newValue
@@ -110,20 +110,22 @@ public struct JLToastViewValue {
     }
 
     override public func main() {
-        executing = true
+        self.executing = true
 
         dispatch_async(dispatch_get_main_queue(), {
             self.view.updateView()
             self.view.alpha = 0
             UIApplication.sharedApplication().keyWindow?.subviews.first?.addSubview(self.view)
-            UIView.animateWithDuration(0.5,
+            UIView.animateWithDuration(
+                0.5,
                 delay: self.delay,
-                options: UIViewAnimationOptions.BeginFromCurrentState,
+                options: .BeginFromCurrentState,
                 animations: {
                     self.view.alpha = 1
                 },
                 completion: { completed in
-                    UIView.animateWithDuration(self.duration,
+                    UIView.animateWithDuration(
+                        self.duration,
                         animations: {
                             self.view.alpha = 1.0001
                         },
@@ -140,7 +142,7 @@ public struct JLToastViewValue {
     }
     
     public func finish() {
-        executing = false
-        finished = true
+        self.executing = false
+        self.finished = true
     }
 }

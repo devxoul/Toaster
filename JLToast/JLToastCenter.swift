@@ -19,18 +19,21 @@
 
 import UIKit
 
-private let _defaultCenter = JLToastCenter()
-
 @objc public class JLToastCenter: NSObject {
 
-    private var _queue = NSOperationQueue()
+    private var _queue: NSOperationQueue!
+
+    private struct Singletone {
+        static let defaultCenter = JLToastCenter()
+    }
     
     public class func defaultCenter() -> JLToastCenter {
-        return _defaultCenter
+        return Singletone.defaultCenter
     }
     
     override init() {
         super.init()
+        self._queue = NSOperationQueue()
         self._queue.maxConcurrentOperationCount = 1
         NSNotificationCenter.defaultCenter().addObserver(
             self,

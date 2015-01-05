@@ -51,3 +51,6 @@ License
 -------
 
 JLToast is under [WTFPL](http://www.wtfpl.net/). You can do what the fuck you want with JLToast. See LICENSE file for more info.
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/devxoul/jltoast/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+

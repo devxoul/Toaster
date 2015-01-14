@@ -14,12 +14,20 @@ JLToast.makeText("Some text").show()
 ```
 
 
+Features
+--------
+
+- **Objective-C Compatible**: import `JLToast.h` to use JLToast in Objective-C.
+- **Queueing**: centralized toast center manages toast queue.
+- **Customizable**: see [Appearance](https://github.com/devxoul/JLToast#appearance) section.
+
+
 Installation
 ------------
 
 Use [CocoaPods](http://cocoapods.org). Minimum requiredment version of CocoaPods is **0.36**, which supports Swift frameworks.
 
-_**Note:** CocoaPods 0.36 is just a beta yet, so you need to install CocoaPods prerelease via `$ gem install cocoapods --pre`_
+> **Note:** CocoaPods 0.36 is just a beta yet, so you need to install CocoaPods prerelease via `$ gem install cocoapods --pre`
 
 **Podfile**
 

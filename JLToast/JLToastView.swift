@@ -19,7 +19,11 @@
 
 import UIKit
 
-public let JLToastViewFontSizeAttributeName = "JLToastViewFontSizeAttributeName"
+public let JLToastViewBackgroundColorAttributeName = "JLToastViewBackgroundColorAttributeName"
+public let JLToastViewCornerRadiusAttributeName = "JLToastViewCornerRadiusAttributeName"
+public let JLToastViewTextInsetsAttributeName = "JLToastViewTextInsetsAttributeName"
+public let JLToastViewTextColorAttributeName = "JLToastViewTextColorAttributeName"
+public let JLToastViewFontAttributeName = "JLToastViewFontAttributeName"
 public let JLToastViewPortraitOffsetYAttributeName = "JLToastViewPortraitOffsetYAttributeName"
 public let JLToastViewLandscapeOffsetYAttributeName = "JLToastViewLandscapeOffsetYAttributeName"
 
@@ -27,32 +31,45 @@ public let JLToastViewLandscapeOffsetYAttributeName = "JLToastViewLandscapeOffse
     
     var backgroundView: UIView!
     var textLabel: UILabel!
-    var textInsets = UIEdgeInsets(top: 6, left: 10, bottom: 6, right: 10)
+    var textInsets: UIEdgeInsets!
     
     override init() {
         super.init(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
 
         let userInterfaceIdiom = UIDevice.currentDevice().userInterfaceIdiom
-        let fontSize = self.dynamicType.defaultValueForAttributeName(
-            JLToastViewFontSizeAttributeName,
-            forUserInterfaceIdiom: userInterfaceIdiom
-        )
 
         self.backgroundView = UIView()
         self.backgroundView.frame = self.bounds
-        self.backgroundView.backgroundColor = UIColor(white: 0, alpha: 0.7)
-        self.backgroundView.layer.cornerRadius = 5
+        self.backgroundView.backgroundColor = self.dynamicType.defaultValueForAttributeName(
+            JLToastViewBackgroundColorAttributeName,
+            forUserInterfaceIdiom: userInterfaceIdiom
+        ) as? UIColor
+        self.backgroundView.layer.cornerRadius = self.dynamicType.defaultValueForAttributeName(
+            JLToastViewCornerRadiusAttributeName,
+            forUserInterfaceIdiom: userInterfaceIdiom
+        ) as CGFloat
         self.backgroundView.clipsToBounds = true
         self.addSubview(self.backgroundView)
 
         self.textLabel = UILabel()
         self.textLabel.frame = self.bounds
-        self.textLabel.textColor = UIColor.whiteColor()
+        self.textLabel.textColor = self.dynamicType.defaultValueForAttributeName(
+            JLToastViewTextColorAttributeName,
+            forUserInterfaceIdiom: userInterfaceIdiom
+        ) as? UIColor
         self.textLabel.backgroundColor = UIColor.clearColor()
-        self.textLabel.font = UIFont.systemFontOfSize(fontSize)
+        self.textLabel.font = self.dynamicType.defaultValueForAttributeName(
+            JLToastViewFontAttributeName,
+            forUserInterfaceIdiom: userInterfaceIdiom
+        ) as UIFont
         self.textLabel.numberOfLines = 0
         self.textLabel.textAlignment = .Center;
         self.addSubview(self.textLabel)
+
+        self.textInsets = (self.dynamicType.defaultValueForAttributeName(
+            JLToastViewTextInsetsAttributeName,
+            forUserInterfaceIdiom: userInterfaceIdiom
+        ) as NSValue).UIEdgeInsetsValue()
     }
     
     required convenience public init(coder aDecoder: NSCoder) {
@@ -92,11 +109,11 @@ public let JLToastViewLandscapeOffsetYAttributeName = "JLToastViewLandscapeOffse
         let portraitOffsetY = self.dynamicType.defaultValueForAttributeName(
             JLToastViewPortraitOffsetYAttributeName,
             forUserInterfaceIdiom: userInterfaceIdiom
-        )
+        ) as CGFloat
         let landscapeOffsetY = self.dynamicType.defaultValueForAttributeName(
             JLToastViewLandscapeOffsetYAttributeName,
             forUserInterfaceIdiom: userInterfaceIdiom
-        )
+        ) as CGFloat
 
         if UIInterfaceOrientationIsLandscape(orientation) && systemVersion < 8.0 {
             width = screenSize.height
@@ -125,16 +142,40 @@ public let JLToastViewLandscapeOffsetYAttributeName = "JLToastViewLandscapeOffse
 
 public extension JLToastView {
     private struct Singleton {
-        static var defaultValues: [String: [UIUserInterfaceIdiom: CGFloat]] = [
-            JLToastViewFontSizeAttributeName: [
-                .Phone: 12,
-                .Pad: 16,
+        static var defaultValues: [String: [UIUserInterfaceIdiom: AnyObject]] = [
+            // backgroundView.color
+            JLToastViewBackgroundColorAttributeName: [
+                .Unspecified: UIColor(white: 0, alpha: 0.7)
             ],
+
+            // backgroundView.layer.cornerRadius
+            JLToastViewCornerRadiusAttributeName: [
+                .Unspecified: 5
+            ],
+
+            JLToastViewTextInsetsAttributeName: [
+                .Unspecified: NSValue(UIEdgeInsets: UIEdgeInsets(top: 6, left: 10, bottom: 6, right: 10))
+            ],
+
+            // textLabel.textColor
+            JLToastViewTextColorAttributeName: [
+                .Unspecified: UIColor.whiteColor()
+            ],
+
+            // textLabel.font
+            JLToastViewFontAttributeName: [
+                .Unspecified: UIFont.systemFontOfSize(12),
+                .Phone: UIFont.systemFontOfSize(12),
+                .Pad: UIFont.systemFontOfSize(16),
+            ],
+
             JLToastViewPortraitOffsetYAttributeName: [
+                .Unspecified: 30,
                 .Phone: 30,
                 .Pad: 60,
             ],
             JLToastViewLandscapeOffsetYAttributeName: [
+                .Unspecified: 20,
                 .Phone: 20,
                 .Pad: 40,
             ],
@@ -143,11 +184,15 @@ public extension JLToastView {
 
     class func defaultValueForAttributeName(attributeName: String,
                                             forUserInterfaceIdiom userInterfaceIdiom: UIUserInterfaceIdiom)
-                                            -> CGFloat {
-        return Singleton.defaultValues[attributeName]![userInterfaceIdiom]!
+                                            -> AnyObject {
+        let valueForAttributeName = Singleton.defaultValues[attributeName]!
+        if let value: AnyObject = valueForAttributeName[userInterfaceIdiom] {
+            return value
+        }
+        return valueForAttributeName[.Unspecified]!
     }
 
-    class func setDefaultValue(value: CGFloat,
+    class func setDefaultValue(value: AnyObject,
                                forAttributeName attributeName: String,
                                userInterfaceIdiom: UIUserInterfaceIdiom) {
         var values = Singleton.defaultValues[attributeName]!

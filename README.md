@@ -37,6 +37,45 @@ JLToast.makeText("Some text", delay: 1, duration: JLToastDelay.ShortDelay)
 ```
 
 
+Appearance
+----------
+
+Since JLToast 1.1.0, you can set default values for appearance attributes. The code below sets default background color to red.
+
+> **Note:** It is not recommended to set default values while toasts are queued. It can occur unexpected results.
+
+**Swift**
+
+```swift
+JLToastView.setDefaultValue(
+    UIColor.redColor(),
+    forAttributeName: JLToastViewBackgroundColorAttributeName,
+    userInterfaceIdiom: .Phone
+)
+```
+
+**Objective-C**
+
+```objc
+[JLToastView setDefaultValue:[UIColor redColor]
+            forAttributeName:JLToastViewBackgroundColorAttributeName
+          userInterfaceIdiom:UIUserInterfaceIdiomPhone];
+```
+
+
+#### Supported Attributes
+
+| Attribute | Type | Description |
+|---|---|---|
+| `JLToastViewBackgroundColorAttributeName` | `UIColor` | Background color |
+| `JLToastViewCornerRadiusAttributeName` | `NSNumber(CGFloat)` | Corner radius |
+| `JLToastViewTextInsetsAttributeName` | `NSValue(UIEdgeInsets)` | Text inset |
+| `JLToastViewTextColorAttributeName` | `UIColor` | Text color |
+| `JLToastViewFontAttributeName` | `UIFont` | Font |
+| `JLToastViewPortraitOffsetYAttributeName` | `NSNumber(CGFloat)` | Vertical offfset from bottom in portrait mode |
+|` JLToastViewLandscapeOffsetYAttributeName` | `NSNumber(CGFloat)` | Vertical offfset from bottom in landscape mode |
+
+
 Screenshots
 -----------
 

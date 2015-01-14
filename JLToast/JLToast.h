@@ -16,6 +16,9 @@
  */
 
 #if __OBJC__
-    static const NSTimeInterval JLToastShortDelay = 2.0;
-    static const NSTimeInterval JLToastLongDelay = 3.5;
+static NSTimeInterval const JLToastShortDelay = 2.0;
+static NSTimeInterval const JLToastLongDelay = 3.5;
+static NSString * const JLToastViewFontSizeAttributeName = @"JLToastViewFontSizeAttributeName";
+static NSString * const JLToastViewPortraitOffsetYAttributeName = @"JLToastViewPortraitOffsetYAttributeName";
+static NSString * const JLToastViewLandscapeOffsetYAttributeName = @"JLToastViewLandscapeOffsetYAttributeName";
 #endif

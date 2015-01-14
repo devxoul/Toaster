@@ -24,20 +24,6 @@ public struct JLToastDelay {
     public static let LongDelay: NSTimeInterval = 3.5
 }
 
-public struct JLToastViewValue {
-    static var FontSize: CGFloat {
-        return UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Phone ? 12 : 16
-    }
-    
-    static var PortraitOffsetY: CGFloat {
-        return UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Phone ? 30 : 60
-    }
-    
-    static var LandscapeOffsetY: CGFloat {
-        return UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Phone ? 20 : 40
-    }
-}
-
 @objc public class JLToast: NSOperation {
 
     public var view: JLToastView = JLToastView()

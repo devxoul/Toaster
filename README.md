@@ -1,7 +1,7 @@
 JLToast - Toast for Swift
 =========================
 
-[![CocoaPods](http://img.shields.io/cocoapods/v/JLToast.svg)](http://cocoapods.org/?q=name%3AJLToast%20author%3Adevxoul)
+[![CocoaPods](http://img.shields.io/cocoapods/v/JLToast.svg?style=flat)](http://cocoapods.org/?q=name%3AJLToast%20author%3Adevxoul)
 
 Android-like toast with very simple interface.
 

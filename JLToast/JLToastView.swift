@@ -19,6 +19,10 @@
 
 import UIKit
 
+public let JLToastViewFontSizeAttributeName = "JLToastViewFontSizeAttributeName"
+public let JLToastViewPortraitOffsetYAttributeName = "JLToastViewPortraitOffsetYAttributeName"
+public let JLToastViewLandscapeOffsetYAttributeName = "JLToastViewLandscapeOffsetYAttributeName"
+
 @objc public class JLToastView: UIView {
     
     var backgroundView: UIView!
@@ -27,6 +31,12 @@ import UIKit
     
     override init() {
         super.init(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
+
+        let userInterfaceIdiom = UIDevice.currentDevice().userInterfaceIdiom
+        let fontSize = self.dynamicType.defaultValueForAttributeName(
+            JLToastViewFontSizeAttributeName,
+            forUserInterfaceIdiom: userInterfaceIdiom
+        )
 
         self.backgroundView = UIView()
         self.backgroundView.frame = self.bounds
@@ -39,7 +49,7 @@ import UIKit
         self.textLabel.frame = self.bounds
         self.textLabel.textColor = UIColor.whiteColor()
         self.textLabel.backgroundColor = UIColor.clearColor()
-        self.textLabel.font = UIFont.systemFontOfSize(JLToastViewValue.FontSize)
+        self.textLabel.font = UIFont.systemFontOfSize(fontSize)
         self.textLabel.numberOfLines = 0
         self.textLabel.textAlignment = .Center;
         self.addSubview(self.textLabel)
@@ -78,17 +88,27 @@ import UIKit
         let orientation = UIApplication.sharedApplication().statusBarOrientation
         let systemVersion = (UIDevice.currentDevice().systemVersion as NSString).floatValue
 
+        let userInterfaceIdiom = UIDevice.currentDevice().userInterfaceIdiom
+        let portraitOffsetY = self.dynamicType.defaultValueForAttributeName(
+            JLToastViewPortraitOffsetYAttributeName,
+            forUserInterfaceIdiom: userInterfaceIdiom
+        )
+        let landscapeOffsetY = self.dynamicType.defaultValueForAttributeName(
+            JLToastViewLandscapeOffsetYAttributeName,
+            forUserInterfaceIdiom: userInterfaceIdiom
+        )
+
         if UIInterfaceOrientationIsLandscape(orientation) && systemVersion < 8.0 {
             width = screenSize.height
             height = screenSize.width
-            y = JLToastViewValue.LandscapeOffsetY
+            y = landscapeOffsetY
         } else {
             width = screenSize.width
             height = screenSize.height
             if UIInterfaceOrientationIsLandscape(orientation) {
-                y = JLToastViewValue.LandscapeOffsetY
+                y = landscapeOffsetY
             } else {
-                y = JLToastViewValue.PortraitOffsetY
+                y = portraitOffsetY
             }
         }
 
@@ -99,5 +119,39 @@ import UIKit
     
     override public func hitTest(point: CGPoint, withEvent event: UIEvent!) -> UIView? {
         return nil
+    }
+
+}
+
+public extension JLToastView {
+    private struct Singleton {
+        static var defaultValues: [String: [UIUserInterfaceIdiom: CGFloat]] = [
+            JLToastViewFontSizeAttributeName: [
+                .Phone: 12,
+                .Pad: 16,
+            ],
+            JLToastViewPortraitOffsetYAttributeName: [
+                .Phone: 30,
+                .Pad: 60,
+            ],
+            JLToastViewLandscapeOffsetYAttributeName: [
+                .Phone: 20,
+                .Pad: 40,
+            ],
+        ]
+    }
+
+    class func defaultValueForAttributeName(attributeName: String,
+                                            forUserInterfaceIdiom userInterfaceIdiom: UIUserInterfaceIdiom)
+                                            -> CGFloat {
+        return Singleton.defaultValues[attributeName]![userInterfaceIdiom]!
+    }
+
+    class func setDefaultValue(value: CGFloat,
+                               forAttributeName attributeName: String,
+                               userInterfaceIdiom: UIUserInterfaceIdiom) {
+        var values = Singleton.defaultValues[attributeName]!
+        values[userInterfaceIdiom] = value
+        Singleton.defaultValues[attributeName] = values
     }
 }

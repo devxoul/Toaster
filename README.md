@@ -79,11 +79,7 @@ JLToastView.setDefaultValue(
 Screenshots
 -----------
 
-![First Screenshot](https://raw.github.com/Joyfl/JLToast/master/Screenshots/JLToast-Screenshot-1.png)
-<br />
-![Second Screenshot](https://raw.github.com/Joyfl/JLToast/master/Screenshots/JLToast-Screenshot-2.png)
-<br />
-![Third Screenshot](https://raw.github.com/Joyfl/JLToast/master/Screenshots/JLToast-Screenshot-3.png)
+![JLToast Screenshot](https://raw.github.com/Joyfl/JLToast/master/Screenshots/JLToast.png)
 
 
 License

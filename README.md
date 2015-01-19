@@ -35,6 +35,21 @@ Use [CocoaPods](http://cocoapods.org). Minimum requiredment version of CocoaPods
 pod 'JLToast'
 ```
 
+#### Objective-C
+
+JLToast is compatible with Objective-C. What you need to do is to import a auto-generated header file:
+
+```objc
+#import <JLToast/JLToast-Swift.h>
+```
+
+If you are looking for constants, import `JLToast.h`.
+
+```objc
+#import <JLToast/JLToast-Swift.h>
+#import <JLToast/JLToast.h> // if you want to use constants
+```
+
 
 Setting Duration and Delay
 --------------------------

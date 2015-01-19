@@ -15,6 +15,9 @@
  *
  */
 
+FOUNDATION_EXPORT double JLToastVersionNumber;
+FOUNDATION_EXPORT const unsigned char JLToastVersionString[];
+
 #if __OBJC__
 static NSTimeInterval const JLToastShortDelay = 2.0;
 static NSTimeInterval const JLToastLongDelay = 3.5;

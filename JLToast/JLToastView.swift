@@ -33,7 +33,7 @@ public let JLToastViewLandscapeOffsetYAttributeName = "JLToastViewLandscapeOffse
     var textLabel: UILabel!
     var textInsets: UIEdgeInsets!
     
-    override init() {
+    init() {
         super.init(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
 
         let userInterfaceIdiom = UIDevice.currentDevice().userInterfaceIdiom

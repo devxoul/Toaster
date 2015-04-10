@@ -33,7 +33,7 @@ public let JLToastViewLandscapeOffsetYAttributeName = "JLToastViewLandscapeOffse
     var textLabel: UILabel!
     var textInsets: UIEdgeInsets!
     
-    override init() {
+    init() {
         super.init(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
 
         let userInterfaceIdiom = UIDevice.currentDevice().userInterfaceIdiom
@@ -47,7 +47,7 @@ public let JLToastViewLandscapeOffsetYAttributeName = "JLToastViewLandscapeOffse
         self.backgroundView.layer.cornerRadius = self.dynamicType.defaultValueForAttributeName(
             JLToastViewCornerRadiusAttributeName,
             forUserInterfaceIdiom: userInterfaceIdiom
-        ) as CGFloat
+        ) as! CGFloat
         self.backgroundView.clipsToBounds = true
         self.addSubview(self.backgroundView)
 
@@ -61,7 +61,7 @@ public let JLToastViewLandscapeOffsetYAttributeName = "JLToastViewLandscapeOffse
         self.textLabel.font = self.dynamicType.defaultValueForAttributeName(
             JLToastViewFontAttributeName,
             forUserInterfaceIdiom: userInterfaceIdiom
-        ) as UIFont
+        ) as! UIFont
         self.textLabel.numberOfLines = 0
         self.textLabel.textAlignment = .Center;
         self.addSubview(self.textLabel)
@@ -69,7 +69,7 @@ public let JLToastViewLandscapeOffsetYAttributeName = "JLToastViewLandscapeOffse
         self.textInsets = (self.dynamicType.defaultValueForAttributeName(
             JLToastViewTextInsetsAttributeName,
             forUserInterfaceIdiom: userInterfaceIdiom
-        ) as NSValue).UIEdgeInsetsValue()
+        ) as! NSValue).UIEdgeInsetsValue()
     }
     
     required convenience public init(coder aDecoder: NSCoder) {
@@ -109,11 +109,11 @@ public let JLToastViewLandscapeOffsetYAttributeName = "JLToastViewLandscapeOffse
         let portraitOffsetY = self.dynamicType.defaultValueForAttributeName(
             JLToastViewPortraitOffsetYAttributeName,
             forUserInterfaceIdiom: userInterfaceIdiom
-        ) as CGFloat
+        ) as! CGFloat
         let landscapeOffsetY = self.dynamicType.defaultValueForAttributeName(
             JLToastViewLandscapeOffsetYAttributeName,
             forUserInterfaceIdiom: userInterfaceIdiom
-        ) as CGFloat
+        ) as! CGFloat
 
         if UIInterfaceOrientationIsLandscape(orientation) && systemVersion < 8.0 {
             width = screenSize.height

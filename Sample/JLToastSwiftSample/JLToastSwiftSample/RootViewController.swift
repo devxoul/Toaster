@@ -22,7 +22,7 @@ import UIKit
 class RootViewController: UIViewController {
 
     override func viewDidLoad() {
-        var button: UIButton = UIButton.buttonWithType(UIButtonType.System) as UIButton
+        var button: UIButton = UIButton.buttonWithType(UIButtonType.System) as! UIButton
         button.frame = CGRectMake(10, 10, 300, 60)
         button.setTitle("Show", forState: UIControlState.Normal)
         button.addTarget(self, action: "showButtonTouchUpInside", forControlEvents: UIControlEvents.TouchUpInside)

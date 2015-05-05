@@ -3,7 +3,7 @@
 //  JLToastSwiftSampleTests
 //
 //  Created by 전수열 on 8/15/14.
-//  Copyright (c) 2014 Suyeol Jeon. All rights reserved.
+//  Copyright (c) 2015 Suyeol Jeon. All rights reserved.
 //
 
 import UIKit

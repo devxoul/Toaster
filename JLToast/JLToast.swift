@@ -101,7 +101,7 @@ public struct JLToastDelay {
         dispatch_async(dispatch_get_main_queue(), {
             self.view.updateView()
             self.view.alpha = 0
-            UIApplication.sharedApplication().keyWindow?.subviews.first?.addSubview(self.view)
+            UIApplication.sharedApplication().windows.first?.addSubview(self.view)
             UIView.animateWithDuration(
                 0.5,
                 delay: self.delay,

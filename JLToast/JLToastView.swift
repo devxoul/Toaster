@@ -38,6 +38,8 @@ public let JLToastViewLandscapeOffsetYAttributeName = "JLToastViewLandscapeOffse
 
         let userInterfaceIdiom = UIDevice.currentDevice().userInterfaceIdiom
 
+        self.userInteractionEnabled = false
+
         self.backgroundView = UIView()
         self.backgroundView.frame = self.bounds
         self.backgroundView.backgroundColor = self.dynamicType.defaultValueForAttributeName(
@@ -135,6 +137,13 @@ public let JLToastViewLandscapeOffsetYAttributeName = "JLToastViewLandscapeOffse
     }
     
     override public func hitTest(point: CGPoint, withEvent event: UIEvent!) -> UIView? {
+        if let superview = self.superview {
+            let pointInWindow = self.convertPoint(point, toView: self.superview)
+            let contains = CGRectContainsPoint(self.frame, pointInWindow)
+            if contains && self.userInteractionEnabled {
+                return self
+            }
+        }
         return nil
     }
 

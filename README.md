@@ -25,9 +25,9 @@ Features
 Installation
 ------------
 
-Use [CocoaPods](http://cocoapods.org). Minimum requiredment version of CocoaPods is **0.36**, which supports Swift frameworks.
+### iOS 8+
 
-> **Note:** CocoaPods 0.36 is just a beta yet, so you need to install CocoaPods prerelease via `$ gem install cocoapods --pre`
+Use [CocoaPods](https://cocoapods.org). Minimum required version of CocoaPods is 0.36, which supports Swift frameworks.
 
 **Podfile**
 
@@ -35,7 +35,20 @@ Use [CocoaPods](http://cocoapods.org). Minimum requiredment version of CocoaPods
 pod 'JLToast'
 ```
 
-#### Objective-C
+
+### iOS 7
+
+I recommend you to try [CocoaSeeds](https://github.com/devxoul/CocoaSeeds), which uses source code instead of dynamic framework.
+
+**Seedfile**
+
+```ruby
+github 'devxoul/JLToast', '1.2.2', :files => 'JLToast/*.{swift,h}'
+```
+
+
+Objective-C
+-----------
 
 JLToast is compatible with Objective-C. What you need to do is to import a auto-generated header file:
 
@@ -109,3 +122,4 @@ License
 -------
 
 JLToast is under [WTFPL](http://www.wtfpl.net/). You can do what the fuck you want with JLToast. See LICENSE file for more info.
+I

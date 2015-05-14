@@ -131,7 +131,7 @@ public let JLToastViewLandscapeOffsetYAttributeName = "JLToastViewLandscapeOffse
 
         x = (width - backgroundViewSize.width) * 0.5
         y = height - (backgroundViewSize.height + y)
-        self.frame = CGRect(x: x, y: y, width: width, height: height);
+        self.frame = CGRect(x: x, y: y, width: backgroundViewSize.width, height: backgroundViewSize.height);
     }
     
     override public func hitTest(point: CGPoint, withEvent event: UIEvent!) -> UIView? {

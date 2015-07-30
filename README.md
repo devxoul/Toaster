@@ -43,7 +43,7 @@ I recommend you to try [CocoaSeeds](https://github.com/devxoul/CocoaSeeds), whic
 **Seedfile**
 
 ```ruby
-github 'devxoul/JLToast', '1.2.2', :files => 'JLToast/*.{swift,h}'
+github 'devxoul/JLToast', '1.2.4', :files => 'JLToast/*.{swift,h}'
 ```
 
 

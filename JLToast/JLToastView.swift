@@ -80,7 +80,6 @@ public let JLToastViewLandscapeOffsetYAttributeName = "JLToastViewLandscapeOffse
     
     func updateView() {
         let deviceWidth = CGRectGetWidth(UIScreen.mainScreen().bounds)
-        let font = self.textLabel.font
         let constraintSize = CGSize(width: deviceWidth * (280.0 / 320.0), height: CGFloat.max)
         let textLabelSize = self.textLabel.sizeThatFits(constraintSize)
         self.textLabel.frame = CGRect(
@@ -137,7 +136,7 @@ public let JLToastViewLandscapeOffsetYAttributeName = "JLToastViewLandscapeOffse
     }
     
     override public func hitTest(point: CGPoint, withEvent event: UIEvent!) -> UIView? {
-        if let superview = self.superview {
+        if self.superview != nil {
             let pointInWindow = self.convertPoint(point, toView: self.superview)
             let contains = CGRectContainsPoint(self.frame, pointInWindow)
             if contains && self.userInteractionEnabled {

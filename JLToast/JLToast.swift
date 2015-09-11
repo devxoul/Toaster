@@ -65,12 +65,12 @@ public struct JLToastDelay {
     }
 
     internal var window: UIWindow {
-        for window in UIApplication.sharedApplication().windows as? [UIWindow] ?? [] {
+        for window in UIApplication.sharedApplication().windows {
             if NSStringFromClass(window.dynamicType) == "UITextEffectsWindow" {
                 return window
             }
         }
-        return UIApplication.sharedApplication().windows.first as! UIWindow
+        return UIApplication.sharedApplication().windows.first!
     }
     
     
@@ -83,7 +83,7 @@ public struct JLToastDelay {
     }
     
     public class func makeText(text: String, delay: NSTimeInterval, duration: NSTimeInterval) -> JLToast {
-        var toast = JLToast()
+        let toast = JLToast()
         toast.text = text
         toast.delay = delay
         toast.duration = duration

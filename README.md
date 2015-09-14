@@ -32,7 +32,7 @@ Use [CocoaPods](https://cocoapods.org). Minimum required version of CocoaPods is
 **Podfile**
 
 ```ruby
-pod 'JLToast'
+pod 'JLToast', '~> 1.3'
 ```
 
 
@@ -43,7 +43,7 @@ I recommend you to try [CocoaSeeds](https://github.com/devxoul/CocoaSeeds), whic
 **Seedfile**
 
 ```ruby
-github 'devxoul/JLToast', '1.2.5', :files => 'JLToast/*.{swift,h}'
+github 'devxoul/JLToast', '1.3.0', :files => 'JLToast/*.{swift,h}'
 ```
 
 

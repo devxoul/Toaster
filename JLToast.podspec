@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "JLToast"
-  s.version      = "1.3.0"
+  s.version      = "1.3.1"
   s.summary      = "Toast UI for Swift - Android-like toast with very simple interface."
   s.homepage     = "http://github.com/devxoul/JLToast"
   s.license      = { :type => 'WTPFL', :file => 'LICENSE' }

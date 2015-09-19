@@ -65,12 +65,14 @@ public struct JLToastDelay {
     }
 
     internal var window: UIWindow {
-        for window in UIApplication.sharedApplication().windows {
-            if NSStringFromClass(window.dynamicType) == "UITextEffectsWindow" {
+        let windows = UIApplication.sharedApplication().windows
+        for window in windows.reverse() {
+            let className = NSStringFromClass(window.dynamicType)
+            if className == "UIRemoteKeyboardWindow" || className == "UITextEffectsWindow" {
                 return window
             }
         }
-        return UIApplication.sharedApplication().windows.first!
+        return windows.first!
     }
     
     

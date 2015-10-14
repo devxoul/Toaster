@@ -3,6 +3,7 @@ JLToast - Toast for Swift
 
 ![Swift 2.0](https://img.shields.io/badge/Swift-2.0-orange.svg)
 [![CocoaPods](http://img.shields.io/cocoapods/v/JLToast.svg?style=flat)](http://cocoapods.org/?q=name%3AJLToast%20author%3Adevxoul)
+[![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 
 Android-like toast with very simple interface.
 
@@ -26,26 +27,23 @@ Features
 Installation
 ------------
 
-### iOS 8+
+- **For iOS 8+ projects with [CocoaPods](https://cocoapods.org):**
 
-Use [CocoaPods](https://cocoapods.org). Minimum required version of CocoaPods is 0.36, which supports Swift frameworks.
+    ```ruby
+    pod 'JLToast', '~> 1.3'
+    ```
+    
+- **For iOS 8+ projects with [Carthage](https://github.com/Carthage/Carthage):**
 
-**Podfile**
+    ```
+    github "devxoul/JLToast" ~> 1.0
+    ```
+    
+- **For iOS 7 projects:** I recommend you to try [CocoaSeeds](https://github.com/devxoul/CocoaSeeds), which uses source code instead of dynamic frameworks. Sample Seedfile:
 
-```ruby
-pod 'JLToast', '~> 1.3'
-```
-
-
-### iOS 7
-
-I recommend you to try [CocoaSeeds](https://github.com/devxoul/CocoaSeeds), which uses source code instead of dynamic framework.
-
-**Seedfile**
-
-```ruby
-github 'devxoul/JLToast', '1.3.1', :files => 'JLToast/*.{swift,h}'
-```
+    ```ruby
+    github 'devxoul/JLToast', '1.3.1', :files => 'JLToast/*.{swift,h}'
+    ```
 
 
 Objective-C

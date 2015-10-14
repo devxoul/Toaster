@@ -1,15 +1,15 @@
 //
-//  JLToastSwiftSampleTests.swift
-//  JLToastSwiftSampleTests
+//  JLToastTests.swift
+//  JLToastTests
 //
-//  Created by 전수열 on 8/15/14.
-//  Copyright (c) 2015 Suyeol Jeon. All rights reserved.
+//  Created by 전수열 on 10/15/15.
+//  Copyright © 2015 Suyeol Jeon. All rights reserved.
 //
 
-import UIKit
 import XCTest
+@testable import JLToast
 
-class JLToastSwiftSampleTests: XCTestCase {
+class JLToastTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
@@ -23,12 +23,12 @@ class JLToastSwiftSampleTests: XCTestCase {
     
     func testExample() {
         // This is an example of a functional test case.
-        XCTAssert(true, "Pass")
+        // Use XCTAssert and related functions to verify your tests produce the correct results.
     }
     
     func testPerformanceExample() {
         // This is an example of a performance test case.
-        self.measureBlock() {
+        self.measureBlock {
             // Put the code you want to measure the time of here.
         }
     }

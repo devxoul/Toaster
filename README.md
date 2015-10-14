@@ -122,5 +122,4 @@ Screenshots
 License
 -------
 
-JLToast is under [WTFPL](http://www.wtfpl.net/). You can do what the fuck you want with JLToast. See LICENSE file for more info.
-I
+JLToast is under [WTFPL](http://www.wtfpl.net/). You can do what the fuck you want with JLToast. See [LICENSE](LICENSE) file for more info.

@@ -18,13 +18,16 @@
  */
 
 import UIKit
+import JLToast
 
 class RootViewController: UIViewController {
 
     override func viewDidLoad() {
         let button = UIButton(type: .System)
-        button.frame = CGRect(x: 10, y: 10, width: 300, height: 60)
         button.setTitle("Show", forState: .Normal)
+        button.sizeToFit()
+        button.center.x = self.view.frame.width / 2
+        button.center.y = 60
         button.addTarget(self, action: "showButtonTouchUpInside", forControlEvents: UIControlEvents.TouchUpInside)
         self.view.addSubview(button)
     }

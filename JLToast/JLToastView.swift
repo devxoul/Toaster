@@ -26,6 +26,13 @@ public let JLToastViewTextColorAttributeName = "JLToastViewTextColorAttributeNam
 public let JLToastViewFontAttributeName = "JLToastViewFontAttributeName"
 public let JLToastViewPortraitOffsetYAttributeName = "JLToastViewPortraitOffsetYAttributeName"
 public let JLToastViewLandscapeOffsetYAttributeName = "JLToastViewLandscapeOffsetYAttributeName"
+public let JLToastViewGravityAttributeName = "JLToastViewGravityAttributeName"
+
+public struct JLToastGravity {
+    public static let Top: String = "Top"
+    public static let Center: String = "Center"
+    public static let Bottom: String = "Bottom"
+}
 
 @objc public class JLToastView: UIView {
     
@@ -115,6 +122,10 @@ public let JLToastViewLandscapeOffsetYAttributeName = "JLToastViewLandscapeOffse
             JLToastViewLandscapeOffsetYAttributeName,
             forUserInterfaceIdiom: userInterfaceIdiom
         ) as! CGFloat
+        let gravity = self.dynamicType.defaultValueForAttributeName(
+            JLToastViewGravityAttributeName,
+            forUserInterfaceIdiom: userInterfaceIdiom
+        ) as! String
 
         if UIInterfaceOrientationIsLandscape(orientation) && systemVersion < 8.0 {
             width = screenSize.height
@@ -131,7 +142,13 @@ public let JLToastViewLandscapeOffsetYAttributeName = "JLToastViewLandscapeOffse
         }
 
         x = (width - backgroundViewSize.width) * 0.5
-        y = height - (backgroundViewSize.height + y)
+        switch gravity {
+        case JLToastGravity.Top:    break
+        case JLToastGravity.Center: y = height / 2.0
+        case JLToastGravity.Bottom: y = height - (backgroundViewSize.height + y)
+        default:                    y = height - (backgroundViewSize.height + y)
+        }
+
         self.frame = CGRect(x: x, y: y, width: backgroundViewSize.width, height: backgroundViewSize.height);
     }
     
@@ -186,6 +203,10 @@ public extension JLToastView {
                 .Unspecified: 20,
                 .Phone: 20,
                 .Pad: 40,
+            ],
+
+            JLToastViewGravityAttributeName: [
+                .Unspecified: JLToastGravity.Bottom,
             ],
         ]
     }

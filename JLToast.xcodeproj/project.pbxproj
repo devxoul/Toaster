@@ -7,16 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		037A2EA91C043C9600257E51 /* JLToastWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 037A2EA81C043C9600257E51 /* JLToastWindow.swift */; };
 		03A75E2F1BCF2066002E46C4 /* JLToast.h in Headers */ = {isa = PBXBuildFile; fileRef = 03A75E2E1BCF2066002E46C4 /* JLToast.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		03A75E361BCF2066002E46C4 /* JLToast.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03A75E2B1BCF2066002E46C4 /* JLToast.framework */; settings = {ASSET_TAGS = (); }; };
+		03A75E361BCF2066002E46C4 /* JLToast.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03A75E2B1BCF2066002E46C4 /* JLToast.framework */; };
 		03A75E3B1BCF2066002E46C4 /* JLToastTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03A75E3A1BCF2066002E46C4 /* JLToastTests.swift */; };
-		03A75E481BCF2098002E46C4 /* JLToast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03A75E451BCF2098002E46C4 /* JLToast.swift */; settings = {ASSET_TAGS = (); }; };
-		03A75E491BCF2098002E46C4 /* JLToastCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03A75E461BCF2098002E46C4 /* JLToastCenter.swift */; settings = {ASSET_TAGS = (); }; };
-		03A75E4A1BCF2098002E46C4 /* JLToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03A75E471BCF2098002E46C4 /* JLToastView.swift */; settings = {ASSET_TAGS = (); }; };
+		03A75E481BCF2098002E46C4 /* JLToast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03A75E451BCF2098002E46C4 /* JLToast.swift */; };
+		03A75E491BCF2098002E46C4 /* JLToastCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03A75E461BCF2098002E46C4 /* JLToastCenter.swift */; };
+		03A75E4A1BCF2098002E46C4 /* JLToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03A75E471BCF2098002E46C4 /* JLToastView.swift */; };
 		03A75E521BCF20D4002E46C4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03A75E511BCF20D4002E46C4 /* AppDelegate.swift */; };
 		03A75E591BCF20D4002E46C4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 03A75E581BCF20D4002E46C4 /* Assets.xcassets */; };
 		03A75E5C1BCF20D4002E46C4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 03A75E5A1BCF20D4002E46C4 /* LaunchScreen.storyboard */; };
-		03A75E621BCF2102002E46C4 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03A75E611BCF2102002E46C4 /* RootViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		03A75E621BCF2102002E46C4 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03A75E611BCF2102002E46C4 /* RootViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,6 +38,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		037A2EA81C043C9600257E51 /* JLToastWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JLToastWindow.swift; sourceTree = "<group>"; };
 		03A75E2B1BCF2066002E46C4 /* JLToast.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = JLToast.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		03A75E2E1BCF2066002E46C4 /* JLToast.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JLToast.h; sourceTree = "<group>"; };
 		03A75E301BCF2066002E46C4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -107,6 +109,7 @@
 				03A75E451BCF2098002E46C4 /* JLToast.swift */,
 				03A75E461BCF2098002E46C4 /* JLToastCenter.swift */,
 				03A75E471BCF2098002E46C4 /* JLToastView.swift */,
+				037A2EA81C043C9600257E51 /* JLToastWindow.swift */,
 				03A75E301BCF2066002E46C4 /* Info.plist */,
 			);
 			path = JLToast;
@@ -276,6 +279,7 @@
 				03A75E491BCF2098002E46C4 /* JLToastCenter.swift in Sources */,
 				03A75E4A1BCF2098002E46C4 /* JLToastView.swift in Sources */,
 				03A75E481BCF2098002E46C4 /* JLToast.swift in Sources */,
+				037A2EA91C043C9600257E51 /* JLToastWindow.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -530,6 +534,7 @@
 				03A75E601BCF20D4002E46C4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

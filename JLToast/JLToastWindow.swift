@@ -47,6 +47,10 @@ private class JLToastWindowRootViewController: UIViewController {
         self.init(nibName: nil, bundle: nil)
     }
 
+    private override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        return UIApplication.sharedApplication().statusBarStyle
+    }
+
     private override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
         return .All
     }

@@ -26,6 +26,7 @@ public let JLToastViewTextColorAttributeName = "JLToastViewTextColorAttributeNam
 public let JLToastViewFontAttributeName = "JLToastViewFontAttributeName"
 public let JLToastViewPortraitOffsetYAttributeName = "JLToastViewPortraitOffsetYAttributeName"
 public let JLToastViewLandscapeOffsetYAttributeName = "JLToastViewLandscapeOffsetYAttributeName"
+public let JLToastViewCenterYAttributeName = "JLToastViewCenterYAttributeName"
 
 @objc public class JLToastView: UIView {
     
@@ -115,7 +116,11 @@ public let JLToastViewLandscapeOffsetYAttributeName = "JLToastViewLandscapeOffse
             JLToastViewLandscapeOffsetYAttributeName,
             forUserInterfaceIdiom: userInterfaceIdiom
         ) as! CGFloat
-
+        let centerY = self.dynamicType.defaultValueForAttributeName(
+            JLToastViewCenterYAttributeName,
+            forUserInterfaceIdiom: userInterfaceIdiom
+        ) as! Bool
+        
         if UIInterfaceOrientationIsLandscape(orientation) && systemVersion < 8.0 {
             width = screenSize.height
             height = screenSize.width
@@ -129,9 +134,15 @@ public let JLToastViewLandscapeOffsetYAttributeName = "JLToastViewLandscapeOffse
                 y = portraitOffsetY
             }
         }
-
-        x = (width - backgroundViewSize.width) * 0.5
-        y = height - (backgroundViewSize.height + y)
+        
+        if (centerY) {
+            x = (width - backgroundViewSize.width) * 0.5
+            y = (height - backgroundViewSize.height) * 0.5
+        } else {
+            x = (width - backgroundViewSize.width) * 0.5
+            y = height - (backgroundViewSize.height + y)
+        }
+        
         self.frame = CGRect(x: x, y: y, width: backgroundViewSize.width, height: backgroundViewSize.height);
     }
     
@@ -186,6 +197,9 @@ public extension JLToastView {
                 .Unspecified: 20,
                 .Phone: 20,
                 .Pad: 40,
+            ],
+            JLToastViewCenterYAttributeName: [
+                .Unspecified: false,
             ],
         ]
     }

@@ -109,8 +109,9 @@ JLToastView.setDefaultValue(
 | `JLToastViewFontAttributeName` | `UIFont` | Font |
 | `JLToastViewPortraitOffsetYAttributeName` | `NSNumber(CGFloat)` | Vertical offfset from bottom in portrait mode |
 |` JLToastViewLandscapeOffsetYAttributeName` | `NSNumber(CGFloat)` | Vertical offfset from bottom in landscape mode |
-|` JLToastViewCenterYAttributeName` | `NSNumber(BOOL)` | Vertical Centering |
-
+| `JLToastViewPortraitOffsetXAttributeName` | `NSNumber(CGFloat)` | Horizontally offfset from left in portrait mode |
+|` JLToastViewLandscapeOffsetXAttributeName` | `NSNumber(CGFloat)` | Horizontally offfset from left in landscape mode |
+|` JLToastViewGravityAttributeName` | `enum JLToastGravity` | Position (Top, Center, Bottom) |
 
 Screenshots
 -----------

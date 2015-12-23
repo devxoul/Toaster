@@ -111,7 +111,7 @@ JLToastView.setDefaultValue(
 |` JLToastViewLandscapeOffsetYAttributeName` | `NSNumber(CGFloat)` | Vertical offfset from bottom in landscape mode |
 | `JLToastViewPortraitOffsetXAttributeName` | `NSNumber(CGFloat)` | Horizontally offfset from left in portrait mode |
 |` JLToastViewLandscapeOffsetXAttributeName` | `NSNumber(CGFloat)` | Horizontally offfset from left in landscape mode |
-|` JLToastViewGravityAttributeName` | `enum JLToastGravity` | Position (Top, Center, Bottom) |
+|` JLToastViewGravityAttributeName` | `enum JLToastGravity` | Position (Top, Center, Bottom, Left, Right) |
 
 Screenshots
 -----------

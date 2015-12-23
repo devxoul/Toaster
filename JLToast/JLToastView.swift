@@ -160,7 +160,7 @@ public let JLToastViewGravityAttributeName = "JLToastViewGravityAttributeName"
         if gravity.contains(JLToastGravity.Left) {
             
         } else if gravity.contains(JLToastGravity.Right) {
-            x = width - backgroundViewSize.width + x
+            x = width - backgroundViewSize.width - x
         } else {
             x = (width - backgroundViewSize.width) * 0.5 + x
         }
@@ -248,7 +248,7 @@ public extension JLToastView {
             
             //backgroundView Gravity
             JLToastViewGravityAttributeName: [
-                .Unspecified: [JLToastGravity.CenterX, JLToastGravity.CenterY],
+                .Unspecified: [JLToastGravity.CenterX, JLToastGravity.Bottom],
             ],
         ]
     }
@@ -269,5 +269,39 @@ public extension JLToastView {
         var values = Singleton.defaultValues[attributeName]!
         values[userInterfaceIdiom] = value
         Singleton.defaultValues[attributeName] = values
+    }
+    
+    class func setDefaultOffset() {
+        JLToastView.setDefaultValue(
+            30,
+            forAttributeName: JLToastViewPortraitOffsetYAttributeName,
+            userInterfaceIdiom: .Unspecified
+        )
+        JLToastView.setDefaultValue(
+            30,
+            forAttributeName: JLToastViewPortraitOffsetYAttributeName,
+            userInterfaceIdiom: .Phone
+        )
+        JLToastView.setDefaultValue(
+            60,
+            forAttributeName: JLToastViewPortraitOffsetYAttributeName,
+            userInterfaceIdiom: .Pad
+        )
+        
+        JLToastView.setDefaultValue(
+            20,
+            forAttributeName: JLToastViewLandscapeOffsetYAttributeName,
+            userInterfaceIdiom: .Unspecified
+        )
+        JLToastView.setDefaultValue(
+            20,
+            forAttributeName: JLToastViewLandscapeOffsetYAttributeName,
+            userInterfaceIdiom: .Phone
+        )
+        JLToastView.setDefaultValue(
+            40,
+            forAttributeName: JLToastViewLandscapeOffsetYAttributeName,
+            userInterfaceIdiom: .Pad
+        )
     }
 }

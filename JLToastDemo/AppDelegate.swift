@@ -32,37 +32,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window!.backgroundColor = UIColor.whiteColor()
         self.window!.rootViewController = RootViewController()
         self.window!.makeKeyAndVisible()
-        JLToastView.setDefaultValue(
-            30,
-            forAttributeName: JLToastViewPortraitOffsetYAttributeName,
-            userInterfaceIdiom: .Unspecified
-        )
-        JLToastView.setDefaultValue(
-            30,
-            forAttributeName: JLToastViewPortraitOffsetYAttributeName,
-            userInterfaceIdiom: .Phone
-        )
-        JLToastView.setDefaultValue(
-            60,
-            forAttributeName: JLToastViewPortraitOffsetYAttributeName,
-            userInterfaceIdiom: .Pad
-        )
-        
-        JLToastView.setDefaultValue(
-            20,
-            forAttributeName: JLToastViewLandscapeOffsetYAttributeName,
-            userInterfaceIdiom: .Unspecified
-        )
-        JLToastView.setDefaultValue(
-            20,
-            forAttributeName: JLToastViewLandscapeOffsetYAttributeName,
-            userInterfaceIdiom: .Phone
-        )
-        JLToastView.setDefaultValue(
-            40,
-            forAttributeName: JLToastViewLandscapeOffsetYAttributeName,
-            userInterfaceIdiom: .Pad
-        )
+        JLToastView.setDefaultOffset()
         return true
     }
 }

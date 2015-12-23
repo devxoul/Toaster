@@ -32,10 +32,23 @@ public class JLToastWindow: UIWindow {
 
     public override init(frame: CGRect) {
         super.init(frame: frame)
+        NSNotificationCenter.defaultCenter().addObserver(self,
+            selector: "bringWindowToTop:",
+            name: UIWindowDidBecomeVisibleNotification,
+            object: nil
+        )
     }
 
     required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    /// Bring JLToastWindow to top when another window is being shown.
+    func bringWindowToTop(notification: NSNotification) {
+        if !(notification.object is JLToastWindow) {
+            self.dynamicType.sharedWindow.hidden = true
+            self.dynamicType.sharedWindow.hidden = false
+        }
     }
 
 }

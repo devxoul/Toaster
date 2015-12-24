@@ -116,8 +116,14 @@ public struct JLToastDelay {
                         },
                         completion: { completed in
                             self.finish()
-                            UIView.animateWithDuration(0.5, animations: {
-                                self.view.alpha = 0
+                            UIView.animateWithDuration(
+                                0.5,
+                                animations: {
+                                    self.view.alpha = 0
+                                },
+                                completion:{ completed in
+                                    self.view.removeFromSuperview()
+                                    
                             })
                         }
                     )

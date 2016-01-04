@@ -25,6 +25,7 @@ public class JLToastWindow: UIWindow {
         let window = JLToastWindow(frame: UIScreen.mainScreen().bounds)
         window.userInteractionEnabled = false
         window.windowLevel = CGFloat.max
+        window.backgroundColor = .clearColor()
         window.rootViewController = JLToastWindowRootViewController()
         window.hidden = false
         return window
@@ -58,6 +59,11 @@ private class JLToastWindowRootViewController: UIViewController {
 
     private convenience init() {
         self.init(nibName: nil, bundle: nil)
+    }
+
+    private override func viewDidLoad() {
+        super.viewDidLoad()
+//        self.view.backgroundColor = UIColor.greenColor().colorWithAlphaComponent(0)
     }
 
     private override func preferredStatusBarStyle() -> UIStatusBarStyle {

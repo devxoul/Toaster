@@ -32,10 +32,25 @@ class RootViewController: UIViewController {
         self.view.addSubview(button)
     }
 
+    func randomStringWithLength(len: Int) -> NSString {
+
+        let letters: NSString = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+        let randomString = NSMutableString(capacity: len)
+
+        for (var i = 0; i < len; i++) {
+            let length = UInt32(letters.length)
+            let rand = arc4random_uniform(length)
+            randomString.appendFormat("%C", letters.characterAtIndex(Int(rand)))
+        }
+
+        return randomString
+    }
+
     func showButtonTouchUpInside() {
-        JLToast.makeText("Basic JLToast").show()
-        JLToast.makeText("You can set duration. `JLToastDelay.ShortDelay` means 2 seconds.\n" +
-                         "`JLToastDelay.LongDelay` means 3.5 seconds.", duration: JLToastDelay.LongDelay).show()
-        JLToast.makeText("With delay, JLToast will be shown after delay.", delay: 1, duration: 5).show()
+        JLToast.makeText(randomStringWithLength(15) as String).show()
+
+//        JLToast.makeText("You can set duration. `JLToastDelay.ShortDelay` means 2 seconds.\n" +
+//                         "`JLToastDelay.LongDelay` means 3.5 seconds.", duration: JLToastDelay.LongDelay).show()
+//        JLToast.makeText("With delay, JLToast will be shown after delay.", delay: 1, duration: 5).show()
     }
 }

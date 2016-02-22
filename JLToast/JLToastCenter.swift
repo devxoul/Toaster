@@ -19,7 +19,11 @@
 
 import UIKit
 
-@objc public class JLToastCenter: NSObject {
+protocol JLToastDelegate: class {
+    func getTotalCount() -> Int
+}
+
+@objc public class JLToastCenter: NSObject, JLToastDelegate {
 
     private var _queue: NSOperationQueue!
 
@@ -32,9 +36,9 @@ import UIKit
     }
     
     override init() {
-        super.init()
         self._queue = NSOperationQueue()
-        self._queue.maxConcurrentOperationCount = 1
+        self._queue.maxConcurrentOperationCount = 20
+        super.init()
         NSNotificationCenter.defaultCenter().addObserver(
             self,
             selector: "deviceOrientationDidChange:",
@@ -42,8 +46,13 @@ import UIKit
             object: nil
         )
     }
-    
+
+    public func getTotalCount() -> Int {
+        return self._queue.operationCount
+    }
+
     public func addToast(toast: JLToast) {
+        toast.view.delegate = self
         self._queue.addOperation(toast)
     }
     

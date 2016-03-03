@@ -27,6 +27,7 @@ public struct JLToastDelay {
 @objc public class JLToast: NSOperation {
 
     public var view: JLToastView = JLToastView()
+    public static var topY: CGFloat? = nil
     
     public var text: String? {
         get {
@@ -119,6 +120,13 @@ public struct JLToastDelay {
 
         dispatch_async(dispatch_get_main_queue(), {
             self.view.updateView()
+
+            if let topY = JLToast.topY {
+                JLToast.topY = min(topY, self.view.frame.origin.y)
+            } else {
+                JLToast.topY = self.view.frame.origin.y
+            }
+
             self.view.alpha = 0
             JLToastWindow.sharedWindow.addSubview(self.view)
             UIView.animateWithDuration(

@@ -132,7 +132,11 @@ public let JLToastViewLandscapeOffsetYAttributeName = "JLToastViewLandscapeOffse
         }
 
         x = (width - backgroundViewSize.width) * 0.5
-        y = height - y - (backgroundViewSize.height + 5.0) * CGFloat(self.delegate?.getTotalCount() ?? 1)
+        if let topY = JLToast.topY {
+            y = topY - (backgroundViewSize.height + 5.0)
+        } else {
+            y = height - y - backgroundViewSize.height
+        }
         self.frame = CGRect(x: x, y: y, width: backgroundViewSize.width, height: backgroundViewSize.height);
     }
     

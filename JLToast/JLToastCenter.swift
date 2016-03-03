@@ -49,12 +49,19 @@ protocol JLToastDelegate: class {
         )
     }
 
+    // MARK: - Delegate
+
     public func getTotalCount() -> Int {
         return self._queue.operationCount
     }
 
+    // MARK: -
+
     public func addToast(toast: JLToast) {
         toast.view.delegate = self
+        if self._queue.operationCount == 0 {
+            JLToast.topY = nil
+        }
         self._queue.addOperation(toast)
     }
     

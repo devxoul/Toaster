@@ -64,6 +64,26 @@ public struct JLToastDelay {
         }
     }
     
+	// Use ONLY for debugging / staging builds
+	public class func showDebugText(text: String) {
+		#if DEBUG || RELEASE
+		// Temporarily change colour to red for debug text
+		if let bgColour = JLToastView.defaultValueForAttributeName(JLToastViewBackgroundColorAttributeName, forUserInterfaceIdiom: .Unspecified) as? UIColor {
+			JLToastView.setDefaultValue(
+				UIColor.redColor(),
+				forAttributeName: JLToastViewBackgroundColorAttributeName,
+				userInterfaceIdiom: .Unspecified
+			)
+			JLToast.makeText(text).show()
+			JLToastView.setDefaultValue(
+				bgColour,
+				forAttributeName: JLToastViewBackgroundColorAttributeName,
+				userInterfaceIdiom: .Unspecified
+			)
+		}
+		#endif
+	}
+
     public class func makeText(text: String) -> JLToast {
         return JLToast.makeText(text, delay: 0, duration: JLToastDelay.ShortDelay)
     }

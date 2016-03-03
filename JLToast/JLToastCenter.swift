@@ -19,6 +19,8 @@
 
 import UIKit
 
+let MAX_CONCURRENT_TOASTS: Int = 10
+
 protocol JLToastDelegate: class {
     func getTotalCount() -> Int
 }
@@ -36,9 +38,9 @@ protocol JLToastDelegate: class {
     }
     
     override init() {
-        self._queue = NSOperationQueue()
-        self._queue.maxConcurrentOperationCount = 20
         super.init()
+        self._queue = NSOperationQueue()
+        self._queue.maxConcurrentOperationCount = MAX_CONCURRENT_TOASTS
         NSNotificationCenter.defaultCenter().addObserver(
             self,
             selector: "deviceOrientationDidChange:",
@@ -57,9 +59,16 @@ protocol JLToastDelegate: class {
     }
     
     func deviceOrientationDidChange(sender: AnyObject?) {
-        if self._queue.operations.count > 0 {
-            let lastToast: JLToast = _queue.operations[0] as! JLToast
-            lastToast.view.updateView()
-        }
+        if self._queue.operations.count > 0 && self._queue.operations.count <= self._queue.maxConcurrentOperationCount {
+			for toast in self._queue.operations {
+				let thisToast: JLToast = toast as! JLToast
+				thisToast.view.updateView()
+			}
+		} else if self._queue.operations.count > self._queue.maxConcurrentOperationCount {
+			for index in 0..<self._queue.maxConcurrentOperationCount {
+				let thisToast: JLToast = self._queue.operations[index] as! JLToast
+				thisToast.view.updateView()
+			}
+		}
     }
 }

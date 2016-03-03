@@ -19,7 +19,7 @@
 
 import UIKit
 
-let MAX_CONCURRENT_TOASTS: Int = 10
+let MAX_CONCURRENT_TOASTS: Int = 15
 
 protocol JLToastDelegate: class {
     func getTotalCount() -> Int
@@ -59,7 +59,7 @@ protocol JLToastDelegate: class {
 
     public func addToast(toast: JLToast) {
         toast.view.delegate = self
-        if self._queue.operationCount == 0 {
+        if self._queue.operationCount == 0 || self._queue.operationCount >= MAX_CONCURRENT_TOASTS {
             JLToast.topY = nil
         }
         self._queue.addOperation(toast)

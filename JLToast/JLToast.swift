@@ -21,7 +21,7 @@ import UIKit
 
 public struct JLToastDelay {
     public static let ShortDelay: NSTimeInterval = 2.0
-    public static let LongDelay: NSTimeInterval = 4.5
+    public static let LongDelay: NSTimeInterval = 10
 }
 
 @objc public class JLToast: NSOperation {

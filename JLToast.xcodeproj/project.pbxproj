@@ -18,6 +18,8 @@
 		03A75E591BCF20D4002E46C4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 03A75E581BCF20D4002E46C4 /* Assets.xcassets */; };
 		03A75E5C1BCF20D4002E46C4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 03A75E5A1BCF20D4002E46C4 /* LaunchScreen.storyboard */; };
 		03A75E621BCF2102002E46C4 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03A75E611BCF2102002E46C4 /* RootViewController.swift */; };
+		B02B2A171C80FEB300AA142D /* JLToast.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03A75E2B1BCF2066002E46C4 /* JLToast.framework */; };
+		B02B2A181C80FEB300AA142D /* JLToast.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 03A75E2B1BCF2066002E46C4 /* JLToast.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +38,20 @@
 			remoteInfo = JLToast;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		B02B2A191C80FEB300AA142D /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				B02B2A181C80FEB300AA142D /* JLToast.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		037A2EA81C043C9600257E51 /* JLToastWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JLToastWindow.swift; sourceTree = "<group>"; };
@@ -76,6 +92,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B02B2A171C80FEB300AA142D /* JLToast.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -193,6 +210,7 @@
 				03A75E4B1BCF20D4002E46C4 /* Sources */,
 				03A75E4C1BCF20D4002E46C4 /* Frameworks */,
 				03A75E4D1BCF20D4002E46C4 /* Resources */,
+				B02B2A191C80FEB300AA142D /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -477,6 +495,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = JLToastDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -489,6 +508,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = JLToastDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

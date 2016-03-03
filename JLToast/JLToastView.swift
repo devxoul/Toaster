@@ -32,6 +32,7 @@ public let JLToastViewLandscapeOffsetYAttributeName = "JLToastViewLandscapeOffse
     public var backgroundView: UIView!
     public var textLabel: UILabel!
     public var textInsets: UIEdgeInsets!
+    weak var delegate: JLToastDelegate? = nil
     
     init() {
         super.init(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
@@ -131,7 +132,11 @@ public let JLToastViewLandscapeOffsetYAttributeName = "JLToastViewLandscapeOffse
         }
 
         x = (width - backgroundViewSize.width) * 0.5
-        y = height - (backgroundViewSize.height + y)
+        if let topY = JLToast.topY {
+            y = topY - (backgroundViewSize.height + 5.0)
+        } else {
+            y = height - y - backgroundViewSize.height
+        }
         self.frame = CGRect(x: x, y: y, width: backgroundViewSize.width, height: backgroundViewSize.height);
     }
     

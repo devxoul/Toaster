@@ -21,12 +21,13 @@ import UIKit
 
 public struct JLToastDelay {
     public static let ShortDelay: NSTimeInterval = 2.0
-    public static let LongDelay: NSTimeInterval = 3.5
+    public static let LongDelay: NSTimeInterval = 4.5
 }
 
 @objc public class JLToast: NSOperation {
 
     public var view: JLToastView = JLToastView()
+    public static var topY: CGFloat? = nil
     
     public var text: String? {
         get {
@@ -38,7 +39,7 @@ public struct JLToastDelay {
     }
 
     public var delay: NSTimeInterval = 0
-    public var duration: NSTimeInterval = JLToastDelay.ShortDelay
+    public var duration: NSTimeInterval = JLToastDelay.LongDelay
 
     private var _executing = false
     override public var executing: Bool {
@@ -64,6 +65,26 @@ public struct JLToastDelay {
         }
     }
     
+	// Use ONLY for debugging / staging builds
+	public class func showDebugText(text: String) {
+		#if DEBUG || RELEASE
+		// Temporarily change colour to red for debug text
+		if let bgColour = JLToastView.defaultValueForAttributeName(JLToastViewBackgroundColorAttributeName, forUserInterfaceIdiom: .Unspecified) as? UIColor {
+			JLToastView.setDefaultValue(
+				UIColor.redColor(),
+				forAttributeName: JLToastViewBackgroundColorAttributeName,
+				userInterfaceIdiom: .Unspecified
+			)
+			JLToast.makeText(text).show()
+			JLToastView.setDefaultValue(
+				bgColour,
+				forAttributeName: JLToastViewBackgroundColorAttributeName,
+				userInterfaceIdiom: .Unspecified
+			)
+		}
+		#endif
+	}
+
     public class func makeText(text: String) -> JLToast {
         return JLToast.makeText(text, delay: 0, duration: JLToastDelay.ShortDelay)
     }
@@ -99,6 +120,13 @@ public struct JLToastDelay {
 
         dispatch_async(dispatch_get_main_queue(), {
             self.view.updateView()
+
+            if let topY = JLToast.topY {
+                JLToast.topY = min(topY, self.view.frame.origin.y)
+            } else {
+                JLToast.topY = self.view.frame.origin.y
+            }
+
             self.view.alpha = 0
             JLToastWindow.sharedWindow.addSubview(self.view)
             UIView.animateWithDuration(

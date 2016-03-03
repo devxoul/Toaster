@@ -63,7 +63,6 @@ private class JLToastWindowRootViewController: UIViewController {
 
     private override func viewDidLoad() {
         super.viewDidLoad()
-//        self.view.backgroundColor = UIColor.greenColor().colorWithAlphaComponent(0)
     }
 
     private override func preferredStatusBarStyle() -> UIStatusBarStyle {

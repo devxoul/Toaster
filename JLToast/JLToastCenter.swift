@@ -19,7 +19,7 @@
 
 import UIKit
 
-let MAX_CONCURRENT_TOASTS: Int = 15
+let MAX_CONCURRENT_TOASTS: Int = 10
 
 protocol JLToastDelegate: class {
     func getTotalCount() -> Int
@@ -64,18 +64,18 @@ protocol JLToastDelegate: class {
         }
         self._queue.addOperation(toast)
     }
-    
+
     func deviceOrientationDidChange(sender: AnyObject?) {
         if self._queue.operations.count > 0 && self._queue.operations.count <= self._queue.maxConcurrentOperationCount {
-			for toast in self._queue.operations {
-				let thisToast: JLToast = toast as! JLToast
-				thisToast.view.updateView()
-			}
-		} else if self._queue.operations.count > self._queue.maxConcurrentOperationCount {
-			for index in 0..<self._queue.maxConcurrentOperationCount {
-				let thisToast: JLToast = self._queue.operations[index] as! JLToast
-				thisToast.view.updateView()
-			}
-		}
+            for toast in self._queue.operations {
+                let thisToast: JLToast = toast as! JLToast
+                JLToast.updateView(thisToast.view)
+            }
+        } else if self._queue.operations.count > self._queue.maxConcurrentOperationCount {
+            for index in 0..<self._queue.maxConcurrentOperationCount {
+                let thisToast: JLToast = self._queue.operations[index] as! JLToast
+                JLToast.updateView(thisToast.view)
+            }
+        }
     }
 }

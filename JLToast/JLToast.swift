@@ -116,18 +116,20 @@ public struct JLToastDelay {
         }
     }
 
+    public static func updateView(toastView: JLToastView) {
+        toastView.updateView()
+        if let topY = JLToast.topY {
+            JLToast.topY = min(topY, toastView.frame.origin.y)
+        } else {
+            JLToast.topY = toastView.frame.origin.y
+        }
+    }
+
     override public func main() {
         self.executing = true
 
         dispatch_async(dispatch_get_main_queue(), {
-            self.view.updateView()
-
-            if let topY = JLToast.topY {
-                JLToast.topY = min(topY, self.view.frame.origin.y)
-            } else {
-                JLToast.topY = self.view.frame.origin.y
-            }
-
+            JLToast.updateView(self.view)
             self.view.alpha = 0
             JLToastWindow.sharedWindow.addSubview(self.view)
             UIView.animateWithDuration(

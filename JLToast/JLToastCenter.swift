@@ -59,7 +59,7 @@ protocol JLToastDelegate: class {
 
     public func addToast(toast: JLToast) {
         toast.view.delegate = self
-        if self._queue.operationCount == 0 || self._queue.operationCount >= MAX_CONCURRENT_TOASTS {
+        if self._queue.operationCount == 0 || self._queue.operationCount >= MAX_CONCURRENT_TOASTS || JLToast.topY <= 0 {
             JLToast.topY = nil
         }
         self._queue.addOperation(toast)

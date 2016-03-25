@@ -38,6 +38,11 @@ public class JLToastWindow: UIWindow {
             name: UIWindowDidBecomeVisibleNotification,
             object: nil
         )
+        NSNotificationCenter.defaultCenter().addObserver(self,
+            selector: "didBecomeActive:",
+            name: UIApplicationDidBecomeActiveNotification,
+            object: nil
+        )
     }
 
     required public init?(coder aDecoder: NSCoder) {
@@ -49,6 +54,15 @@ public class JLToastWindow: UIWindow {
         if !(notification.object is JLToastWindow) {
             self.dynamicType.sharedWindow.hidden = true
             self.dynamicType.sharedWindow.hidden = false
+        }
+    }
+    
+    func didBecomeActive(notification: NSNotification) {
+        if notification.object is UIApplication {
+            if let window = (notification.object as! UIApplication).delegate?.window {
+                frame.size = window!.frame.size
+                JLToastCenter.defaultCenter().chageSize()
+            }
         }
     }
 

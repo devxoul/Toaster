@@ -79,7 +79,8 @@ public let JLToastViewLandscapeOffsetYAttributeName = "JLToastViewLandscapeOffse
     }
     
     func updateView() {
-        let deviceWidth = CGRectGetWidth(UIScreen.mainScreen().bounds)
+        let screenSize = JLToastWindow.sharedWindow.frame.size
+        let deviceWidth = screenSize.width
         let constraintSize = CGSize(width: deviceWidth * (280.0 / 320.0), height: CGFloat.max)
         let textLabelSize = self.textLabel.sizeThatFits(constraintSize)
         self.textLabel.frame = CGRect(
@@ -100,7 +101,6 @@ public let JLToastViewLandscapeOffsetYAttributeName = "JLToastViewLandscapeOffse
         var width:CGFloat
         var height:CGFloat
 
-        let screenSize = UIScreen.mainScreen().bounds.size
         let backgroundViewSize = self.backgroundView.frame.size
 
         let orientation = UIApplication.sharedApplication().statusBarOrientation

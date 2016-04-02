@@ -84,6 +84,10 @@ public struct JLToastDelay {
         JLToastCenter.defaultCenter().addToast(self)
     }
     
+    public class func clear() {
+        JLToastCenter.defaultCenter().cancelAllToasts()
+    }
+
     override public func start() {
         if !NSThread.isMainThread() {
             dispatch_async(dispatch_get_main_queue(), {
@@ -97,10 +101,23 @@ public struct JLToastDelay {
     override public func main() {
         self.executing = true
 
+        // cancel
+        if self.cancelled {
+            self.abort()
+            return
+        }
+
         dispatch_async(dispatch_get_main_queue(), {
             self.view.updateView()
             self.view.alpha = 0
             JLToastWindow.sharedWindow.addSubview(self.view)
+
+            // cancel
+            if self.cancelled {
+                self.abort()
+                return
+            }
+
             UIView.animateWithDuration(
                 0.5,
                 delay: self.delay,
@@ -109,12 +126,24 @@ public struct JLToastDelay {
                     self.view.alpha = 1
                 },
                 completion: { completed in
+                    // cancel
+                    if self.cancelled {
+                        self.abort()
+                        return
+                    }
+
                     UIView.animateWithDuration(
                         self.duration,
                         animations: {
                             self.view.alpha = 1.0001
                         },
                         completion: { completed in
+                            // cancel
+                            if self.cancelled {
+                                self.abort()
+                                return
+                            }
+
                             self.finish()
                             UIView.animateWithDuration(
                                 0.5,
@@ -132,9 +161,23 @@ public struct JLToastDelay {
         })
     }
     
+    public override func cancel() {
+        // workaround for warning
+        if !self.executing {
+            self.executing = true
+        }
+
+        super.cancel()
+        abort()
+    }
+
     public func finish() {
         self.executing = false
         self.finished = true
     }
 
+    private func abort() {
+        view.removeFromSuperview()
+        finish()
+    }
 }

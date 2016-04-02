@@ -87,10 +87,10 @@ public struct JLToastDelay {
     override public func start() {
         if !NSThread.isMainThread() {
             dispatch_async(dispatch_get_main_queue(), {
-                self.start()
+                self.main()
             })
         } else {
-            super.start()
+            self.main()
         }
     }
 

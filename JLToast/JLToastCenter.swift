@@ -47,6 +47,10 @@ import UIKit
         self._queue.addOperation(toast)
     }
     
+    public func cancelAllToasts() {
+        self._queue.cancelAllOperations()
+    }
+
     func deviceOrientationDidChange(sender: AnyObject?) {
         if self._queue.operations.count > 0 {
             let lastToast: JLToast = _queue.operations[0] as! JLToast

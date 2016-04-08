@@ -26,10 +26,14 @@ public class JLToastWindow: UIWindow {
         window.userInteractionEnabled = false
         window.windowLevel = CGFloat.max
         window.backgroundColor = .clearColor()
-        window.rootViewController = JLToastWindowRootViewController()
         window.hidden = false
         return window
     }()
+
+    override public var rootViewController: UIViewController? {
+        get { return UIApplication.sharedApplication().windows.first?.rootViewController }
+        set { /* Do nothing */ }
+    }
 
     public override init(frame: CGRect) {
         super.init(frame: frame)
@@ -50,32 +54,6 @@ public class JLToastWindow: UIWindow {
             self.dynamicType.sharedWindow.hidden = true
             self.dynamicType.sharedWindow.hidden = false
         }
-    }
-
-}
-
-
-private class JLToastWindowRootViewController: UIViewController {
-
-    private convenience init() {
-        self.init(nibName: nil, bundle: nil)
-    }
-
-    private override func viewDidLoad() {
-        super.viewDidLoad()
-//        self.view.backgroundColor = UIColor.greenColor().colorWithAlphaComponent(0)
-    }
-
-    private override func prefersStatusBarHidden() -> Bool {
-        return UIApplication.sharedApplication().statusBarHidden
-    }
-    
-    private override func preferredStatusBarStyle() -> UIStatusBarStyle {
-        return UIApplication.sharedApplication().statusBarStyle
-    }
-
-    private override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
-        return .All
     }
 
 }

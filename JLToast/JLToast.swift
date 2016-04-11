@@ -131,6 +131,12 @@ public struct JLToastDelay {
             )
         })
     }
+
+    public override func cancel() {
+        super.cancel()
+        self.finish()
+        self.view.removeFromSuperview()
+    }
     
     public func finish() {
         self.executing = false

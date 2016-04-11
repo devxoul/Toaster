@@ -72,6 +72,32 @@ JLToast.makeText("Some text", delay: 1, duration: JLToastDelay.ShortDelay)
 ```
 
 
+Removing Toasts
+---------------
+
+- **Removing toast with reference**:
+
+    ```swift
+    let toast = JLToast.makeText("Hello")
+    toast.show()
+    toast.cancel() // remove toast immediately
+    ```
+    
+- **Removing current toast**:
+
+    ```swift
+    if let currentToast = JLToastCenter.defaultCenter.currentToast {
+        currentToast.cancel()
+    }
+    ```
+    
+- **Removing all toasts**:
+
+    ```swift
+    JLToastCenter.defaultCenter.cancelAllToasts()
+    ```
+
+
 Appearance
 ----------
 

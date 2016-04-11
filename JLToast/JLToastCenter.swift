@@ -57,4 +57,11 @@ import UIKit
             lastToast.view.updateView()
         }
     }
+
+    public func cancelAllToasts() {
+        for toast in self._queue.operations {
+            toast.cancel()
+        }
+    }
+
 }

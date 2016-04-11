@@ -23,6 +23,10 @@ import UIKit
 
     private var _queue: NSOperationQueue!
 
+    public var currentToast: JLToast? {
+        return self._queue.operations.first as? JLToast
+    }
+
     private struct Singletone {
         static let defaultCenter = JLToastCenter()
     }

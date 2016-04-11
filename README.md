@@ -30,7 +30,7 @@ Installation
 - **For iOS 8+ projects with [CocoaPods](https://cocoapods.org):**
 
     ```ruby
-    pod 'JLToast', '~> 1.3'
+    pod 'JLToast', '~> 1.4'
     ```
     
 - **For iOS 8+ projects with [Carthage](https://github.com/Carthage/Carthage):**
@@ -42,7 +42,7 @@ Installation
 - **For iOS 7 projects:** I recommend you to try [CocoaSeeds](https://github.com/devxoul/CocoaSeeds), which uses source code instead of dynamic frameworks. Sample Seedfile:
 
     ```ruby
-    github 'devxoul/JLToast', '1.3.5', :files => 'JLToast/*.{swift,h}'
+    github 'devxoul/JLToast', '1.4.0', :files => 'JLToast/*.{swift,h}'
     ```
 
 

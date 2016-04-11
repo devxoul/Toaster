@@ -79,8 +79,8 @@ public let JLToastViewLandscapeOffsetYAttributeName = "JLToastViewLandscapeOffse
     }
     
     func updateView() {
-        let deviceWidth = CGRectGetWidth(UIScreen.mainScreen().bounds)
-        let constraintSize = CGSize(width: deviceWidth * (280.0 / 320.0), height: CGFloat.max)
+        let containerSize = JLToastWindow.sharedWindow.frame.size
+        let constraintSize = CGSize(width: containerSize.width * (280.0 / 320.0), height: CGFloat.max)
         let textLabelSize = self.textLabel.sizeThatFits(constraintSize)
         self.textLabel.frame = CGRect(
             x: self.textInsets.left,
@@ -100,12 +100,6 @@ public let JLToastViewLandscapeOffsetYAttributeName = "JLToastViewLandscapeOffse
         var width:CGFloat
         var height:CGFloat
 
-        let screenSize = UIScreen.mainScreen().bounds.size
-        let backgroundViewSize = self.backgroundView.frame.size
-
-        let orientation = UIApplication.sharedApplication().statusBarOrientation
-        let systemVersion = (UIDevice.currentDevice().systemVersion as NSString).floatValue
-
         let userInterfaceIdiom = UIDevice.currentDevice().userInterfaceIdiom
         let portraitOffsetY = self.dynamicType.defaultValueForAttributeName(
             JLToastViewPortraitOffsetYAttributeName,
@@ -116,20 +110,18 @@ public let JLToastViewLandscapeOffsetYAttributeName = "JLToastViewLandscapeOffse
             forUserInterfaceIdiom: userInterfaceIdiom
         ) as! CGFloat
 
-        if UIInterfaceOrientationIsLandscape(orientation) && systemVersion < 8.0 {
-            width = screenSize.height
-            height = screenSize.width
-            y = landscapeOffsetY
+        let orientation = UIApplication.sharedApplication().statusBarOrientation
+        if orientation.isPortrait || !JLToastWindow.sharedWindow.shouldRotateManually {
+            width = containerSize.width
+            height = containerSize.height
+            y = portraitOffsetY
         } else {
-            width = screenSize.width
-            height = screenSize.height
-            if UIInterfaceOrientationIsLandscape(orientation) {
-                y = landscapeOffsetY
-            } else {
-                y = portraitOffsetY
-            }
+            width = containerSize.height
+            height = containerSize.width
+            y = landscapeOffsetY
         }
 
+        let backgroundViewSize = self.backgroundView.frame.size
         x = (width - backgroundViewSize.width) * 0.5
         y = height - (backgroundViewSize.height + y)
         self.frame = CGRect(x: x, y: y, width: backgroundViewSize.width, height: backgroundViewSize.height);

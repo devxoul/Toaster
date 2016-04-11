@@ -26,6 +26,14 @@ public class JLToastWindow: UIWindow {
     /// Will not return `rootViewController` while this value is `true`. Or the rotation will be fucked in iOS 9.
     var isStatusBarOrientationChanging = false
 
+    /// Don't rotate manually if the device is iPad with iOS 9.
+    var shouldRotateManually: Bool {
+        if #available(iOS 9, *), UIDevice.currentDevice().userInterfaceIdiom == .Pad {
+            return false
+        }
+        return true
+    }
+
     override public var rootViewController: UIViewController? {
         get {
             guard !self.isStatusBarOrientationChanging else { return nil }
@@ -57,6 +65,11 @@ public class JLToastWindow: UIWindow {
             name: UIApplicationDidChangeStatusBarOrientationNotification,
             object: nil
         )
+        NSNotificationCenter.defaultCenter().addObserver(self,
+            selector: #selector(self.applicationDidBecomeActive),
+            name: UIApplicationDidBecomeActiveNotification,
+            object: nil
+        )
     }
 
     required public init?(coder aDecoder: NSCoder) {
@@ -81,19 +94,32 @@ public class JLToastWindow: UIWindow {
         self.isStatusBarOrientationChanging = false
     }
 
+    func applicationDidBecomeActive() {
+        let orientation = UIApplication.sharedApplication().statusBarOrientation
+        self.handleRotate(orientation)
+    }
+
     func handleRotate(orientation: UIInterfaceOrientation) {
         let angle = self.angleForOrientation(orientation)
-        self.transform = CGAffineTransformMakeRotation(CGFloat(angle))
+        if self.shouldRotateManually {
+            self.transform = CGAffineTransformMakeRotation(CGFloat(angle))
+        }
 
-        if orientation.isPortrait {
-            self.frame.size.width = UIScreen.mainScreen().bounds.size.width
-            self.frame.size.height = UIScreen.mainScreen().bounds.size.height
-        } else {
-            self.frame.size.width = UIScreen.mainScreen().bounds.size.height
-            self.frame.size.height = UIScreen.mainScreen().bounds.size.width
+        if let window = UIApplication.sharedApplication().windows.first {
+            if orientation.isPortrait || !self.shouldRotateManually {
+                self.frame.size.width = window.bounds.size.width
+                self.frame.size.height = window.bounds.size.height
+            } else {
+                self.frame.size.width = window.bounds.size.height
+                self.frame.size.height = window.bounds.size.width
+            }
         }
 
         self.frame.origin = .zero
+
+        dispatch_async(dispatch_get_main_queue()) {
+            JLToastCenter.defaultCenter().currentToast?.view.updateView()
+        }
     }
 
     func angleForOrientation(orientation: UIInterfaceOrientation) -> Double {

@@ -26,6 +26,18 @@ public let JLToastViewTextColorAttributeName = "JLToastViewTextColorAttributeNam
 public let JLToastViewFontAttributeName = "JLToastViewFontAttributeName"
 public let JLToastViewPortraitOffsetYAttributeName = "JLToastViewPortraitOffsetYAttributeName"
 public let JLToastViewLandscapeOffsetYAttributeName = "JLToastViewLandscapeOffsetYAttributeName"
+public let JLToastViewPortraitOffsetXAttributeName = "JLToastViewPortraitOffsetXAttributeName"
+public let JLToastViewLandscapeOffsetXAttributeName = "JLToastViewLandscapeOffsetXAttributeName"
+public let JLToastViewGravityAttributeName = "JLToastViewGravityAttributeName"
+
+@objc public enum JLToastGravity : Int {
+    case CenterX
+    case CenterY
+    case Top
+    case Bottom
+    case Left
+    case Right
+}
 
 @objc public class JLToastView: UIView {
     
@@ -46,10 +58,10 @@ public let JLToastViewLandscapeOffsetYAttributeName = "JLToastViewLandscapeOffse
             JLToastViewBackgroundColorAttributeName,
             forUserInterfaceIdiom: userInterfaceIdiom
         ) as? UIColor
-        self.backgroundView.layer.cornerRadius = self.dynamicType.defaultValueForAttributeName(
+        self.backgroundView.layer.cornerRadius = CGFloat(self.dynamicType.defaultValueForAttributeName(
             JLToastViewCornerRadiusAttributeName,
             forUserInterfaceIdiom: userInterfaceIdiom
-        ) as! CGFloat
+            ) as! NSNumber)
         self.backgroundView.clipsToBounds = true
         self.addSubview(self.backgroundView)
 
@@ -107,31 +119,60 @@ public let JLToastViewLandscapeOffsetYAttributeName = "JLToastViewLandscapeOffse
         let systemVersion = (UIDevice.currentDevice().systemVersion as NSString).floatValue
 
         let userInterfaceIdiom = UIDevice.currentDevice().userInterfaceIdiom
-        let portraitOffsetY = self.dynamicType.defaultValueForAttributeName(
+        let portraitOffsetY = CGFloat(self.dynamicType.defaultValueForAttributeName(
             JLToastViewPortraitOffsetYAttributeName,
             forUserInterfaceIdiom: userInterfaceIdiom
-        ) as! CGFloat
-        let landscapeOffsetY = self.dynamicType.defaultValueForAttributeName(
+            ) as! NSNumber)
+        let landscapeOffsetY = CGFloat(self.dynamicType.defaultValueForAttributeName(
             JLToastViewLandscapeOffsetYAttributeName,
             forUserInterfaceIdiom: userInterfaceIdiom
-        ) as! CGFloat
-
+            ) as! NSNumber)
+        let portraitOffsetX = CGFloat(self.dynamicType.defaultValueForAttributeName(
+            JLToastViewPortraitOffsetXAttributeName,
+            forUserInterfaceIdiom: userInterfaceIdiom
+            ) as! NSNumber)
+        let landscapeOffsetX = CGFloat(self.dynamicType.defaultValueForAttributeName(
+            JLToastViewLandscapeOffsetXAttributeName,
+            forUserInterfaceIdiom: userInterfaceIdiom
+            ) as! NSNumber)
+        let gravity = self.dynamicType.defaultValueForAttributeName(
+            JLToastViewGravityAttributeName,
+            forUserInterfaceIdiom: userInterfaceIdiom
+            ) as! Array<JLToastGravity>
+        
         if UIInterfaceOrientationIsLandscape(orientation) && systemVersion < 8.0 {
             width = screenSize.height
             height = screenSize.width
             y = landscapeOffsetY
+            x = landscapeOffsetX
         } else {
             width = screenSize.width
             height = screenSize.height
             if UIInterfaceOrientationIsLandscape(orientation) {
                 y = landscapeOffsetY
+                x = landscapeOffsetX
             } else {
                 y = portraitOffsetY
+                x = portraitOffsetX
             }
         }
-
-        x = (width - backgroundViewSize.width) * 0.5
-        y = height - (backgroundViewSize.height + y)
+        
+        if gravity.contains(JLToastGravity.Left) {
+            
+        } else if gravity.contains(JLToastGravity.Right) {
+            x = width - backgroundViewSize.width - x
+        } else {
+            x = (width - backgroundViewSize.width) * 0.5 + x
+        }
+        
+        if gravity.contains(JLToastGravity.Top) {
+            
+        } else if gravity.contains(JLToastGravity.CenterY) {
+            y = (height - backgroundViewSize.height) * 0.5 - y
+        } else {
+            y = height - (backgroundViewSize.height + y)
+        }
+        
         self.frame = CGRect(x: x, y: y, width: backgroundViewSize.width, height: backgroundViewSize.height);
     }
     
@@ -150,7 +191,7 @@ public let JLToastViewLandscapeOffsetYAttributeName = "JLToastViewLandscapeOffse
 
 public extension JLToastView {
     private struct Singleton {
-        static var defaultValues: [String: [UIUserInterfaceIdiom: AnyObject]] = [
+        static var defaultValues: [String: [UIUserInterfaceIdiom: Any]] = [
             // backgroundView.color
             JLToastViewBackgroundColorAttributeName: [
                 .Unspecified: UIColor(white: 0, alpha: 0.7)
@@ -177,34 +218,90 @@ public extension JLToastView {
                 .Pad: UIFont.systemFontOfSize(16),
             ],
 
+            //backgroundView Portrait OffsetY
             JLToastViewPortraitOffsetYAttributeName: [
-                .Unspecified: 30,
-                .Phone: 30,
-                .Pad: 60,
+                .Unspecified: 0,
+                .Phone: 0,
+                .Pad: 0,
             ],
+            
+            //backgroundView Landscape OffsetY
             JLToastViewLandscapeOffsetYAttributeName: [
-                .Unspecified: 20,
-                .Phone: 20,
-                .Pad: 40,
+                .Unspecified: 0,
+                .Phone: 0,
+                .Pad: 0,
+            ],
+            
+            //backgroundView Portrait OffsetX
+            JLToastViewPortraitOffsetXAttributeName: [
+                .Unspecified: 0,
+                .Phone: 0,
+                .Pad: 0,
+            ],
+            
+            //backgroundView Landscape OffsetX
+            JLToastViewLandscapeOffsetXAttributeName: [
+                .Unspecified: 0,
+                .Phone: 0,
+                .Pad: 0,
+            ],
+            
+            //backgroundView Gravity
+            JLToastViewGravityAttributeName: [
+                .Unspecified: [JLToastGravity.CenterX, JLToastGravity.Bottom],
             ],
         ]
     }
 
     class func defaultValueForAttributeName(attributeName: String,
                                             forUserInterfaceIdiom userInterfaceIdiom: UIUserInterfaceIdiom)
-                                            -> AnyObject {
+                                            -> Any {
         let valueForAttributeName = Singleton.defaultValues[attributeName]!
-        if let value: AnyObject = valueForAttributeName[userInterfaceIdiom] {
+        if let value: Any = valueForAttributeName[userInterfaceIdiom] {
             return value
         }
         return valueForAttributeName[.Unspecified]!
     }
 
-    class func setDefaultValue(value: AnyObject,
+    class func setDefaultValue(value: Any,
                                forAttributeName attributeName: String,
                                userInterfaceIdiom: UIUserInterfaceIdiom) {
         var values = Singleton.defaultValues[attributeName]!
         values[userInterfaceIdiom] = value
         Singleton.defaultValues[attributeName] = values
+    }
+    
+    class func setDefaultOffset() {
+        JLToastView.setDefaultValue(
+            30,
+            forAttributeName: JLToastViewPortraitOffsetYAttributeName,
+            userInterfaceIdiom: .Unspecified
+        )
+        JLToastView.setDefaultValue(
+            30,
+            forAttributeName: JLToastViewPortraitOffsetYAttributeName,
+            userInterfaceIdiom: .Phone
+        )
+        JLToastView.setDefaultValue(
+            60,
+            forAttributeName: JLToastViewPortraitOffsetYAttributeName,
+            userInterfaceIdiom: .Pad
+        )
+        
+        JLToastView.setDefaultValue(
+            20,
+            forAttributeName: JLToastViewLandscapeOffsetYAttributeName,
+            userInterfaceIdiom: .Unspecified
+        )
+        JLToastView.setDefaultValue(
+            20,
+            forAttributeName: JLToastViewLandscapeOffsetYAttributeName,
+            userInterfaceIdiom: .Phone
+        )
+        JLToastView.setDefaultValue(
+            40,
+            forAttributeName: JLToastViewLandscapeOffsetYAttributeName,
+            userInterfaceIdiom: .Pad
+        )
     }
 }

@@ -19,6 +19,7 @@
 
 import Foundation
 import UIKit
+import JLToast
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -31,6 +32,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window!.backgroundColor = UIColor.whiteColor()
         self.window!.rootViewController = RootViewController()
         self.window!.makeKeyAndVisible()
+        JLToastView.setDefaultOffset()
         return true
     }
 }

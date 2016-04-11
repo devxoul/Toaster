@@ -30,4 +30,7 @@ static NSString * const JLToastViewTextColorAttributeName = @"JLToastViewTextCol
 static NSString * const JLToastViewFontAttributeName = @"JLToastViewFontAttributeName";
 static NSString * const JLToastViewPortraitOffsetYAttributeName = @"JLToastViewPortraitOffsetYAttributeName";
 static NSString * const JLToastViewLandscapeOffsetYAttributeName = @"JLToastViewLandscapeOffsetYAttributeName";
+static NSString * const JLToastViewPortraitOffsetXAttributeName = @"JLToastViewPortraitOffsetXAttributeName";
+static NSString * const JLToastViewLandscapeOffsetXAttributeName = @"JLToastViewLandscapeOffsetXAttributeName";
+static NSString * const JLToastViewGravityAttributeName = @"JLToastViewGravityAttributeName";
 #endif

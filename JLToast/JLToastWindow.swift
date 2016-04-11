@@ -21,25 +21,40 @@ import UIKit
 
 public class JLToastWindow: UIWindow {
 
-    public static let sharedWindow: JLToastWindow = {
-        let window = JLToastWindow(frame: UIScreen.mainScreen().bounds)
-        window.userInteractionEnabled = false
-        window.windowLevel = CGFloat.max
-        window.backgroundColor = .clearColor()
-        window.hidden = false
-        return window
-    }()
+    public static let sharedWindow = JLToastWindow(frame: UIScreen.mainScreen().bounds)
+
+    /// Will not return `rootViewController` while this value is `true`. Or the rotation will be fucked in iOS 9.
+    var isStatusBarOrientationChanging = false
 
     override public var rootViewController: UIViewController? {
-        get { return UIApplication.sharedApplication().windows.first?.rootViewController }
+        get {
+            guard !self.isStatusBarOrientationChanging else { return nil }
+            return UIApplication.sharedApplication().windows.first?.rootViewController
+        }
         set { /* Do nothing */ }
     }
 
     public override init(frame: CGRect) {
         super.init(frame: frame)
+        self.userInteractionEnabled = false
+        self.windowLevel = CGFloat.max
+        self.backgroundColor = .clearColor()
+        self.hidden = false
+        self.handleRotate(UIApplication.sharedApplication().statusBarOrientation)
+
         NSNotificationCenter.defaultCenter().addObserver(self,
             selector: "bringWindowToTop:",
             name: UIWindowDidBecomeVisibleNotification,
+            object: nil
+        )
+        NSNotificationCenter.defaultCenter().addObserver(self,
+            selector: "statusBarOrientationWillChange",
+            name: UIApplicationWillChangeStatusBarOrientationNotification,
+            object: nil
+        )
+        NSNotificationCenter.defaultCenter().addObserver(self,
+            selector: "statusBarOrientationDidChange",
+            name: UIApplicationDidChangeStatusBarOrientationNotification,
             object: nil
         )
     }
@@ -53,6 +68,40 @@ public class JLToastWindow: UIWindow {
         if !(notification.object is JLToastWindow) {
             self.dynamicType.sharedWindow.hidden = true
             self.dynamicType.sharedWindow.hidden = false
+        }
+    }
+
+    dynamic func statusBarOrientationWillChange() {
+        self.isStatusBarOrientationChanging = true
+    }
+
+    dynamic func statusBarOrientationDidChange() {
+        let orientation = UIApplication.sharedApplication().statusBarOrientation
+        self.handleRotate(orientation)
+        self.isStatusBarOrientationChanging = false
+    }
+
+    func handleRotate(orientation: UIInterfaceOrientation) {
+        let angle = self.angleForOrientation(orientation)
+        self.transform = CGAffineTransformMakeRotation(CGFloat(angle))
+
+        if orientation.isPortrait {
+            self.frame.size.width = UIScreen.mainScreen().bounds.size.width
+            self.frame.size.height = UIScreen.mainScreen().bounds.size.height
+        } else {
+            self.frame.size.width = UIScreen.mainScreen().bounds.size.height
+            self.frame.size.height = UIScreen.mainScreen().bounds.size.width
+        }
+
+        self.frame.origin = .zero
+    }
+
+    func angleForOrientation(orientation: UIInterfaceOrientation) -> Double {
+        switch orientation {
+        case .LandscapeLeft: return -M_PI_2
+        case .LandscapeRight: return M_PI_2
+        case .PortraitUpsideDown: return M_PI
+        default: return 0
         }
     }
 

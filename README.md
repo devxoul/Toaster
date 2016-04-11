@@ -1,7 +1,7 @@
 JLToast - Toast for Swift
 =========================
 
-![Swift 2.0](https://img.shields.io/badge/Swift-2.0-orange.svg)
+![Swift 2.0](https://img.shields.io/badge/Swift-2.2-orange.svg)
 [![CocoaPods](http://img.shields.io/cocoapods/v/JLToast.svg?style=flat)](http://cocoapods.org/?q=name%3AJLToast%20author%3Adevxoul)
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 

@@ -28,7 +28,7 @@ class RootViewController: UIViewController {
         button.sizeToFit()
         button.center.x = self.view.frame.width / 2
         button.center.y = 60
-        button.addTarget(self, action: "showButtonTouchUpInside", forControlEvents: UIControlEvents.TouchUpInside)
+        button.addTarget(self, action: #selector(self.showButtonTouchUpInside), forControlEvents: .TouchUpInside)
         self.view.addSubview(button)
     }
 

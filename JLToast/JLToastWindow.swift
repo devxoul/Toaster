@@ -43,17 +43,17 @@ public class JLToastWindow: UIWindow {
         self.handleRotate(UIApplication.sharedApplication().statusBarOrientation)
 
         NSNotificationCenter.defaultCenter().addObserver(self,
-            selector: "bringWindowToTop:",
+            selector: #selector(self.bringWindowToTop),
             name: UIWindowDidBecomeVisibleNotification,
             object: nil
         )
         NSNotificationCenter.defaultCenter().addObserver(self,
-            selector: "statusBarOrientationWillChange",
+            selector: #selector(self.statusBarOrientationWillChange),
             name: UIApplicationWillChangeStatusBarOrientationNotification,
             object: nil
         )
         NSNotificationCenter.defaultCenter().addObserver(self,
-            selector: "statusBarOrientationDidChange",
+            selector: #selector(self.statusBarOrientationDidChange),
             name: UIApplicationDidChangeStatusBarOrientationNotification,
             object: nil
         )

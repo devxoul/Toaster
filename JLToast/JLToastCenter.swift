@@ -41,7 +41,7 @@ import UIKit
         self._queue.maxConcurrentOperationCount = 1
         NSNotificationCenter.defaultCenter().addObserver(
             self,
-            selector: "deviceOrientationDidChange:",
+            selector: #selector(self.deviceOrientationDidChange),
             name: UIDeviceOrientationDidChangeNotification,
             object: nil
         )

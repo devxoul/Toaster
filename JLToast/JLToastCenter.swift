@@ -20,13 +20,13 @@
 import UIKit
 
 @objc public class JLToastCenter: NSObject {
-
+    
     private var _queue: NSOperationQueue!
-
+    
     public var currentToast: JLToast? {
         return self._queue.operations.first as? JLToast
     }
-
+    
     private struct Singletone {
         static let defaultCenter = JLToastCenter()
     }
@@ -48,7 +48,11 @@ import UIKit
     }
     
     public func addToast(toast: JLToast) {
-        self._queue.addOperation(toast)
+        if toast.useQueue {
+            self._queue.addOperation(toast)
+        }else if self._queue.operationCount < 1 {
+            self._queue.addOperation(toast)
+        }
     }
     
     func deviceOrientationDidChange(sender: AnyObject?) {
@@ -57,11 +61,11 @@ import UIKit
             lastToast.view.updateView()
         }
     }
-
+    
     public func cancelAllToasts() {
         for toast in self._queue.operations {
             toast.cancel()
         }
     }
-
+    
 }

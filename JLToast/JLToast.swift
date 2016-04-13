@@ -36,6 +36,8 @@ public struct JLToastDelay {
             self.view.textLabel.text = newValue
         }
     }
+    
+    public var useQueue: Bool = true
 
     public var delay: NSTimeInterval = 0
     public var duration: NSTimeInterval = JLToastDelay.ShortDelay
@@ -68,15 +70,17 @@ public struct JLToastDelay {
         return JLToast.makeText(text, delay: 0, duration: JLToastDelay.ShortDelay)
     }
     
+    
     public class func makeText(text: String, duration: NSTimeInterval) -> JLToast {
         return JLToast.makeText(text, delay: 0, duration: duration)
     }
     
-    public class func makeText(text: String, delay: NSTimeInterval, duration: NSTimeInterval) -> JLToast {
+    public class func makeText(text: String, delay: NSTimeInterval, duration: NSTimeInterval, useQueue: Bool = true) -> JLToast {
         let toast = JLToast()
         toast.text = text
         toast.delay = delay
         toast.duration = duration
+        toast.useQueue = useQueue
         return toast
     }
     

@@ -26,9 +26,11 @@ public class JLToastWindow: UIWindow {
     /// Will not return `rootViewController` while this value is `true`. Or the rotation will be fucked in iOS 9.
     var isStatusBarOrientationChanging = false
 
-    /// Don't rotate manually if the device is iPad with iOS 9.
+    /// Don't rotate manually if the device is an iPad with iOS 9 and the project is not using LaunchScreen.
     var shouldRotateManually: Bool {
-        if #available(iOS 9, *), UIDevice.currentDevice().userInterfaceIdiom == .Pad {
+        if #available(iOS 9, *),
+           UIDevice.currentDevice().userInterfaceIdiom == .Pad &&
+           NSBundle.mainBundle().infoDictionary?["UILaunchStoryboardName"] != nil {
             return false
         }
         return true

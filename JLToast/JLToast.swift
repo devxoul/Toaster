@@ -68,7 +68,7 @@ public struct JLToastDelay {
     // Use ONLY for debugging / staging builds
     public class func showDebugText(text: String) {
         NSLog("showDebugText: \(text)")
-        #if DEBUG || RELEASE
+        #if DEBUG || RELEASE || PURPLE
         // Temporarily change colour to red for debug text
         if let bgColour = JLToastView.defaultValueForAttributeName(JLToastViewBackgroundColorAttributeName, forUserInterfaceIdiom: .Unspecified) as? UIColor {
             JLToastView.setDefaultValue(

@@ -70,17 +70,17 @@ public struct JLToastDelay {
         NSLog("showDebugText: \(text)")
         #if DEBUG || RELEASE || PURPLE
         // Temporarily change colour to red for debug text
-        if let bgColour = JLToastView.defaultValueForAttributeName(JLToastViewBackgroundColorAttributeName, forUserInterfaceIdiom: .Unspecified) as? UIColor {
+        if let bgColour = JLToastView.defaultValueForAttributeName(JLToastViewBackgroundColorAttributeName, forUserInterfaceIdiom: .unspecified) as? UIColor {
             JLToastView.setDefaultValue(
-                UIColor.redColor(),
+                UIColor.red(),
                 forAttributeName: JLToastViewBackgroundColorAttributeName,
-                userInterfaceIdiom: .Unspecified
+                userInterfaceIdiom: .unspecified
             )
             JLToast.makeText(text).show()
             JLToastView.setDefaultValue(
                 bgColour,
                 forAttributeName: JLToastViewBackgroundColorAttributeName,
-                userInterfaceIdiom: .Unspecified
+                userInterfaceIdiom: .unspecified
             )
         }
         #endif

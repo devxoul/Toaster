@@ -22,20 +22,20 @@ import UIKit
 public class JLToastWindow: UIWindow {
 
     public static let sharedWindow: JLToastWindow = {
-        let window = JLToastWindow(frame: UIScreen.mainScreen().bounds)
-        window.userInteractionEnabled = false
-        window.windowLevel = CGFloat.max
-        window.backgroundColor = .clearColor()
+        let window = JLToastWindow(frame: UIScreen.main().bounds)
+        window.isUserInteractionEnabled = false
+        window.windowLevel = CGFloat.greatestFiniteMagnitude
+        window.backgroundColor = .clear()
         window.rootViewController = JLToastWindowRootViewController()
-        window.hidden = false
+        window.isHidden = false
         return window
     }()
 
     public override init(frame: CGRect) {
         super.init(frame: frame)
-        NSNotificationCenter.defaultCenter().addObserver(self,
+        NotificationCenter.default().addObserver(self,
             selector: "bringWindowToTop:",
-            name: UIWindowDidBecomeVisibleNotification,
+            name: NSNotification.Name.UIWindowDidBecomeVisible,
             object: nil
         )
     }
@@ -45,10 +45,10 @@ public class JLToastWindow: UIWindow {
     }
 
     /// Bring JLToastWindow to top when another window is being shown.
-    func bringWindowToTop(notification: NSNotification) {
+    func bringWindowToTop(_ notification: Notification) {
         if !(notification.object is JLToastWindow) {
-            self.dynamicType.sharedWindow.hidden = true
-            self.dynamicType.sharedWindow.hidden = false
+            self.dynamicType.sharedWindow.isHidden = true
+            self.dynamicType.sharedWindow.isHidden = false
         }
     }
 
@@ -66,11 +66,11 @@ private class JLToastWindowRootViewController: UIViewController {
     }
 
     private override func preferredStatusBarStyle() -> UIStatusBarStyle {
-        return UIApplication.sharedApplication().statusBarStyle
+        return UIApplication.shared().statusBarStyle
     }
 
     private override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
-        return .All
+        return .all
     }
 
 }

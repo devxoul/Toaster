@@ -42,7 +42,7 @@ Installation
 - **For iOS 7 projects:** I recommend you to try [CocoaSeeds](https://github.com/devxoul/CocoaSeeds), which uses source code instead of dynamic frameworks. Sample Seedfile:
 
     ```ruby
-    github 'devxoul/JLToast', '1.4.1', :files => 'JLToast/*.{swift,h}'
+    github 'devxoul/JLToast', '1.4.2', :files => 'JLToast/*.{swift,h}'
     ```
 
 

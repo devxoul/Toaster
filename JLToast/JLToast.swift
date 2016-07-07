@@ -107,7 +107,7 @@ public struct JLToastDelay {
     }
     
     override public func start() {
-        if !Thread.isMainThread() {
+        if !Thread.isMainThread {
             DispatchQueue.main.async(execute: {
                 self.start()
             })

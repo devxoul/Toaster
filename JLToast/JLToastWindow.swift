@@ -33,7 +33,7 @@ public class JLToastWindow: UIWindow {
 
     public override init(frame: CGRect) {
         super.init(frame: frame)
-        NotificationCenter.default().addObserver(self,
+        NotificationCenter.default.addObserver(self,
             selector: "bringWindowToTop:",
             name: NSNotification.Name.UIWindowDidBecomeVisible,
             object: nil

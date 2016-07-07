@@ -41,7 +41,7 @@ protocol JLToastDelegate: class {
         super.init()
         self._queue = OperationQueue()
         self._queue.maxConcurrentOperationCount = MAX_CONCURRENT_TOASTS
-        NotificationCenter.default().addObserver(
+        NotificationCenter.default.addObserver(
             self,
             selector: "deviceOrientationDidChange:",
             name: NSNotification.Name.UIDeviceOrientationDidChange,

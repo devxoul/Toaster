@@ -23,12 +23,12 @@ import JLToast
 class RootViewController: UIViewController {
 
     override func viewDidLoad() {
-        let button = UIButton(type: .System)
-        button.setTitle("Show", forState: .Normal)
+        let button = UIButton(type: .system)
+        button.setTitle("Show", for: .normal)
         button.sizeToFit()
         button.center.x = self.view.frame.width / 2
         button.center.y = 60
-        button.addTarget(self, action: #selector(self.showButtonTouchUpInside), forControlEvents: .TouchUpInside)
+        button.addTarget(self, action: #selector(self.showButtonTouchUpInside), for: .touchUpInside)
         self.view.addSubview(button)
     }
 

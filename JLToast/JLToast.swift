@@ -20,11 +20,11 @@
 import UIKit
 
 public struct JLToastDelay {
-    public static let ShortDelay: NSTimeInterval = 2.0
-    public static let LongDelay: NSTimeInterval = 3.5
+    public static let ShortDelay: TimeInterval = 2.0
+    public static let LongDelay: TimeInterval = 3.5
 }
 
-@objc public class JLToast: NSOperation {
+@objc public class JLToast: Operation {
 
     public var view: JLToastView = JLToastView()
     
@@ -37,42 +37,42 @@ public struct JLToastDelay {
         }
     }
 
-    public var delay: NSTimeInterval = 0
-    public var duration: NSTimeInterval = JLToastDelay.ShortDelay
+    public var delay: TimeInterval = 0
+    public var duration: TimeInterval = JLToastDelay.ShortDelay
 
     private var _executing = false
-    override public var executing: Bool {
+    override public var isExecuting: Bool {
         get {
             return self._executing
         }
         set {
-            self.willChangeValueForKey("isExecuting")
+            self.willChangeValue(forKey: "isExecuting")
             self._executing = newValue
-            self.didChangeValueForKey("isExecuting")
+            self.didChangeValue(forKey: "isExecuting")
         }
     }
 
     private var _finished = false
-    override public var finished: Bool {
+    override public var isFinished: Bool {
         get {
             return self._finished
         }
         set {
-            self.willChangeValueForKey("isFinished")
+            self.willChangeValue(forKey: "isFinished")
             self._finished = newValue
-            self.didChangeValueForKey("isFinished")
+            self.didChangeValue(forKey: "isFinished")
         }
     }
     
-    public class func makeText(text: String) -> JLToast {
+    public class func makeText(_ text: String) -> JLToast {
         return JLToast.makeText(text, delay: 0, duration: JLToastDelay.ShortDelay)
     }
     
-    public class func makeText(text: String, duration: NSTimeInterval) -> JLToast {
+    public class func makeText(_ text: String, duration: TimeInterval) -> JLToast {
         return JLToast.makeText(text, delay: 0, duration: duration)
     }
     
-    public class func makeText(text: String, delay: NSTimeInterval, duration: NSTimeInterval) -> JLToast {
+    public class func makeText(_ text: String, delay: TimeInterval, duration: TimeInterval) -> JLToast {
         let toast = JLToast()
         toast.text = text
         toast.delay = delay
@@ -85,8 +85,8 @@ public struct JLToastDelay {
     }
     
     override public func start() {
-        if !NSThread.isMainThread() {
-            dispatch_async(dispatch_get_main_queue(), {[weak self] in
+        if !Thread.isMainThread {
+            DispatchQueue.main.async(execute: {[weak self] in
                 self?.start()
             })
         } else {
@@ -95,29 +95,29 @@ public struct JLToastDelay {
     }
 
     override public func main() {
-        self.executing = true
+        self.isExecuting = true
 
-        dispatch_async(dispatch_get_main_queue(), {
+        DispatchQueue.main.async(execute: {
             self.view.updateView()
             self.view.alpha = 0
             JLToastWindow.sharedWindow.addSubview(self.view)
-            UIView.animateWithDuration(
-                0.5,
+            UIView.animate(
+                withDuration: 0.5,
                 delay: self.delay,
-                options: .BeginFromCurrentState,
+                options: .beginFromCurrentState,
                 animations: {
                     self.view.alpha = 1
                 },
                 completion: { completed in
-                    UIView.animateWithDuration(
-                        self.duration,
+                    UIView.animate(
+                        withDuration: self.duration,
                         animations: {
                             self.view.alpha = 1.0001
                         },
                         completion: { completed in
                             self.finish()
-                            UIView.animateWithDuration(
-                                0.5,
+                            UIView.animate(
+                                withDuration: 0.5,
                                 animations: {
                                     self.view.alpha = 0
                                 },
@@ -139,8 +139,8 @@ public struct JLToastDelay {
     }
     
     public func finish() {
-        self.executing = false
-        self.finished = true
+        self.isExecuting = false
+        self.isFinished = true
     }
 
 }

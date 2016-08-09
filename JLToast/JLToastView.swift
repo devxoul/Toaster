@@ -36,7 +36,7 @@ public let JLToastViewLandscapeOffsetYAttributeName = "JLToastViewLandscapeOffse
     init() {
         super.init(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
 
-        let userInterfaceIdiom = UIDevice.current().userInterfaceIdiom
+        let userInterfaceIdiom = UIDevice.current.userInterfaceIdiom
 
         self.isUserInteractionEnabled = false
 
@@ -59,7 +59,7 @@ public let JLToastViewLandscapeOffsetYAttributeName = "JLToastViewLandscapeOffse
             JLToastViewTextColorAttributeName,
             forUserInterfaceIdiom: userInterfaceIdiom
         ) as? UIColor
-        self.textLabel.backgroundColor = UIColor.clear()
+        self.textLabel.backgroundColor = UIColor.clear
         self.textLabel.font = self.dynamicType.defaultValueForAttributeName(
             JLToastViewFontAttributeName,
             forUserInterfaceIdiom: userInterfaceIdiom
@@ -71,7 +71,7 @@ public let JLToastViewLandscapeOffsetYAttributeName = "JLToastViewLandscapeOffse
         self.textInsets = (self.dynamicType.defaultValueForAttributeName(
             JLToastViewTextInsetsAttributeName,
             forUserInterfaceIdiom: userInterfaceIdiom
-        ) as! NSValue).uiEdgeInsetsValue()
+        ) as! NSValue).uiEdgeInsetsValue
     }
     
     required convenience public init?(coder aDecoder: NSCoder) {
@@ -100,7 +100,7 @@ public let JLToastViewLandscapeOffsetYAttributeName = "JLToastViewLandscapeOffse
         var width:CGFloat
         var height:CGFloat
 
-        let userInterfaceIdiom = UIDevice.current().userInterfaceIdiom
+        let userInterfaceIdiom = UIDevice.current.userInterfaceIdiom
         let portraitOffsetY = self.dynamicType.defaultValueForAttributeName(
             JLToastViewPortraitOffsetYAttributeName,
             forUserInterfaceIdiom: userInterfaceIdiom
@@ -110,7 +110,7 @@ public let JLToastViewLandscapeOffsetYAttributeName = "JLToastViewLandscapeOffse
             forUserInterfaceIdiom: userInterfaceIdiom
         ) as! CGFloat
 
-        let orientation = UIApplication.shared().statusBarOrientation
+        let orientation = UIApplication.shared.statusBarOrientation
         if orientation.isPortrait || !JLToastWindow.sharedWindow.shouldRotateManually {
             width = containerSize.width
             height = containerSize.height
@@ -159,7 +159,7 @@ public extension JLToastView {
 
             // textLabel.textColor
             JLToastViewTextColorAttributeName: [
-                .unspecified: UIColor.white()
+                .unspecified: UIColor.white
             ],
 
             // textLabel.font

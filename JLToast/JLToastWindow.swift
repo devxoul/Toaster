@@ -41,7 +41,7 @@ public class JLToastWindow: UIWindow {
         let supportsAllOrientations = application.supportedInterfaceOrientations(for: window) == .all
 
         let info = Bundle.main.infoDictionary
-        let requiresFullScreen = info?["UIRequiresFullScreen"]?.boolValue == true
+        let requiresFullScreen = (info?["UIRequiresFullScreen"] as? NSNumber)?.boolValue == true
         let hasLaunchStoryboard = info?["UILaunchStoryboardName"] != nil
 
         if #available(iOS 9, *), iPad && supportsAllOrientations && !requiresFullScreen && hasLaunchStoryboard {
@@ -95,8 +95,8 @@ public class JLToastWindow: UIWindow {
     /// Bring JLToastWindow to top when another window is being shown.
     func bringWindowToTop(_ notification: Notification) {
         if !(notification.object is JLToastWindow) {
-            self.dynamicType.sharedWindow.isHidden = true
-            self.dynamicType.sharedWindow.isHidden = false
+            type(of: self).sharedWindow.isHidden = true
+            type(of: self).sharedWindow.isHidden = false
         }
     }
 

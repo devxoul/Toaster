@@ -1,5 +1,5 @@
 /*
- * JLToastView.swift
+ * ToastView.swift
  *
  *            DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE
  *                    Version 2, December 2004
@@ -19,15 +19,15 @@
 
 import UIKit
 
-public let JLToastViewBackgroundColorAttributeName = "JLToastViewBackgroundColorAttributeName"
-public let JLToastViewCornerRadiusAttributeName = "JLToastViewCornerRadiusAttributeName"
-public let JLToastViewTextInsetsAttributeName = "JLToastViewTextInsetsAttributeName"
-public let JLToastViewTextColorAttributeName = "JLToastViewTextColorAttributeName"
-public let JLToastViewFontAttributeName = "JLToastViewFontAttributeName"
-public let JLToastViewPortraitOffsetYAttributeName = "JLToastViewPortraitOffsetYAttributeName"
-public let JLToastViewLandscapeOffsetYAttributeName = "JLToastViewLandscapeOffsetYAttributeName"
+public let ToastViewBackgroundColorAttributeName = "ToastViewBackgroundColorAttributeName"
+public let ToastViewCornerRadiusAttributeName = "ToastViewCornerRadiusAttributeName"
+public let ToastViewTextInsetsAttributeName = "ToastViewTextInsetsAttributeName"
+public let ToastViewTextColorAttributeName = "ToastViewTextColorAttributeName"
+public let ToastViewFontAttributeName = "ToastViewFontAttributeName"
+public let ToastViewPortraitOffsetYAttributeName = "ToastViewPortraitOffsetYAttributeName"
+public let ToastViewLandscapeOffsetYAttributeName = "ToastViewLandscapeOffsetYAttributeName"
 
-@objc public class JLToastView: UIView {
+@objc public class ToastView: UIView {
     
     public var backgroundView: UIView!
     public var textLabel: UILabel!
@@ -43,11 +43,11 @@ public let JLToastViewLandscapeOffsetYAttributeName = "JLToastViewLandscapeOffse
         self.backgroundView = UIView()
         self.backgroundView.frame = self.bounds
         self.backgroundView.backgroundColor = type(of: self).defaultValueForAttributeName(
-            JLToastViewBackgroundColorAttributeName,
+            ToastViewBackgroundColorAttributeName,
             forUserInterfaceIdiom: userInterfaceIdiom
         ) as? UIColor
         self.backgroundView.layer.cornerRadius = type(of: self).defaultValueForAttributeName(
-            JLToastViewCornerRadiusAttributeName,
+            ToastViewCornerRadiusAttributeName,
             forUserInterfaceIdiom: userInterfaceIdiom
         ) as! CGFloat
         self.backgroundView.clipsToBounds = true
@@ -56,12 +56,12 @@ public let JLToastViewLandscapeOffsetYAttributeName = "JLToastViewLandscapeOffse
         self.textLabel = UILabel()
         self.textLabel.frame = self.bounds
         self.textLabel.textColor = type(of: self).defaultValueForAttributeName(
-            JLToastViewTextColorAttributeName,
+            ToastViewTextColorAttributeName,
             forUserInterfaceIdiom: userInterfaceIdiom
         ) as? UIColor
         self.textLabel.backgroundColor = UIColor.clear
         self.textLabel.font = type(of: self).defaultValueForAttributeName(
-            JLToastViewFontAttributeName,
+            ToastViewFontAttributeName,
             forUserInterfaceIdiom: userInterfaceIdiom
         ) as! UIFont
         self.textLabel.numberOfLines = 0
@@ -69,7 +69,7 @@ public let JLToastViewLandscapeOffsetYAttributeName = "JLToastViewLandscapeOffse
         self.addSubview(self.textLabel)
 
         self.textInsets = (type(of: self).defaultValueForAttributeName(
-            JLToastViewTextInsetsAttributeName,
+            ToastViewTextInsetsAttributeName,
             forUserInterfaceIdiom: userInterfaceIdiom
         ) as! NSValue).uiEdgeInsetsValue
     }
@@ -79,7 +79,7 @@ public let JLToastViewLandscapeOffsetYAttributeName = "JLToastViewLandscapeOffse
     }
     
     func updateView() {
-        let containerSize = JLToastWindow.sharedWindow.frame.size
+        let containerSize = ToastWindow.sharedWindow.frame.size
         let constraintSize = CGSize(width: containerSize.width * (280.0 / 320.0), height: CGFloat.greatestFiniteMagnitude)
         let textLabelSize = self.textLabel.sizeThatFits(constraintSize)
         self.textLabel.frame = CGRect(
@@ -102,16 +102,16 @@ public let JLToastViewLandscapeOffsetYAttributeName = "JLToastViewLandscapeOffse
 
         let userInterfaceIdiom = UIDevice.current.userInterfaceIdiom
         let portraitOffsetY = type(of: self).defaultValueForAttributeName(
-            JLToastViewPortraitOffsetYAttributeName,
+            ToastViewPortraitOffsetYAttributeName,
             forUserInterfaceIdiom: userInterfaceIdiom
         ) as! CGFloat
         let landscapeOffsetY = type(of: self).defaultValueForAttributeName(
-            JLToastViewLandscapeOffsetYAttributeName,
+            ToastViewLandscapeOffsetYAttributeName,
             forUserInterfaceIdiom: userInterfaceIdiom
         ) as! CGFloat
 
         let orientation = UIApplication.shared.statusBarOrientation
-        if orientation.isPortrait || !JLToastWindow.sharedWindow.shouldRotateManually {
+        if orientation.isPortrait || !ToastWindow.sharedWindow.shouldRotateManually {
             width = containerSize.width
             height = containerSize.height
             y = portraitOffsetY
@@ -140,41 +140,41 @@ public let JLToastViewLandscapeOffsetYAttributeName = "JLToastViewLandscapeOffse
 
 }
 
-public extension JLToastView {
+public extension ToastView {
     private struct Singleton {
         static var defaultValues: [String: [UIUserInterfaceIdiom: Any]] = [
             // backgroundView.color
-            JLToastViewBackgroundColorAttributeName: [
+            ToastViewBackgroundColorAttributeName: [
                 .unspecified: UIColor(white: 0, alpha: 0.7)
             ],
 
             // backgroundView.layer.cornerRadius
-            JLToastViewCornerRadiusAttributeName: [
+            ToastViewCornerRadiusAttributeName: [
                 .unspecified: 5
             ],
 
-            JLToastViewTextInsetsAttributeName: [
+            ToastViewTextInsetsAttributeName: [
                 .unspecified: NSValue(uiEdgeInsets: UIEdgeInsets(top: 6, left: 10, bottom: 6, right: 10))
             ],
 
             // textLabel.textColor
-            JLToastViewTextColorAttributeName: [
+            ToastViewTextColorAttributeName: [
                 .unspecified: UIColor.white
             ],
 
             // textLabel.font
-            JLToastViewFontAttributeName: [
+            ToastViewFontAttributeName: [
                 .unspecified: UIFont.systemFont(ofSize: 12),
                 .phone: UIFont.systemFont(ofSize: 12),
                 .pad: UIFont.systemFont(ofSize: 16),
             ],
 
-            JLToastViewPortraitOffsetYAttributeName: [
+            ToastViewPortraitOffsetYAttributeName: [
                 .unspecified: 30,
                 .phone: 30,
                 .pad: 60,
             ],
-            JLToastViewLandscapeOffsetYAttributeName: [
+            ToastViewLandscapeOffsetYAttributeName: [
                 .unspecified: 20,
                 .phone: 20,
                 .pad: 40,

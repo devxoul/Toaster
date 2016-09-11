@@ -18,7 +18,7 @@
  */
 
 import UIKit
-import JLToast
+import Toaster
 
 class RootViewController: UIViewController {
 
@@ -33,9 +33,9 @@ class RootViewController: UIViewController {
     }
 
     func showButtonTouchUpInside() {
-        JLToast.makeText("Basic JLToast").show()
-        JLToast.makeText("You can set duration. `JLToastDelay.ShortDelay` means 2 seconds.\n" +
-                         "`JLToastDelay.LongDelay` means 3.5 seconds.", duration: JLToastDelay.LongDelay).show()
-        JLToast.makeText("With delay, JLToast will be shown after delay.", delay: 1, duration: 5).show()
+        Toast.makeText("Basic Toaster").show()
+        Toast.makeText("You can set duration. `ToastDelay.ShortDelay` means 2 seconds.\n" +
+                         "`ToastDelay.LongDelay` means 3.5 seconds.", duration: ToastDelay.LongDelay).show()
+        Toast.makeText("With delay, Toaster will be shown after delay.", delay: 1, duration: 5).show()
     }
 }

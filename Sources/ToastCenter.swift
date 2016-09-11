@@ -1,5 +1,5 @@
 /*
- * JLToastCenter.swift
+ * ToastCenter.swift
  *
  *            DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE
  *                    Version 2, December 2004
@@ -19,19 +19,19 @@
 
 import UIKit
 
-@objc public class JLToastCenter: NSObject {
+@objc public class ToastCenter: NSObject {
 
     private var _queue: OperationQueue!
 
-    public var currentToast: JLToast? {
-        return self._queue.operations.first as? JLToast
+    public var currentToast: Toast? {
+        return self._queue.operations.first as? Toast
     }
 
     private struct Singletone {
-        static let defaultCenter = JLToastCenter()
+        static let defaultCenter = ToastCenter()
     }
     
-    public class func defaultCenter() -> JLToastCenter {
+    public class func defaultCenter() -> ToastCenter {
         return Singletone.defaultCenter
     }
     
@@ -47,13 +47,13 @@ import UIKit
         )
     }
     
-    public func addToast(_ toast: JLToast) {
+    public func addToast(_ toast: Toast) {
         self._queue.addOperation(toast)
     }
     
     func deviceOrientationDidChange(_ sender: AnyObject?) {
         if self._queue.operations.count > 0 {
-            let lastToast: JLToast = _queue.operations[0] as! JLToast
+            let lastToast: Toast = _queue.operations[0] as! Toast
             lastToast.view.updateView()
         }
     }

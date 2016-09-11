@@ -1,5 +1,5 @@
 /*
- * JLToast.swift
+ * Toast.swift
  *
  *            DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE
  *                    Version 2, December 2004
@@ -19,14 +19,14 @@
 
 import UIKit
 
-public struct JLToastDelay {
+public struct ToastDelay {
     public static let ShortDelay: TimeInterval = 2.0
     public static let LongDelay: TimeInterval = 3.5
 }
 
-@objc public class JLToast: Operation {
+@objc public class Toast: Operation {
 
-    public var view: JLToastView = JLToastView()
+    public var view: ToastView = ToastView()
     
     public var text: String? {
         get {
@@ -38,7 +38,7 @@ public struct JLToastDelay {
     }
 
     public var delay: TimeInterval = 0
-    public var duration: TimeInterval = JLToastDelay.ShortDelay
+    public var duration: TimeInterval = ToastDelay.ShortDelay
 
     private var _executing = false
     override public var isExecuting: Bool {
@@ -64,16 +64,16 @@ public struct JLToastDelay {
         }
     }
     
-    public class func makeText(_ text: String) -> JLToast {
-        return JLToast.makeText(text, delay: 0, duration: JLToastDelay.ShortDelay)
+    public class func makeText(_ text: String) -> Toast {
+        return Toast.makeText(text, delay: 0, duration: ToastDelay.ShortDelay)
     }
     
-    public class func makeText(_ text: String, duration: TimeInterval) -> JLToast {
-        return JLToast.makeText(text, delay: 0, duration: duration)
+    public class func makeText(_ text: String, duration: TimeInterval) -> Toast {
+        return Toast.makeText(text, delay: 0, duration: duration)
     }
     
-    public class func makeText(_ text: String, delay: TimeInterval, duration: TimeInterval) -> JLToast {
-        let toast = JLToast()
+    public class func makeText(_ text: String, delay: TimeInterval, duration: TimeInterval) -> Toast {
+        let toast = Toast()
         toast.text = text
         toast.delay = delay
         toast.duration = duration
@@ -81,7 +81,7 @@ public struct JLToastDelay {
     }
     
     public func show() {
-        JLToastCenter.defaultCenter().addToast(self)
+        ToastCenter.defaultCenter().addToast(self)
     }
     
     override public func start() {
@@ -100,7 +100,7 @@ public struct JLToastDelay {
         DispatchQueue.main.async(execute: {
             self.view.updateView()
             self.view.alpha = 0
-            JLToastWindow.sharedWindow.addSubview(self.view)
+            ToastWindow.sharedWindow.addSubview(self.view)
             UIView.animate(
                 withDuration: 0.5,
                 delay: self.delay,

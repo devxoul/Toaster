@@ -1,5 +1,5 @@
 /*
- * JLToastView.swift
+ * ToastView.swift
  *
  *            DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE
  *                    Version 2, December 2004
@@ -19,9 +19,9 @@
 
 import UIKit
 
-public class JLToastWindow: UIWindow {
+public class ToastWindow: UIWindow {
 
-    public static let sharedWindow = JLToastWindow(frame: UIScreen.main.bounds)
+    public static let sharedWindow = ToastWindow(frame: UIScreen.main.bounds)
 
     /// Will not return `rootViewController` while this value is `true`. Or the rotation will be fucked in iOS 9.
     var isStatusBarOrientationChanging = false
@@ -92,9 +92,9 @@ public class JLToastWindow: UIWindow {
         fatalError("init(coder:) has not been implemented")
     }
 
-    /// Bring JLToastWindow to top when another window is being shown.
+    /// Bring ToastWindow to top when another window is being shown.
     func bringWindowToTop(_ notification: Notification) {
-        if !(notification.object is JLToastWindow) {
+        if !(notification.object is ToastWindow) {
             type(of: self).sharedWindow.isHidden = true
             type(of: self).sharedWindow.isHidden = false
         }
@@ -134,7 +134,7 @@ public class JLToastWindow: UIWindow {
         self.frame.origin = .zero
 
         DispatchQueue.main.async {
-            JLToastCenter.defaultCenter().currentToast?.view.updateView()
+            ToastCenter.defaultCenter().currentToast?.view.updateView()
         }
     }
 

@@ -1,26 +1,30 @@
-Toaster - Toast for Swift
-=========================
+Toaster
+=======
 
-![Swift 2.0](https://img.shields.io/badge/Swift-2.2-orange.svg)
-[![CocoaPods](http://img.shields.io/cocoapods/v/Toast.svg?style=flat)](http://cocoapods.org/?q=name%3AToaster%20author%3Adevxoul)
+![Swift](https://img.shields.io/badge/Swift-3.0-orange.svg)
+[![CocoaPods](http://img.shields.io/cocoapods/v/Toaster.svg?style=flat)](http://cocoapods.org/?q=name%3AToaster%20author%3Adevxoul)
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 
-Android-like toast with very simple interface.
+Android-like toast with very simple interface. (formerly JLToast)
+
+Toaster is written in Swift 3.0. If you're looking for Swift 2 compatible version, see the [JLToast 1.4.2](https://github.com/devxoul/JLToast/tree/1.4.2).
+
+
+Features
+--------
+
+- **Queueing**: Centralized toast center manages the toast queue.
+- **Customizable**: See the [Appearance](#appearance) section.
 
 
 At a Glance
 -----------
 
 ```swift
-Toast.makeText("Some text").show()
+import Toaster
+
+Toast(text: "Hello, world!").show()
 ```
-
-
-Features
---------
-
-- **Queueing**: centralized toast center manages toast queue.
-- **Customizable**: see [Appearance](https://github.com/devxoul/Toaster#appearance) section.
 
 
 Installation
@@ -29,38 +33,38 @@ Installation
 - **For iOS 8+ projects with [CocoaPods](https://cocoapods.org):**
 
     ```ruby
-    pod 'Toaster', '~> 1.4'
+    pod 'Toaster', '~> 2.0'
     ```
     
 - **For iOS 8+ projects with [Carthage](https://github.com/Carthage/Carthage):**
 
     ```
-    github "devxoul/Toaster" ~> 1.0
+    github "devxoul/Toaster" ~> 2.0
     ```
     
 - **For iOS 7 projects:** I recommend you to try [CocoaSeeds](https://github.com/devxoul/CocoaSeeds), which uses source code instead of dynamic frameworks. Sample Seedfile:
 
     ```ruby
-    github 'devxoul/Toaster', '1.4.2', :files => 'Sources/*.{swift,h}'
+    github 'devxoul/Toaster', '2.0.0', :files => 'Sources/*.{swift,h}'
     ```
+    
 
+Getting Started
+---------------
 
-Setting Duration and Delay
---------------------------
+### Setting Duration and Delay
 
 ```swift
-Toast.makeText("Some text", duration: ToastDelay.LongDelay)
-Toast.makeText("Some text", delay: 1, duration: ToastDelay.ShortDelay)
+Toast(text: "Hello, world!", duration: Delay.long)
+Toast(text: "Hello, world!", delay: Delay.short, duration: Delay.long)
 ```
 
-
-Removing Toasts
----------------
+### Removing Toasts
 
 - **Removing toast with reference**:
 
     ```swift
-    let toast = Toast.makeText("Hello")
+    let toast = Toast(text: "Hello")
     toast.show()
     toast.cancel() // remove toast immediately
     ```
@@ -68,7 +72,7 @@ Removing Toasts
 - **Removing current toast**:
 
     ```swift
-    if let currentToast = ToastCenter.defaultCenter.currentToast {
+    if let currentToast = ToastCenter.default.currentToast {
         currentToast.cancel()
     }
     ```
@@ -76,37 +80,29 @@ Removing Toasts
 - **Removing all toasts**:
 
     ```swift
-    ToastCenter.defaultCenter.cancelAllToasts()
+    ToastCenter.default.cancelAll()
     ```
 
+### Appearance
 
-Appearance
-----------
-
-Since Toaster 1.1.0, you can set default values for appearance attributes. The code below sets default background color to red.
-
-> **Note:** It is not recommended to set default values while toasts are queued. It can occur unexpected results.
+Since Toaster 2.0.0, you can use `UIAppearance` to set default appearance. This is an short example to set default background color to red.
 
 ```swift
-ToastView.setDefaultValue(
-    UIColor.redColor(),
-    forAttributeName: ToastViewBackgroundColorAttributeName,
-    userInterfaceIdiom: .Phone
-)
+ToastView.appearance().backgroundColor = .red
 ```
 
 
-#### Supported Attributes
+Supported appearance properties are:
 
-| Attribute | Type | Description |
+| Property | Type | Description |
 |---|---|---|
-| `ToastViewBackgroundColorAttributeName` | `UIColor` | Background color |
-| `ToastViewCornerRadiusAttributeName` | `NSNumber(CGFloat)` | Corner radius |
-| `ToastViewTextInsetsAttributeName` | `NSValue(UIEdgeInsets)` | Text inset |
-| `ToastViewTextColorAttributeName` | `UIColor` | Text color |
-| `ToastViewFontAttributeName` | `UIFont` | Font |
-| `ToastViewPortraitOffsetYAttributeName` | `NSNumber(CGFloat)` | Vertical offfset from bottom in portrait mode |
-|` ToastViewLandscapeOffsetYAttributeName` | `NSNumber(CGFloat)` | Vertical offfset from bottom in landscape mode |
+| `backgroundColor` | `UIColor` | Background color |
+| `cornerRadius` | `CGFloat` | Corner radius |
+| `textInsets` | `UIEdgeInsets` | Text inset |
+| `textColor` | `UIColor` | Text color |
+| `font` | `UIFont` | Font |
+| `bottomOffsetPortrait` | `CGFloat` | Vertical offfset from bottom in portrait mode |
+|` bottomOffsetLandscape` | `CGFloat` | Vertical offfset from bottom in landscape mode |
 
 
 Screenshots

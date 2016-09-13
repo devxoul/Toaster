@@ -19,9 +19,9 @@
 
 import UIKit
 
-public class ToastWindow: UIWindow {
+open class ToastWindow: UIWindow {
 
-  public static let sharedWindow = ToastWindow(frame: UIScreen.main.bounds)
+  open static let shared = ToastWindow(frame: UIScreen.main.bounds)
 
   /// Will not return `rootViewController` while this value is `true`. Or the rotation will be fucked in iOS 9.
   var isStatusBarOrientationChanging = false
@@ -50,7 +50,7 @@ public class ToastWindow: UIWindow {
     return true
   }
 
-  override public var rootViewController: UIViewController? {
+  override open var rootViewController: UIViewController? {
     get {
       guard !self.isStatusBarOrientationChanging else { return nil }
       return UIApplication.shared.windows.first?.rootViewController
@@ -66,25 +66,29 @@ public class ToastWindow: UIWindow {
     self.isHidden = false
     self.handleRotate(UIApplication.shared.statusBarOrientation)
 
-    NotificationCenter.default.addObserver(self,
-                                           selector: #selector(self.bringWindowToTop),
-                                           name: NSNotification.Name.UIWindowDidBecomeVisible,
-                                           object: nil
+    NotificationCenter.default.addObserver(
+      self,
+      selector: #selector(self.bringWindowToTop),
+      name: .UIWindowDidBecomeVisible,
+      object: nil
     )
-    NotificationCenter.default.addObserver(self,
-                                           selector: #selector(self.statusBarOrientationWillChange),
-                                           name: NSNotification.Name.UIApplicationWillChangeStatusBarOrientation,
-                                           object: nil
+    NotificationCenter.default.addObserver(
+      self,
+      selector: #selector(self.statusBarOrientationWillChange),
+      name: .UIApplicationWillChangeStatusBarOrientation,
+      object: nil
     )
-    NotificationCenter.default.addObserver(self,
-                                           selector: #selector(self.statusBarOrientationDidChange),
-                                           name: NSNotification.Name.UIApplicationDidChangeStatusBarOrientation,
-                                           object: nil
+    NotificationCenter.default.addObserver(
+      self,
+      selector: #selector(self.statusBarOrientationDidChange),
+      name: .UIApplicationDidChangeStatusBarOrientation,
+      object: nil
     )
-    NotificationCenter.default.addObserver(self,
-                                           selector: #selector(self.applicationDidBecomeActive),
-                                           name: NSNotification.Name.UIApplicationDidBecomeActive,
-                                           object: nil
+    NotificationCenter.default.addObserver(
+      self,
+      selector: #selector(self.applicationDidBecomeActive),
+      name: .UIApplicationDidBecomeActive,
+      object: nil
     )
   }
 
@@ -95,8 +99,8 @@ public class ToastWindow: UIWindow {
   /// Bring ToastWindow to top when another window is being shown.
   func bringWindowToTop(_ notification: Notification) {
     if !(notification.object is ToastWindow) {
-      type(of: self).sharedWindow.isHidden = true
-      type(of: self).sharedWindow.isHidden = false
+      ToastWindow.shared.isHidden = true
+      ToastWindow.shared.isHidden = false
     }
   }
 
@@ -134,7 +138,7 @@ public class ToastWindow: UIWindow {
     self.frame.origin = .zero
 
     DispatchQueue.main.async {
-      ToastCenter.defaultCenter().currentToast?.view.updateView()
+      ToastCenter.default.currentToast?.view.setNeedsLayout()
     }
   }
 

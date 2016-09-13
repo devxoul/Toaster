@@ -19,29 +19,25 @@
 
 import UIKit
 
-public struct ToastDelay {
-  public static let ShortDelay: TimeInterval = 2.0
-  public static let LongDelay: TimeInterval = 3.5
+public struct Delay {
+  public static let short: TimeInterval = 2.0
+  public static let long: TimeInterval = 3.5
 }
 
-@objc public class Toast: Operation {
+open class Toast: Operation {
 
-  public var view: ToastView = ToastView()
+  // MARK: Properties
 
   public var text: String? {
-    get {
-      return self.view.textLabel.text
-    }
-    set {
-      self.view.textLabel.text = newValue
-    }
+    get { return self.view.text }
+    set { self.view.text = newValue }
   }
 
-  public var delay: TimeInterval = 0
-  public var duration: TimeInterval = ToastDelay.ShortDelay
+  public var delay: TimeInterval
+  public var duration: TimeInterval
 
   private var _executing = false
-  override public var isExecuting: Bool {
+  override open var isExecuting: Bool {
     get {
       return self._executing
     }
@@ -53,7 +49,7 @@ public struct ToastDelay {
   }
 
   private var _finished = false
-  override public var isFinished: Bool {
+  override open var isFinished: Bool {
     get {
       return self._finished
     }
@@ -64,43 +60,76 @@ public struct ToastDelay {
     }
   }
 
+
+  // MARK: UI
+
+  public var view: ToastView = ToastView()
+
+
+  // MARK: Initializing
+
+  public init(text: String?, delay: TimeInterval = 0, duration: TimeInterval = Delay.short) {
+    self.delay = delay
+    self.duration = duration
+    super.init()
+    self.text = text
+  }
+
+
+  // MARK: Factory (Deprecated)
+
+  @available(*, deprecated, message: "Use 'init(text:)' instead.")
   public class func makeText(_ text: String) -> Toast {
-    return Toast.makeText(text, delay: 0, duration: ToastDelay.ShortDelay)
+    return Toast(text: text)
   }
 
+  @available(*, deprecated, message: "Use 'init(text:duration:)' instead.")
   public class func makeText(_ text: String, duration: TimeInterval) -> Toast {
-    return Toast.makeText(text, delay: 0, duration: duration)
+    return Toast(text: text, duration: duration)
   }
 
-  public class func makeText(_ text: String, delay: TimeInterval, duration: TimeInterval) -> Toast {
-    let toast = Toast()
-    toast.text = text
-    toast.delay = delay
-    toast.duration = duration
-    return toast
+  @available(*, deprecated, message: "Use 'init(text:delay:duration:)' instead.")
+  public class func makeText(_ text: String?, delay: TimeInterval, duration: TimeInterval) -> Toast {
+    return Toast(text: text, delay: delay, duration: duration)
   }
+
+
+  // MARK: Showing
 
   public func show() {
-    ToastCenter.defaultCenter().addToast(self)
+    ToastCenter.default.add(self)
   }
 
-  override public func start() {
-    if !Thread.isMainThread {
-      DispatchQueue.main.async(execute: {[weak self] in
+
+  // MARK: Cancelling
+
+  open override func cancel() {
+    super.cancel()
+    self.finish()
+    self.view.removeFromSuperview()
+  }
+
+
+  // MARK: Operation Subclassing
+
+  override open func start() {
+    guard Thread.isMainThread else {
+      DispatchQueue.main.async { [weak self] in
         self?.start()
-        })
-    } else {
-      super.start()
+      }
+      return
     }
+    super.start()
   }
 
-  override public func main() {
+  override open func main() {
     self.isExecuting = true
 
-    DispatchQueue.main.async(execute: {
-      self.view.updateView()
+    DispatchQueue.main.async {
+      self.view.setNeedsLayout()
       self.view.alpha = 0
-      ToastWindow.sharedWindow.addSubview(self.view)
+      ToastWindow.shared.addSubview(self.view)
+
       UIView.animate(
         withDuration: 0.5,
         delay: self.delay,
@@ -121,24 +150,18 @@ public struct ToastDelay {
                 animations: {
                   self.view.alpha = 0
                 },
-                completion:{ completed in
+                completion: { completed in
                   self.view.removeFromSuperview()
-
-              })
+                }
+              )
             }
           )
         }
       )
-    })
+    }
   }
 
-  public override func cancel() {
-    super.cancel()
-    self.finish()
-    self.view.removeFromSuperview()
-  }
-
-  public func finish() {
+  open func finish() {
     self.isExecuting = false
     self.isFinished = true
   }

@@ -19,48 +19,56 @@
 
 import UIKit
 
-@objc public class ToastCenter: NSObject {
+open class ToastCenter {
 
-  private var _queue: OperationQueue!
+  // MARK: Properties
 
-  public var currentToast: Toast? {
-    return self._queue.operations.first as? Toast
+  private let queue: OperationQueue = {
+    let queue = OperationQueue()
+    queue.maxConcurrentOperationCount = 1
+    return queue
+  }()
+
+  open var currentToast: Toast? {
+    return self.queue.operations.first as? Toast
   }
 
-  private struct Singletone {
-    static let defaultCenter = ToastCenter()
-  }
+  open static let `default` = ToastCenter()
 
-  public class func defaultCenter() -> ToastCenter {
-    return Singletone.defaultCenter
-  }
 
-  override init() {
-    super.init()
-    self._queue = OperationQueue()
-    self._queue.maxConcurrentOperationCount = 1
+  // MARK: Initializing
+
+  init() {
     NotificationCenter.default.addObserver(
       self,
       selector: #selector(self.deviceOrientationDidChange),
-      name: NSNotification.Name.UIDeviceOrientationDidChange,
+      name: .UIDeviceOrientationDidChange,
       object: nil
     )
   }
 
-  public func addToast(_ toast: Toast) {
-    self._queue.addOperation(toast)
+
+  // MARK: Adding Toasts
+
+  open func add(_ toast: Toast) {
+    self.queue.addOperation(toast)
   }
 
-  func deviceOrientationDidChange(_ sender: AnyObject?) {
-    if self._queue.operations.count > 0 {
-      let lastToast: Toast = _queue.operations[0] as! Toast
-      lastToast.view.updateView()
+
+  // MARK: Cancelling Toasts
+
+  open func cancelAll() {
+    for toast in self.queue.operations {
+      toast.cancel()
     }
   }
 
-  public func cancelAllToasts() {
-    for toast in self._queue.operations {
-      toast.cancel()
+
+  // MARK: Notifications
+
+  dynamic func deviceOrientationDidChange() {
+    if let lastToast = self.queue.operations.first as? Toast {
+      lastToast.view.setNeedsLayout()
     }
   }
 

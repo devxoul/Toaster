@@ -19,68 +19,119 @@
 
 import UIKit
 
-public let ToastViewBackgroundColorAttributeName = "ToastViewBackgroundColorAttributeName"
-public let ToastViewCornerRadiusAttributeName = "ToastViewCornerRadiusAttributeName"
-public let ToastViewTextInsetsAttributeName = "ToastViewTextInsetsAttributeName"
-public let ToastViewTextColorAttributeName = "ToastViewTextColorAttributeName"
-public let ToastViewFontAttributeName = "ToastViewFontAttributeName"
-public let ToastViewPortraitOffsetYAttributeName = "ToastViewPortraitOffsetYAttributeName"
-public let ToastViewLandscapeOffsetYAttributeName = "ToastViewLandscapeOffsetYAttributeName"
+open class ToastView: UIView {
 
-@objc public class ToastView: UIView {
+  // MARK: Properties
 
-  public var backgroundView: UIView!
-  public var textLabel: UILabel!
-  public var textInsets: UIEdgeInsets!
+  open var text: String? {
+    get { return self.textLabel.text }
+    set { self.textLabel.text = newValue }
+  }
 
-  init() {
-    super.init(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
 
-    let userInterfaceIdiom = UIDevice.current.userInterfaceIdiom
+  // MARK: Appearance
 
+  /// The background view's color.
+  override open dynamic var backgroundColor: UIColor? {
+    get { return self.backgroundView.backgroundColor }
+    set { self.backgroundView.backgroundColor = newValue }
+  }
+
+  /// The background view's corner radius.
+  open dynamic var cornerRadius: CGFloat {
+    get { return self.backgroundView.layer.cornerRadius }
+    set { self.backgroundView.layer.cornerRadius = newValue }
+  }
+
+  /// The inset of the text label.
+  open dynamic var textInsets = UIEdgeInsets(top: 6, left: 10, bottom: 6, right: 10)
+
+  /// The color of the text label's text.
+  open dynamic var textColor: UIColor? {
+    get { return self.textLabel.textColor }
+    set { self.textLabel.textColor = newValue }
+  }
+
+  /// The font of the text label.
+  open dynamic var font: UIFont? {
+    get { return self.textLabel.font }
+    set { self.textLabel.font = newValue }
+  }
+
+  /// The bottom offset from the screen's bottom in portrait mode.
+  open dynamic var bottomOffsetPortrait: CGFloat = {
+    switch UIDevice.current.userInterfaceIdiom {
+    case .unspecified: return 30
+    case .phone: return 30
+    case .pad: return 60
+    case .tv: return 90
+    case .carPlay: return 30
+    }
+  }()
+
+  /// The bottom offset from the screen's bottom in landscape mode.
+  open dynamic var bottomOffsetLandscape: CGFloat = {
+    switch UIDevice.current.userInterfaceIdiom {
+    case .unspecified: return 20
+    case .phone: return 20
+    case .pad: return 40
+    case .tv: return 60
+    case .carPlay: return 20
+    }
+  }()
+
+
+  // MARK: UI
+
+  private let backgroundView: UIView = {
+    let `self` = UIView()
+    self.backgroundColor = UIColor(white: 0, alpha: 0.7)
+    self.layer.cornerRadius = 5
+    self.clipsToBounds = true
+    return self
+  }()
+  private let textLabel: UILabel = {
+    let `self` = UILabel()
+    self.textColor = .white
+    self.backgroundColor = .clear
+    self.font = {
+      switch UIDevice.current.userInterfaceIdiom {
+      case .unspecified: return .systemFont(ofSize: 12)
+      case .phone: return .systemFont(ofSize: 12)
+      case .pad: return .systemFont(ofSize: 16)
+      case .tv: return .systemFont(ofSize: 20)
+      case .carPlay: return .systemFont(ofSize: 12)
+      }
+    }()
+    self.numberOfLines = 0
+    self.textAlignment = .center
+    return self
+  }()
+
+
+  // MARK: Initializing
+
+  public init() {
+    super.init(frame: .zero)
     self.isUserInteractionEnabled = false
-
-    self.backgroundView = UIView()
-    self.backgroundView.frame = self.bounds
-    self.backgroundView.backgroundColor = type(of: self).defaultValueForAttributeName(
-      ToastViewBackgroundColorAttributeName,
-      forUserInterfaceIdiom: userInterfaceIdiom
-      ) as? UIColor
-    self.backgroundView.layer.cornerRadius = type(of: self).defaultValueForAttributeName(
-      ToastViewCornerRadiusAttributeName,
-      forUserInterfaceIdiom: userInterfaceIdiom
-      ) as! CGFloat
-    self.backgroundView.clipsToBounds = true
     self.addSubview(self.backgroundView)
-
-    self.textLabel = UILabel()
-    self.textLabel.frame = self.bounds
-    self.textLabel.textColor = type(of: self).defaultValueForAttributeName(
-      ToastViewTextColorAttributeName,
-      forUserInterfaceIdiom: userInterfaceIdiom
-      ) as? UIColor
-    self.textLabel.backgroundColor = UIColor.clear
-    self.textLabel.font = type(of: self).defaultValueForAttributeName(
-      ToastViewFontAttributeName,
-      forUserInterfaceIdiom: userInterfaceIdiom
-      ) as! UIFont
-    self.textLabel.numberOfLines = 0
-    self.textLabel.textAlignment = .center;
     self.addSubview(self.textLabel)
-
-    self.textInsets = (type(of: self).defaultValueForAttributeName(
-      ToastViewTextInsetsAttributeName,
-      forUserInterfaceIdiom: userInterfaceIdiom
-      ) as! NSValue).uiEdgeInsetsValue
   }
 
   required convenience public init?(coder aDecoder: NSCoder) {
     self.init()
   }
 
-  func updateView() {
-    let containerSize = ToastWindow.sharedWindow.frame.size
-    let constraintSize = CGSize(width: containerSize.width * (280.0 / 320.0), height: CGFloat.greatestFiniteMagnitude)
+
+  // MARK: Layout
+
+  override open func layoutSubviews() {
+    super.layoutSubviews()
+    let containerSize = ToastWindow.shared.frame.size
+    let constraintSize = CGSize(
+      width: containerSize.width * (280.0 / 320.0),
+      height: CGFloat.greatestFiniteMagnitude
+    )
     let textLabelSize = self.textLabel.sizeThatFits(constraintSize)
     self.textLabel.frame = CGRect(
       x: self.textInsets.left,
@@ -97,39 +148,34 @@ public let ToastViewLandscapeOffsetYAttributeName = "ToastViewLandscapeOffsetYAt
 
     var x: CGFloat
     var y: CGFloat
-    var width:CGFloat
-    var height:CGFloat
-
-    let userInterfaceIdiom = UIDevice.current.userInterfaceIdiom
-    let portraitOffsetY = type(of: self).defaultValueForAttributeName(
-      ToastViewPortraitOffsetYAttributeName,
-      forUserInterfaceIdiom: userInterfaceIdiom
-      ) as! CGFloat
-    let landscapeOffsetY = type(of: self).defaultValueForAttributeName(
-      ToastViewLandscapeOffsetYAttributeName,
-      forUserInterfaceIdiom: userInterfaceIdiom
-      ) as! CGFloat
+    var width: CGFloat
+    var height: CGFloat
 
     let orientation = UIApplication.shared.statusBarOrientation
-    if orientation.isPortrait || !ToastWindow.sharedWindow.shouldRotateManually {
+    if orientation.isPortrait || !ToastWindow.shared.shouldRotateManually {
       width = containerSize.width
       height = containerSize.height
-      y = portraitOffsetY
+      y = self.bottomOffsetPortrait
     } else {
       width = containerSize.height
       height = containerSize.width
-      y = landscapeOffsetY
+      y = self.bottomOffsetLandscape
     }
 
     let backgroundViewSize = self.backgroundView.frame.size
     x = (width - backgroundViewSize.width) * 0.5
     y = height - (backgroundViewSize.height + y)
-    self.frame = CGRect(x: x, y: y, width: backgroundViewSize.width, height: backgroundViewSize.height);
+    self.frame = CGRect(
+      x: x,
+      y: y,
+      width: backgroundViewSize.width,
+      height: backgroundViewSize.height
+    )
   }
 
-  override public func hitTest(_ point: CGPoint, with event: UIEvent!) -> UIView? {
-    if self.superview != nil {
-      let pointInWindow = self.convert(point, to: self.superview)
+  override open func hitTest(_ point: CGPoint, with event: UIEvent!) -> UIView? {
+    if let superview = self.superview {
+      let pointInWindow = self.convert(point, to: superview)
       let contains = self.frame.contains(pointInWindow)
       if contains && self.isUserInteractionEnabled {
         return self
@@ -138,65 +184,4 @@ public let ToastViewLandscapeOffsetYAttributeName = "ToastViewLandscapeOffsetYAt
     return nil
   }
 
-}
-
-public extension ToastView {
-  private struct Singleton {
-    static var defaultValues: [String: [UIUserInterfaceIdiom: Any]] = [
-      // backgroundView.color
-      ToastViewBackgroundColorAttributeName: [
-        .unspecified: UIColor(white: 0, alpha: 0.7)
-      ],
-
-      // backgroundView.layer.cornerRadius
-      ToastViewCornerRadiusAttributeName: [
-        .unspecified: 5
-      ],
-
-      ToastViewTextInsetsAttributeName: [
-        .unspecified: NSValue(uiEdgeInsets: UIEdgeInsets(top: 6, left: 10, bottom: 6, right: 10))
-      ],
-
-      // textLabel.textColor
-      ToastViewTextColorAttributeName: [
-        .unspecified: UIColor.white
-      ],
-
-      // textLabel.font
-      ToastViewFontAttributeName: [
-        .unspecified: UIFont.systemFont(ofSize: 12),
-        .phone: UIFont.systemFont(ofSize: 12),
-        .pad: UIFont.systemFont(ofSize: 16),
-      ],
-
-      ToastViewPortraitOffsetYAttributeName: [
-        .unspecified: 30,
-        .phone: 30,
-        .pad: 60,
-      ],
-      ToastViewLandscapeOffsetYAttributeName: [
-        .unspecified: 20,
-        .phone: 20,
-        .pad: 40,
-      ],
-      ]
-  }
-
-  class func defaultValueForAttributeName(_ attributeName: String,
-                                          forUserInterfaceIdiom userInterfaceIdiom: UIUserInterfaceIdiom)
-    -> Any {
-      let valueForAttributeName = Singleton.defaultValues[attributeName]!
-      if let value: Any = valueForAttributeName[userInterfaceIdiom] {
-        return value
-      }
-      return valueForAttributeName[.unspecified]!
-  }
-
-  class func setDefaultValue(_ value: AnyObject,
-                             forAttributeName attributeName: String,
-                             userInterfaceIdiom: UIUserInterfaceIdiom) {
-    var values = Singleton.defaultValues[attributeName]!
-    values[userInterfaceIdiom] = value
-    Singleton.defaultValues[attributeName] = values
-  }
 }

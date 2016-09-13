@@ -16,6 +16,7 @@
 		0306DBAE1D85D62A007AE314 /* ToastWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0306DBA91D85D62A007AE314 /* ToastWindow.swift */; };
 		0397CD2D1D85D6920077D82F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0306DB991D85D626007AE314 /* AppDelegate.swift */; };
 		0397CD2E1D85D6930077D82F /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0306DB9E1D85D626007AE314 /* RootViewController.swift */; };
+		03C23F3C1D8823AA00EE8424 /* Toaster.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03A75E2B1BCF2066002E46C4 /* Toaster.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +57,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				03C23F3C1D8823AA00EE8424 /* Toaster.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

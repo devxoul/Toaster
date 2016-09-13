@@ -28,11 +28,11 @@ public let ToastViewPortraitOffsetYAttributeName = "ToastViewPortraitOffsetYAttr
 public let ToastViewLandscapeOffsetYAttributeName = "ToastViewLandscapeOffsetYAttributeName"
 
 @objc public class ToastView: UIView {
-    
+
     public var backgroundView: UIView!
     public var textLabel: UILabel!
     public var textInsets: UIEdgeInsets!
-    
+
     init() {
         super.init(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
 
@@ -73,11 +73,11 @@ public let ToastViewLandscapeOffsetYAttributeName = "ToastViewLandscapeOffsetYAt
             forUserInterfaceIdiom: userInterfaceIdiom
         ) as! NSValue).uiEdgeInsetsValue
     }
-    
+
     required convenience public init?(coder aDecoder: NSCoder) {
         self.init()
     }
-    
+
     func updateView() {
         let containerSize = ToastWindow.sharedWindow.frame.size
         let constraintSize = CGSize(width: containerSize.width * (280.0 / 320.0), height: CGFloat.greatestFiniteMagnitude)
@@ -126,7 +126,7 @@ public let ToastViewLandscapeOffsetYAttributeName = "ToastViewLandscapeOffsetYAt
         y = height - (backgroundViewSize.height + y)
         self.frame = CGRect(x: x, y: y, width: backgroundViewSize.width, height: backgroundViewSize.height);
     }
-    
+
     override public func hitTest(_ point: CGPoint, with event: UIEvent!) -> UIView? {
         if self.superview != nil {
             let pointInWindow = self.convert(point, to: self.superview)

@@ -27,7 +27,7 @@ public struct ToastDelay {
 @objc public class Toast: Operation {
 
     public var view: ToastView = ToastView()
-    
+
     public var text: String? {
         get {
             return self.view.textLabel.text
@@ -63,15 +63,15 @@ public struct ToastDelay {
             self.didChangeValue(forKey: "isFinished")
         }
     }
-    
+
     public class func makeText(_ text: String) -> Toast {
         return Toast.makeText(text, delay: 0, duration: ToastDelay.ShortDelay)
     }
-    
+
     public class func makeText(_ text: String, duration: TimeInterval) -> Toast {
         return Toast.makeText(text, delay: 0, duration: duration)
     }
-    
+
     public class func makeText(_ text: String, delay: TimeInterval, duration: TimeInterval) -> Toast {
         let toast = Toast()
         toast.text = text
@@ -79,11 +79,11 @@ public struct ToastDelay {
         toast.duration = duration
         return toast
     }
-    
+
     public func show() {
         ToastCenter.defaultCenter().addToast(self)
     }
-    
+
     override public func start() {
         if !Thread.isMainThread {
             DispatchQueue.main.async(execute: {[weak self] in
@@ -123,7 +123,7 @@ public struct ToastDelay {
                                 },
                                 completion:{ completed in
                                     self.view.removeFromSuperview()
-                                    
+
                             })
                         }
                     )
@@ -137,7 +137,7 @@ public struct ToastDelay {
         self.finish()
         self.view.removeFromSuperview()
     }
-    
+
     public func finish() {
         self.isExecuting = false
         self.isFinished = true

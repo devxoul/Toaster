@@ -30,11 +30,11 @@ import UIKit
     private struct Singletone {
         static let defaultCenter = ToastCenter()
     }
-    
+
     public class func defaultCenter() -> ToastCenter {
         return Singletone.defaultCenter
     }
-    
+
     override init() {
         super.init()
         self._queue = OperationQueue()
@@ -46,11 +46,11 @@ import UIKit
             object: nil
         )
     }
-    
+
     public func addToast(_ toast: Toast) {
         self._queue.addOperation(toast)
     }
-    
+
     func deviceOrientationDidChange(_ sender: AnyObject?) {
         if self._queue.operations.count > 0 {
             let lastToast: Toast = _queue.operations[0] as! Toast

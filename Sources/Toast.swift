@@ -20,127 +20,127 @@
 import UIKit
 
 public struct ToastDelay {
-    public static let ShortDelay: TimeInterval = 2.0
-    public static let LongDelay: TimeInterval = 3.5
+  public static let ShortDelay: TimeInterval = 2.0
+  public static let LongDelay: TimeInterval = 3.5
 }
 
 @objc public class Toast: Operation {
 
-    public var view: ToastView = ToastView()
+  public var view: ToastView = ToastView()
 
-    public var text: String? {
-        get {
-            return self.view.textLabel.text
-        }
-        set {
-            self.view.textLabel.text = newValue
-        }
+  public var text: String? {
+    get {
+      return self.view.textLabel.text
     }
-
-    public var delay: TimeInterval = 0
-    public var duration: TimeInterval = ToastDelay.ShortDelay
-
-    private var _executing = false
-    override public var isExecuting: Bool {
-        get {
-            return self._executing
-        }
-        set {
-            self.willChangeValue(forKey: "isExecuting")
-            self._executing = newValue
-            self.didChangeValue(forKey: "isExecuting")
-        }
+    set {
+      self.view.textLabel.text = newValue
     }
+  }
 
-    private var _finished = false
-    override public var isFinished: Bool {
-        get {
-            return self._finished
-        }
-        set {
-            self.willChangeValue(forKey: "isFinished")
-            self._finished = newValue
-            self.didChangeValue(forKey: "isFinished")
-        }
+  public var delay: TimeInterval = 0
+  public var duration: TimeInterval = ToastDelay.ShortDelay
+
+  private var _executing = false
+  override public var isExecuting: Bool {
+    get {
+      return self._executing
     }
-
-    public class func makeText(_ text: String) -> Toast {
-        return Toast.makeText(text, delay: 0, duration: ToastDelay.ShortDelay)
+    set {
+      self.willChangeValue(forKey: "isExecuting")
+      self._executing = newValue
+      self.didChangeValue(forKey: "isExecuting")
     }
+  }
 
-    public class func makeText(_ text: String, duration: TimeInterval) -> Toast {
-        return Toast.makeText(text, delay: 0, duration: duration)
+  private var _finished = false
+  override public var isFinished: Bool {
+    get {
+      return self._finished
     }
-
-    public class func makeText(_ text: String, delay: TimeInterval, duration: TimeInterval) -> Toast {
-        let toast = Toast()
-        toast.text = text
-        toast.delay = delay
-        toast.duration = duration
-        return toast
+    set {
+      self.willChangeValue(forKey: "isFinished")
+      self._finished = newValue
+      self.didChangeValue(forKey: "isFinished")
     }
+  }
 
-    public func show() {
-        ToastCenter.defaultCenter().addToast(self)
-    }
+  public class func makeText(_ text: String) -> Toast {
+    return Toast.makeText(text, delay: 0, duration: ToastDelay.ShortDelay)
+  }
 
-    override public func start() {
-        if !Thread.isMainThread {
-            DispatchQueue.main.async(execute: {[weak self] in
-                self?.start()
-            })
-        } else {
-            super.start()
-        }
-    }
+  public class func makeText(_ text: String, duration: TimeInterval) -> Toast {
+    return Toast.makeText(text, delay: 0, duration: duration)
+  }
 
-    override public func main() {
-        self.isExecuting = true
+  public class func makeText(_ text: String, delay: TimeInterval, duration: TimeInterval) -> Toast {
+    let toast = Toast()
+    toast.text = text
+    toast.delay = delay
+    toast.duration = duration
+    return toast
+  }
 
-        DispatchQueue.main.async(execute: {
-            self.view.updateView()
-            self.view.alpha = 0
-            ToastWindow.sharedWindow.addSubview(self.view)
-            UIView.animate(
-                withDuration: 0.5,
-                delay: self.delay,
-                options: .beginFromCurrentState,
-                animations: {
-                    self.view.alpha = 1
-                },
-                completion: { completed in
-                    UIView.animate(
-                        withDuration: self.duration,
-                        animations: {
-                            self.view.alpha = 1.0001
-                        },
-                        completion: { completed in
-                            self.finish()
-                            UIView.animate(
-                                withDuration: 0.5,
-                                animations: {
-                                    self.view.alpha = 0
-                                },
-                                completion:{ completed in
-                                    self.view.removeFromSuperview()
+  public func show() {
+    ToastCenter.defaultCenter().addToast(self)
+  }
 
-                            })
-                        }
-                    )
-                }
-            )
+  override public func start() {
+    if !Thread.isMainThread {
+      DispatchQueue.main.async(execute: {[weak self] in
+        self?.start()
         })
+    } else {
+      super.start()
     }
+  }
 
-    public override func cancel() {
-        super.cancel()
-        self.finish()
-        self.view.removeFromSuperview()
-    }
+  override public func main() {
+    self.isExecuting = true
 
-    public func finish() {
-        self.isExecuting = false
-        self.isFinished = true
-    }
+    DispatchQueue.main.async(execute: {
+      self.view.updateView()
+      self.view.alpha = 0
+      ToastWindow.sharedWindow.addSubview(self.view)
+      UIView.animate(
+        withDuration: 0.5,
+        delay: self.delay,
+        options: .beginFromCurrentState,
+        animations: {
+          self.view.alpha = 1
+        },
+        completion: { completed in
+          UIView.animate(
+            withDuration: self.duration,
+            animations: {
+              self.view.alpha = 1.0001
+            },
+            completion: { completed in
+              self.finish()
+              UIView.animate(
+                withDuration: 0.5,
+                animations: {
+                  self.view.alpha = 0
+                },
+                completion:{ completed in
+                  self.view.removeFromSuperview()
+
+              })
+            }
+          )
+        }
+      )
+    })
+  }
+
+  public override func cancel() {
+    super.cancel()
+    self.finish()
+    self.view.removeFromSuperview()
+  }
+
+  public func finish() {
+    self.isExecuting = false
+    self.isFinished = true
+  }
 
 }

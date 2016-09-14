@@ -1,27 +1,30 @@
-JLToast - Toast for Swift
-=========================
+Toaster
+=======
 
-![Swift 2.0](https://img.shields.io/badge/Swift-2.2-orange.svg)
-[![CocoaPods](http://img.shields.io/cocoapods/v/JLToast.svg?style=flat)](http://cocoapods.org/?q=name%3AJLToast%20author%3Adevxoul)
+![Swift](https://img.shields.io/badge/Swift-3.0-orange.svg)
+[![CocoaPods](http://img.shields.io/cocoapods/v/Toaster.svg?style=flat)](http://cocoapods.org/?q=name%3AToaster%20author%3Adevxoul)
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 
-Android-like toast with very simple interface.
+Android-like toast with very simple interface. (formerly JLToast)
+
+Toaster is written in Swift 3.0. If you're looking for Swift 2 compatible version, see the [JLToast 1.4.2](https://github.com/devxoul/JLToast/tree/1.4.2).
+
+
+Features
+--------
+
+- **Queueing**: Centralized toast center manages the toast queue.
+- **Customizable**: See the [Appearance](#appearance) section.
 
 
 At a Glance
 -----------
 
 ```swift
-JLToast.makeText("Some text").show()
+import Toaster
+
+Toast(text: "Hello, world!").show()
 ```
-
-
-Features
---------
-
-- **Objective-C Compatible**: import `JLToast.h` to use JLToast in Objective-C.
-- **Queueing**: centralized toast center manages toast queue.
-- **Customizable**: see [Appearance](https://github.com/devxoul/JLToast#appearance) section.
 
 
 Installation
@@ -30,55 +33,38 @@ Installation
 - **For iOS 8+ projects with [CocoaPods](https://cocoapods.org):**
 
     ```ruby
-    pod 'JLToast', '~> 1.4'
+    pod 'Toaster', '~> 2.0'
     ```
     
 - **For iOS 8+ projects with [Carthage](https://github.com/Carthage/Carthage):**
 
     ```
-    github "devxoul/JLToast" ~> 1.0
+    github "devxoul/Toaster" ~> 2.0
     ```
     
 - **For iOS 7 projects:** I recommend you to try [CocoaSeeds](https://github.com/devxoul/CocoaSeeds), which uses source code instead of dynamic frameworks. Sample Seedfile:
 
     ```ruby
-    github 'devxoul/JLToast', '1.4.2', :files => 'JLToast/*.{swift,h}'
+    github 'devxoul/Toaster', '2.0.0', :files => 'Sources/*.{swift,h}'
     ```
+    
 
+Getting Started
+---------------
 
-Objective-C
------------
-
-JLToast is compatible with Objective-C. What you need to do is to import a auto-generated header file:
-
-```objc
-#import <JLToast/JLToast-Swift.h>
-```
-
-If you are looking for constants, import `JLToast.h`.
-
-```objc
-#import <JLToast/JLToast-Swift.h>
-#import <JLToast/JLToast.h> // if you want to use constants
-```
-
-
-Setting Duration and Delay
---------------------------
+### Setting Duration and Delay
 
 ```swift
-JLToast.makeText("Some text", duration: JLToastDelay.LongDelay)
-JLToast.makeText("Some text", delay: 1, duration: JLToastDelay.ShortDelay)
+Toast(text: "Hello, world!", duration: Delay.long)
+Toast(text: "Hello, world!", delay: Delay.short, duration: Delay.long)
 ```
 
-
-Removing Toasts
----------------
+### Removing Toasts
 
 - **Removing toast with reference**:
 
     ```swift
-    let toast = JLToast.makeText("Hello")
+    let toast = Toast(text: "Hello")
     toast.show()
     toast.cancel() // remove toast immediately
     ```
@@ -86,7 +72,7 @@ Removing Toasts
 - **Removing current toast**:
 
     ```swift
-    if let currentToast = JLToastCenter.defaultCenter.currentToast {
+    if let currentToast = ToastCenter.default.currentToast {
         currentToast.cancel()
     }
     ```
@@ -94,56 +80,38 @@ Removing Toasts
 - **Removing all toasts**:
 
     ```swift
-    JLToastCenter.defaultCenter.cancelAllToasts()
+    ToastCenter.default.cancelAll()
     ```
 
+### Appearance
 
-Appearance
-----------
-
-Since JLToast 1.1.0, you can set default values for appearance attributes. The code below sets default background color to red.
-
-> **Note:** It is not recommended to set default values while toasts are queued. It can occur unexpected results.
-
-**Swift**
+Since Toaster 2.0.0, you can use `UIAppearance` to set default appearance. This is an short example to set default background color to red.
 
 ```swift
-JLToastView.setDefaultValue(
-    UIColor.redColor(),
-    forAttributeName: JLToastViewBackgroundColorAttributeName,
-    userInterfaceIdiom: .Phone
-)
-```
-
-**Objective-C**
-
-```objc
-[JLToastView setDefaultValue:[UIColor redColor]
-            forAttributeName:JLToastViewBackgroundColorAttributeName
-          userInterfaceIdiom:UIUserInterfaceIdiomPhone];
+ToastView.appearance().backgroundColor = .red
 ```
 
 
-#### Supported Attributes
+Supported appearance properties are:
 
-| Attribute | Type | Description |
+| Property | Type | Description |
 |---|---|---|
-| `JLToastViewBackgroundColorAttributeName` | `UIColor` | Background color |
-| `JLToastViewCornerRadiusAttributeName` | `NSNumber(CGFloat)` | Corner radius |
-| `JLToastViewTextInsetsAttributeName` | `NSValue(UIEdgeInsets)` | Text inset |
-| `JLToastViewTextColorAttributeName` | `UIColor` | Text color |
-| `JLToastViewFontAttributeName` | `UIFont` | Font |
-| `JLToastViewPortraitOffsetYAttributeName` | `NSNumber(CGFloat)` | Vertical offfset from bottom in portrait mode |
-|` JLToastViewLandscapeOffsetYAttributeName` | `NSNumber(CGFloat)` | Vertical offfset from bottom in landscape mode |
+| `backgroundColor` | `UIColor` | Background color |
+| `cornerRadius` | `CGFloat` | Corner radius |
+| `textInsets` | `UIEdgeInsets` | Text inset |
+| `textColor` | `UIColor` | Text color |
+| `font` | `UIFont` | Font |
+| `bottomOffsetPortrait` | `CGFloat` | Vertical offfset from bottom in portrait mode |
+|` bottomOffsetLandscape` | `CGFloat` | Vertical offfset from bottom in landscape mode |
 
 
 Screenshots
 -----------
 
-![JLToast Screenshot](https://raw.github.com/Joyfl/JLToast/master/Screenshots/JLToast.png)
+![Toaster Screenshot](https://raw.github.com/devxoul/Toaster/master/Screenshots/Toaster.png)
 
 
 License
 -------
 
-JLToast is under [WTFPL](http://www.wtfpl.net/). You can do what the fuck you want with JLToast. See [LICENSE](LICENSE) file for more info.
+Toaster is under [WTFPL](http://www.wtfpl.net/). You can do what the fuck you want with Toast. See [LICENSE](LICENSE) file for more info.

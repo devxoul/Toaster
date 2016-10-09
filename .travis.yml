@@ -13,3 +13,6 @@ licenses:
 
 script:
   - xcodebuild clean build -sdk $SDK -configuration Debug CODE_SIGN_IDENTITY=\"\" CODE_SIGNING_REQUIRED=NO
+  
+before_install:
+  - xcodebuild -showsdks

@@ -6,10 +6,6 @@ language: objective-c
 env:
   - SDK="iphoneos10.0"
 
-licenses:
-  - 'android-sdk-preview-license-52d11cd2'
-  - 'android-sdk-license-.+'
-
 script:
   - xcodebuild clean build -sdk $SDK -configuration Debug CODE_SIGN_IDENTITY=\"\" CODE_SIGNING_REQUIRED=NO
   

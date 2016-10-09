@@ -4,7 +4,6 @@ sudo: false
 language: objective-c
 
 env:
-  - SDK="iphoneos9.3"
   - SDK="iphoneos10.0"
 
 licenses:

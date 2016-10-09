@@ -1,0 +1,13 @@
+os: osx
+osx_image: xcode8
+sudo: false
+language: objective-c
+
+env:
+  - SDK="iphoneos10.0"
+
+script:
+  - xcodebuild clean build -sdk $SDK -configuration Debug CODE_SIGN_IDENTITY=\"\" CODE_SIGNING_REQUIRED=NO
+  
+before_install:
+  - xcodebuild -showsdks

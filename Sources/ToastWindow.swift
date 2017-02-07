@@ -144,9 +144,9 @@ open class ToastWindow: UIWindow {
 
   func angleForOrientation(_ orientation: UIInterfaceOrientation) -> Double {
     switch orientation {
-    case .landscapeLeft: return -M_PI_2
-    case .landscapeRight: return M_PI_2
-    case .portraitUpsideDown: return M_PI
+    case .landscapeLeft: return -.pi / 2
+    case .landscapeRight: return .pi / 2
+    case .portraitUpsideDown: return .pi
     default: return 0
     }
   }

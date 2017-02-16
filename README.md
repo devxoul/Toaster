@@ -46,7 +46,7 @@ Installation
 - **For iOS 7 projects:** I recommend you to try [CocoaSeeds](https://github.com/devxoul/CocoaSeeds), which uses source code instead of dynamic frameworks. Sample Seedfile:
 
     ```ruby
-    github 'devxoul/Toaster', '2.0.2', :files => 'Sources/*.{swift,h}'
+    github 'devxoul/Toaster', '2.0.3', :files => 'Sources/*.{swift,h}'
     ```
     
 

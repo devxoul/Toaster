@@ -113,6 +113,7 @@ open class Toast: Operation {
   // MARK: Operation Subclassing
 
   override open func start() {
+    guard !self.isExecuting else { return }
     guard Thread.isMainThread else {
       DispatchQueue.main.async { [weak self] in
         self?.start()

@@ -162,6 +162,7 @@ open class Toast: Operation {
   }
 
   open func finish() {
+    guard self.isExecuting else { return }
     self.isExecuting = false
     self.isFinished = true
   }

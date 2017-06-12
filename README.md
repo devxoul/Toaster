@@ -34,21 +34,15 @@ Installation
 - **For iOS 8+ projects with [CocoaPods](https://cocoapods.org):**
 
     ```ruby
-    pod 'Toaster', '~> 2.0'
+    pod 'Toaster'
     ```
-    
+
 - **For iOS 8+ projects with [Carthage](https://github.com/Carthage/Carthage):**
 
     ```
-    github "devxoul/Toaster" ~> 2.0
+    github "devxoul/Toaster"
     ```
-    
-- **For iOS 7 projects:** I recommend you to try [CocoaSeeds](https://github.com/devxoul/CocoaSeeds), which uses source code instead of dynamic frameworks. Sample Seedfile:
 
-    ```ruby
-    github 'devxoul/Toaster', '2.0.3', :files => 'Sources/*.{swift,h}'
-    ```
-    
 
 Getting Started
 ---------------

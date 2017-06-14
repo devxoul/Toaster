@@ -11,3 +11,7 @@ script:
   
 before_install:
   - xcodebuild -showsdks
+
+branches:
+  except:
+  - swift-4

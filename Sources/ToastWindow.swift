@@ -53,7 +53,9 @@ open class ToastWindow: UIWindow {
   override open var rootViewController: UIViewController? {
     get {
       guard !self.isStatusBarOrientationChanging else { return nil }
-      guard let firstWindow = UIApplication.shared.delegate?.window else { return nil }
+      guard let firstWindow = UIApplication.shared.delegate?.window else {
+        return UIApplication.shared.windows.first?.rootViewController
+      }
       return firstWindow is ToastWindow ? nil : firstWindow?.rootViewController
     }
     set { /* Do nothing */ }

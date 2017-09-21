@@ -98,24 +98,24 @@ open class ToastWindow: UIWindow {
   }
 
   /// Bring ToastWindow to top when another window is being shown.
-  func bringWindowToTop(_ notification: Notification) {
+  @objc func bringWindowToTop(_ notification: Notification) {
     if !(notification.object is ToastWindow) {
       ToastWindow.shared.isHidden = true
       ToastWindow.shared.isHidden = false
     }
   }
 
-  dynamic func statusBarOrientationWillChange() {
+  @objc dynamic func statusBarOrientationWillChange() {
     self.isStatusBarOrientationChanging = true
   }
 
-  dynamic func statusBarOrientationDidChange() {
+  @objc dynamic func statusBarOrientationDidChange() {
     let orientation = UIApplication.shared.statusBarOrientation
     self.handleRotate(orientation)
     self.isStatusBarOrientationChanging = false
   }
 
-  func applicationDidBecomeActive() {
+  @objc func applicationDidBecomeActive() {
     let orientation = UIApplication.shared.statusBarOrientation
     self.handleRotate(orientation)
   }

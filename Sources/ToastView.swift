@@ -38,28 +38,28 @@ open class ToastView: UIView {
   }
 
   /// The background view's corner radius.
-  open dynamic var cornerRadius: CGFloat {
+  @objc open dynamic var cornerRadius: CGFloat {
     get { return self.backgroundView.layer.cornerRadius }
     set { self.backgroundView.layer.cornerRadius = newValue }
   }
 
   /// The inset of the text label.
-  open dynamic var textInsets = UIEdgeInsets(top: 6, left: 10, bottom: 6, right: 10)
+  @objc open dynamic var textInsets = UIEdgeInsets(top: 6, left: 10, bottom: 6, right: 10)
 
   /// The color of the text label's text.
-  open dynamic var textColor: UIColor? {
+  @objc open dynamic var textColor: UIColor? {
     get { return self.textLabel.textColor }
     set { self.textLabel.textColor = newValue }
   }
 
   /// The font of the text label.
-  open dynamic var font: UIFont? {
+  @objc open dynamic var font: UIFont? {
     get { return self.textLabel.font }
     set { self.textLabel.font = newValue }
   }
 
   /// The bottom offset from the screen's bottom in portrait mode.
-  open dynamic var bottomOffsetPortrait: CGFloat = {
+  @objc open dynamic var bottomOffsetPortrait: CGFloat = {
     switch UIDevice.current.userInterfaceIdiom {
     case .unspecified: return 30
     case .phone: return 30
@@ -70,7 +70,7 @@ open class ToastView: UIView {
   }()
 
   /// The bottom offset from the screen's bottom in landscape mode.
-  open dynamic var bottomOffsetLandscape: CGFloat = {
+  @objc open dynamic var bottomOffsetLandscape: CGFloat = {
     switch UIDevice.current.userInterfaceIdiom {
     case .unspecified: return 20
     case .phone: return 20

@@ -64,7 +64,7 @@ final class RootViewController: UIViewController {
     appearance.cornerRadius = 20
   }
 
-  dynamic func showButtonTouchUpInside() {
+  @objc dynamic func showButtonTouchUpInside() {
     Toast(text: "Basic Toast").show()
     Toast(text: "You can set duration. `Delay.short` means 2 seconds.\n" +
       "`Delay.long` means 3.5 seconds.",

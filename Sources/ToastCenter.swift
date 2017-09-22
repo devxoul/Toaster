@@ -66,7 +66,7 @@ open class ToastCenter {
 
   // MARK: Notifications
 
-  dynamic func deviceOrientationDidChange() {
+  @objc dynamic func deviceOrientationDidChange() {
     if let lastToast = self.queue.operations.first as? Toast {
       lastToast.view.setNeedsLayout()
     }

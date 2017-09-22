@@ -126,7 +126,7 @@ open class ToastWindow: UIWindow {
       self.transform = CGAffineTransform(rotationAngle: CGFloat(angle))
     }
 
-    if let window = UIApplication.shared.windows.first {
+    if let window = UIApplication.shared.keyWindow {
       if orientation.isPortrait || !self.shouldRotateManually {
         self.frame.size.width = window.bounds.size.width
         self.frame.size.height = window.bounds.size.height

@@ -129,7 +129,8 @@ open class Toast: Operation {
     DispatchQueue.main.async {
       self.view.setNeedsLayout()
       self.view.alpha = 0
-      ToastWindow.shared.addSubview(self.view)
+      UIApplication.shared.windows[UIApplication.shared.windows.count - 1].addSubview(self.view)
+      //ToastWindow.shared.addSubview(self.view)
 
       UIView.animate(
         withDuration: 0.5,

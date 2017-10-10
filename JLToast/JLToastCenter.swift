@@ -27,7 +27,7 @@ protocol JLToastDelegate: class {
 
 @objc public class JLToastCenter: NSObject, JLToastDelegate {
 
-    private var _queue: NSOperationQueue!
+    private var _queue: OperationQueue!
 
     private struct Singletone {
         static let defaultCenter = JLToastCenter()
@@ -39,12 +39,12 @@ protocol JLToastDelegate: class {
     
     override init() {
         super.init()
-        self._queue = NSOperationQueue()
+        self._queue = OperationQueue()
         self._queue.maxConcurrentOperationCount = MAX_CONCURRENT_TOASTS
-        NSNotificationCenter.defaultCenter().addObserver(
+        NotificationCenter.default.addObserver(
             self,
-            selector: "deviceOrientationDidChange:",
-            name: UIDeviceOrientationDidChangeNotification,
+            selector: #selector(JLToastCenter.deviceOrientationDidChange(_:)),
+            name: NSNotification.Name.UIDeviceOrientationDidChange,
             object: nil
         )
     }
@@ -57,15 +57,18 @@ protocol JLToastDelegate: class {
 
     // MARK: -
 
-    public func addToast(toast: JLToast) {
+    public func addToast(_ toast: JLToast) {
         toast.view.delegate = self
-        if self._queue.operationCount == 0 || self._queue.operationCount >= MAX_CONCURRENT_TOASTS || JLToast.topY <= 0 {
-            JLToast.topY = nil
+        if let topY = JLToast.topY {
+            if self._queue.operationCount == 0 || self._queue.operationCount >= MAX_CONCURRENT_TOASTS || topY <= CGFloat(0) {
+                JLToast.topY = nil
+            }
         }
+
         self._queue.addOperation(toast)
     }
 
-    func deviceOrientationDidChange(sender: AnyObject?) {
+    @objc func deviceOrientationDidChange(_ sender: AnyObject?) {
         if self._queue.operations.count > 0 && self._queue.operations.count <= self._queue.maxConcurrentOperationCount {
             for toast in self._queue.operations {
                 let thisToast: JLToast = toast as! JLToast

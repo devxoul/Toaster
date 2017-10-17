@@ -19,26 +19,25 @@ class ToasterTests: XCTestCase {
         XCTAssertNil(ToastCenter.default.currentToast)
     }
     
-    // Regression test https://github.com/devxoul/Toaster/issues/107
-    func testFinishDoesNothingIfNotExecuting() {
-        
-        let toast = Toast(text: "text")
-        toast.show()
-        toast.finish()
-        XCTAssertFalse(toast.isExecuting)
-        XCTAssertFalse(toast.isCancelled)
-        XCTAssertFalse(toast.isFinished)
-    }
-    
     func testCurrentToastShouldIgnoreFinishedAndCancelledToasts() {
         
         let toast1 = Toast(text: "text1")
         toast1.show()
+        XCTAssertEqual(ToastCenter.default.currentToast, toast1)
+
         toast1.cancel()
+        XCTAssertNil(ToastCenter.default.currentToast)
         
-        let toast2 = Toast(text: "text2")
+        let toast2 = Toast(text: "text2", duration: 0.3)
         toast2.show()
-        toast2.finish()
+        XCTAssertEqual(ToastCenter.default.currentToast, toast2)
+        
+        let expectation = self.expectation(description: "Toast 2 should finish")
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+            expectation.fulfill()
+            XCTAssertTrue(toast2.isFinished)
+        }
+        wait(for: [expectation], timeout: 3)
         
         XCTAssertNil(ToastCenter.default.currentToast)
     }

@@ -30,7 +30,7 @@ open class ToastCenter {
   }()
 
   open var currentToast: Toast? {
-    return self.queue.operations.first as? Toast
+    return self.queue.operations.first { !$0.isCancelled && !$0.isFinished } as? Toast
   }
 
   open static let `default` = ToastCenter()
@@ -58,9 +58,7 @@ open class ToastCenter {
   // MARK: Cancelling Toasts
 
   open func cancelAll() {
-    for toast in self.queue.operations {
-      toast.cancel()
-    }
+    queue.cancelAllOperations()
   }
 
 

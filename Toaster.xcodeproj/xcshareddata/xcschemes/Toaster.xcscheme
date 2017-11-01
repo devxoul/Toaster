@@ -29,7 +29,26 @@
       language = ""
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "C06FC9D01F95A8CC00782082"
+               BuildableName = "ToasterTests.xctest"
+               BlueprintName = "ToasterTests"
+               ReferencedContainer = "container:Toaster.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "03A75E2A1BCF2066002E46C4"
+            BuildableName = "Toaster.framework"
+            BlueprintName = "Toaster"
+            ReferencedContainer = "container:Toaster.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>

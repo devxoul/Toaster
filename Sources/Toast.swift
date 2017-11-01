@@ -94,14 +94,15 @@ open class Toast: Operation {
   // MARK: Operation Subclassing
 
   override open func start() {
-    guard !self.isExecuting else { return }
+    let isRunnable = !self.isFinished && !self.isCancelled && !self.isExecuting
+    guard isRunnable else { return }
     guard Thread.isMainThread else {
       DispatchQueue.main.async { [weak self] in
         self?.start()
       }
       return
     }
-    super.start()
+    main()
   }
 
   override open func main() {
@@ -143,8 +144,7 @@ open class Toast: Operation {
     }
   }
 
-  open func finish() {
-    guard self.isExecuting else { return }
+  func finish() {
     self.isExecuting = false
     self.isFinished = true
   }

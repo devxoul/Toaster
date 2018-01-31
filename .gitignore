@@ -16,3 +16,5 @@ doxygenWarnings.txt
 *.xcuserdatad
 
 *.xccheckout
+
+DerivedData/

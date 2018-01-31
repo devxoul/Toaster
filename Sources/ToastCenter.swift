@@ -1,22 +1,3 @@
-/*
- * ToastCenter.swift
- *
- *            DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE
- *                    Version 2, December 2004
- *
- * Copyright (C) 2013-2015 Su Yeol Jeon
- *
- * Everyone is permitted to copy and distribute verbatim or modified
- * copies of this license document, and changing it is allowed as long
- * as the name is changed.
- *
- *            DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE
- *   TERMS AND CONDITIONS FOR COPYING, DISTRIBUTION AND MODIFICATION
- *
- *  0. You just DO WHAT THE FUCK YOU WANT TO.
- *
- */
-
 import UIKit
 
 open class ToastCenter {
@@ -30,7 +11,7 @@ open class ToastCenter {
   }()
 
   open var currentToast: Toast? {
-    return self.queue.operations.first as? Toast
+    return self.queue.operations.first { !$0.isCancelled && !$0.isFinished } as? Toast
   }
 
   open static let `default` = ToastCenter()
@@ -58,15 +39,13 @@ open class ToastCenter {
   // MARK: Cancelling Toasts
 
   open func cancelAll() {
-    for toast in self.queue.operations {
-      toast.cancel()
-    }
+    queue.cancelAllOperations()
   }
 
 
   // MARK: Notifications
 
-  dynamic func deviceOrientationDidChange() {
+  @objc dynamic func deviceOrientationDidChange() {
     if let lastToast = self.queue.operations.first as? Toast {
       lastToast.view.setNeedsLayout()
     }

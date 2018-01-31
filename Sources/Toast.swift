@@ -1,22 +1,3 @@
-/*
- * Toast.swift
- *
- *            DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE
- *                    Version 2, December 2004
- *
- * Copyright (C) 2013-2015 Su Yeol Jeon
- *
- * Everyone is permitted to copy and distribute verbatim or modified
- * copies of this license document, and changing it is allowed as long
- * as the name is changed.
- *
- *            DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE
- *   TERMS AND CONDITIONS FOR COPYING, DISTRIBUTION AND MODIFICATION
- *
- *  0. You just DO WHAT THE FUCK YOU WANT TO.
- *
- */
-
 import UIKit
 
 public struct Delay {
@@ -113,14 +94,15 @@ open class Toast: Operation {
   // MARK: Operation Subclassing
 
   override open func start() {
-    guard !self.isExecuting else { return }
+    let isRunnable = !self.isFinished && !self.isCancelled && !self.isExecuting
+    guard isRunnable else { return }
     guard Thread.isMainThread else {
       DispatchQueue.main.async { [weak self] in
         self?.start()
       }
       return
     }
-    super.start()
+    main()
   }
 
   override open func main() {
@@ -162,8 +144,7 @@ open class Toast: Operation {
     }
   }
 
-  open func finish() {
-    guard self.isExecuting else { return }
+  func finish() {
     self.isExecuting = false
     self.isFinished = true
   }

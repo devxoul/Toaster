@@ -49,7 +49,7 @@ open class Toast: Operation {
 
   // MARK: Initializing
 
-  public init(text: String?, delay: TimeInterval = 0, duration: TimeInterval = Delay.short) {
+  @objc public init(text: String?, delay: TimeInterval = 0, duration: TimeInterval = Delay.short) {
     self.delay = delay
     self.duration = duration
     super.init()
@@ -77,14 +77,14 @@ open class Toast: Operation {
 
   // MARK: Showing
 
-  public func show() {
+  @objc public func show() {
     ToastCenter.default.add(self)
   }
 
 
   // MARK: Cancelling
 
-  open override func cancel() {
+  @objc open override func cancel() {
     super.cancel()
     self.finish()
     self.view.removeFromSuperview()

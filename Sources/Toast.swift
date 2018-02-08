@@ -111,7 +111,11 @@ open class Toast: Operation {
     DispatchQueue.main.async {
       self.view.setNeedsLayout()
       self.view.alpha = 0
-      ToastWindow.shared.addSubview(self.view)
+        
+      let window = UIApplication.shared.windows[UIApplication.shared.windows.count - 1]
+      window.subviews.filter({ $0 is ToastView }).forEach({ $0.removeFromSuperview() })
+      window.addSubview(self.view)
+      window.bringSubview(toFront: self.view)
 
       UIView.animate(
         withDuration: 0.5,

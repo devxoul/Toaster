@@ -7,6 +7,10 @@ open class ToastWindow: UIWindow {
   /// Will not return `rootViewController` while this value is `true`. Or the rotation will be fucked in iOS 9.
   var isStatusBarOrientationChanging = false
 
+  var applicationWindow: UIWindow? {
+    return UIApplication.shared.delegate?.window ?? nil
+  }
+
   /// Don't rotate manually if the application:
   ///
   /// - is running on iPad
@@ -17,10 +21,7 @@ open class ToastWindow: UIWindow {
   ///
   var shouldRotateManually: Bool {
     let iPad = UIDevice.current.userInterfaceIdiom == .pad
-    let application = UIApplication.shared
-    let window = application.delegate?.window ?? nil
-    let supportsAllOrientations = application.supportedInterfaceOrientations(for: window) == .all
-
+    let supportsAllOrientations = UIApplication.shared.supportedInterfaceOrientations(for: applicationWindow) == .all
     let info = Bundle.main.infoDictionary
     let requiresFullScreen = (info?["UIRequiresFullScreen"] as? NSNumber)?.boolValue == true
     let hasLaunchStoryboard = info?["UILaunchStoryboardName"] != nil
@@ -84,6 +85,7 @@ open class ToastWindow: UIWindow {
       ToastWindow.shared.isHidden = true
       ToastWindow.shared.isHidden = false
     }
+    applicationWindow?.makeKey()
   }
 
   @objc dynamic func statusBarOrientationWillChange() {

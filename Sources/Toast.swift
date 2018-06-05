@@ -112,10 +112,11 @@ open class Toast: Operation {
       self.view.setNeedsLayout()
       self.view.alpha = 0
         
-      let window = UIApplication.shared.windows[UIApplication.shared.windows.count - 1]
-      window.subviews.filter({ $0 is ToastView }).forEach({ $0.removeFromSuperview() })
-      window.addSubview(self.view)
-      window.bringSubview(toFront: self.view)
+        if let window = UIApplication.shared.windows.last {
+            window.subviews.filter({ $0 is ToastView }).forEach({ $0.removeFromSuperview() })
+            window.addSubview(self.view)
+            window.bringSubview(toFront: self.view)
+        }
 
       UIView.animate(
         withDuration: 0.5,

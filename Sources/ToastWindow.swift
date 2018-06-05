@@ -43,7 +43,19 @@ open class ToastWindow: UIWindow {
   public override init(frame: CGRect) {
     super.init(frame: frame)
     self.isUserInteractionEnabled = false
-    self.windowLevel = CGFloat.greatestFiniteMagnitude
+    #if swift(>=4.2)
+    self.windowLevel = .init(rawValue: .greatestFiniteMagnitude)
+    let didBecomeVisibleName = UIWindow.didBecomeVisibleNotification
+    let willChangeStatusBarOrientationName = UIApplication.willChangeStatusBarOrientationNotification
+    let didChangeStatusBarOrientationName = UIApplication.didChangeStatusBarOrientationNotification
+    let didBecomeActiveName = UIApplication.didBecomeActiveNotification
+    #else
+    self.windowLevel = .greatestFiniteMagnitude
+    let didBecomeVisibleName = NSNotification.Name.UIWindowDidBecomeVisible
+    let willChangeStatusBarOrientationName = NSNotification.Name.UIApplicationWillChangeStatusBarOrientation
+    let didChangeStatusBarOrientationName = NSNotification.Name.UIApplicationDidChangeStatusBarOrientation
+    let didBecomeActiveName = NSNotification.Name.UIApplicationDidBecomeActive
+    #endif
     self.backgroundColor = .clear
     self.isHidden = false
     self.handleRotate(UIApplication.shared.statusBarOrientation)
@@ -51,25 +63,25 @@ open class ToastWindow: UIWindow {
     NotificationCenter.default.addObserver(
       self,
       selector: #selector(self.bringWindowToTop),
-      name: .UIWindowDidBecomeVisible,
+      name: didBecomeVisibleName,
       object: nil
     )
     NotificationCenter.default.addObserver(
       self,
       selector: #selector(self.statusBarOrientationWillChange),
-      name: .UIApplicationWillChangeStatusBarOrientation,
+      name: willChangeStatusBarOrientationName,
       object: nil
     )
     NotificationCenter.default.addObserver(
       self,
       selector: #selector(self.statusBarOrientationDidChange),
-      name: .UIApplicationDidChangeStatusBarOrientation,
+      name: didChangeStatusBarOrientationName,
       object: nil
     )
     NotificationCenter.default.addObserver(
       self,
       selector: #selector(self.applicationDidBecomeActive),
-      name: .UIApplicationDidBecomeActive,
+      name: didBecomeActiveName,
       object: nil
     )
   }

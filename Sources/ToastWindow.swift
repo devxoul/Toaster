@@ -90,11 +90,23 @@ open class ToastWindow: UIWindow {
     fatalError("init(coder:) has not been implemented: please use ToastWindow.shared")
   }
 
+  override open func addSubview(_ view: UIView) {
+    super.addSubview(view)
+    moveToastToHighestWindow()
+  }
+
   /// Bring ToastWindow to top when another window is being shown.
   @objc func bringWindowToTop(_ notification: Notification) {
     if !(notification.object is ToastWindow) {
       ToastWindow.shared.isHidden = true
       ToastWindow.shared.isHidden = false
+    }
+    moveToastToHighestWindow()
+  }
+
+  private func moveToastToHighestWindow() {
+    if let highestWindow = UIApplication.shared.windows.last, highestWindow.windowLevel > windowLevel {
+      subviews.forEach { highestWindow.addSubview($0) }
     }
   }
 

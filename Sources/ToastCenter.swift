@@ -14,7 +14,7 @@ open class ToastCenter {
     return self.queue.operations.first { !$0.isCancelled && !$0.isFinished } as? Toast
   }
 
-  open static let `default` = ToastCenter()
+  public static let `default` = ToastCenter()
 
 
   // MARK: Initializing

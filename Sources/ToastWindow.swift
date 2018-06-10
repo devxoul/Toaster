@@ -2,7 +2,7 @@ import UIKit
 
 open class ToastWindow: UIWindow {
 
-  open static let shared = ToastWindow(frame: UIScreen.main.bounds)
+  public static let shared = ToastWindow(frame: UIScreen.main.bounds)
 
   /// Will not return `rootViewController` while this value is `true`. Or the rotation will be fucked in iOS 9.
   var isStatusBarOrientationChanging = false

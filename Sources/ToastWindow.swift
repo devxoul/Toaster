@@ -7,6 +7,10 @@ open class ToastWindow: UIWindow {
   /// Will not return `rootViewController` while this value is `true`. Or the rotation will be fucked in iOS 9.
   var isStatusBarOrientationChanging = false
 
+  /// Returns original subviews. `ToastWindow` overrides `addSubview()` to add an subview to the
+  /// top window instead itself.
+  private var originalSubviews = NSPointerArray.weakObjects()
+
   /// Don't rotate manually if the application:
   ///
   /// - is running on iPad
@@ -49,12 +53,16 @@ open class ToastWindow: UIWindow {
     let willChangeStatusBarOrientationName = UIApplication.willChangeStatusBarOrientationNotification
     let didChangeStatusBarOrientationName = UIApplication.didChangeStatusBarOrientationNotification
     let didBecomeActiveName = UIApplication.didBecomeActiveNotification
+    let keyboardWillShowName = UIWindow.keyboardWillShowNotification
+    let keyboardDidHideName = UIWindow.keyboardDidHideNotification
     #else
     self.windowLevel = .greatestFiniteMagnitude
     let didBecomeVisibleName = NSNotification.Name.UIWindowDidBecomeVisible
     let willChangeStatusBarOrientationName = NSNotification.Name.UIApplicationWillChangeStatusBarOrientation
     let didChangeStatusBarOrientationName = NSNotification.Name.UIApplicationDidChangeStatusBarOrientation
     let didBecomeActiveName = NSNotification.Name.UIApplicationDidBecomeActive
+    let keyboardWillShowName = NSNotification.Name.UIKeyboardWillShow
+    let keyboardDidHideName = NSNotification.Name.UIKeyboardDidHide
     #endif
     self.backgroundColor = .clear
     self.isHidden = false
@@ -62,7 +70,7 @@ open class ToastWindow: UIWindow {
 
     NotificationCenter.default.addObserver(
       self,
-      selector: #selector(self.bringWindowToTop),
+      selector: #selector(self.windowDidBecomeVisible),
       name: didBecomeVisibleName,
       object: nil
     )
@@ -84,17 +92,27 @@ open class ToastWindow: UIWindow {
       name: didBecomeActiveName,
       object: nil
     )
+    NotificationCenter.default.addObserver(
+      self,
+      selector: #selector(self.keyboardWillShow),
+      name: keyboardWillShowName,
+      object: nil
+    )
+    NotificationCenter.default.addObserver(
+      self,
+      selector: #selector(self.keyboardDidHide),
+      name: keyboardDidHideName,
+      object: nil
+    )
   }
 
   required public init?(coder aDecoder: NSCoder) {
     fatalError("init(coder:) has not been implemented: please use ToastWindow.shared")
   }
 
-  /// Bring ToastWindow to top when another window is being shown.
-  @objc func bringWindowToTop(_ notification: Notification) {
+  @objc func windowDidBecomeVisible(_ notification: Notification) {
     if !(notification.object is ToastWindow) {
-      ToastWindow.shared.isHidden = true
-      ToastWindow.shared.isHidden = false
+      self.bringWindowToTop()
     }
   }
 
@@ -136,6 +154,21 @@ open class ToastWindow: UIWindow {
     }
   }
 
+  @objc func keyboardWillShow() {
+    self.bringWindowToTop()
+    for subview in self.originalSubviews.allObjects {
+      guard let subview = subview as? UIView else { continue }
+      self.addSubviewToTopWindow(subview: subview)
+    }
+  }
+
+  @objc func keyboardDidHide() {
+    for subview in self.originalSubviews.allObjects {
+      guard let subview = subview as? UIView else { continue }
+      super.addSubview(subview)
+    }
+  }
+
   func angleForOrientation(_ orientation: UIInterfaceOrientation) -> Double {
     switch orientation {
     case .landscapeLeft: return -.pi / 2
@@ -144,5 +177,22 @@ open class ToastWindow: UIWindow {
     default: return 0
     }
   }
-  
+
+  override open func addSubview(_ view: UIView) {
+    super.addSubview(view)
+    self.originalSubviews.addPointer(Unmanaged.passUnretained(view).toOpaque())
+    self.addSubviewToTopWindow(subview: view)
+  }
+
+  private func addSubviewToTopWindow(subview: UIView) {
+    if let window = UIApplication.shared.windows.max(by: { $0.windowLevel < $1.windowLevel }), window !== self {
+      window.addSubview(subview)
+    }
+  }
+
+  /// Brings ToastWindow to top when another window is being shown.
+  private func bringWindowToTop() {
+    ToastWindow.shared.isHidden = true
+    ToastWindow.shared.isHidden = false
+  }
 }

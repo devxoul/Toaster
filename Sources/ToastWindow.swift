@@ -75,7 +75,7 @@ open class ToastWindow: UIWindow {
   }
 
   required public init?(coder aDecoder: NSCoder) {
-    fatalError("init(coder:) has not been implemented")
+    fatalError("init(coder:) has not been implemented: please use ToastWindow.shared")
   }
 
   /// Bring ToastWindow to top when another window is being shown.

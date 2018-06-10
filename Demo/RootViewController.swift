@@ -8,29 +8,17 @@ final class RootViewController: UIViewController {
     button.setTitle("Show", for: .normal)
     button.sizeToFit()
     button.addTarget(self, action: #selector(self.showButtonTouchUpInside), for: .touchUpInside)
-    button.translatesAutoresizingMaskIntoConstraints = false
-    self.view.translatesAutoresizingMaskIntoConstraints = false
+    button.autoresizingMask = [.flexibleBottomMargin, .flexibleLeftMargin, .flexibleRightMargin]
+    button.center = CGPoint(x: view.center.x, y: 75)
     self.view.addSubview(button)
-    self.view.addConstraints([
-      NSLayoutConstraint(
-        item: button,
-        attribute: .top,
-        relatedBy: .equal,
-        toItem: self.view,
-        attribute: .top,
-        multiplier: 1,
-        constant: 60
-      ),
-      NSLayoutConstraint(
-        item: button,
-        attribute: .centerX,
-        relatedBy: .equal,
-        toItem: self.view,
-        attribute: .centerX,
-        multiplier: 1,
-        constant: 0
-      )
-    ])
+
+    let keyboardButton = RespondingButton(type: .system)
+    keyboardButton.setTitle("Toggle keyboard", for: .normal)
+    keyboardButton.sizeToFit()
+    keyboardButton.addTarget(self, action: #selector(self.keyboardButtonTouchUpInside), for: .touchUpInside)
+    keyboardButton.autoresizingMask = [.flexibleBottomMargin, .flexibleLeftMargin, .flexibleRightMargin]
+    keyboardButton.center = CGPoint(x: view.center.x, y: 125)
+    self.view.addSubview(keyboardButton)
 
     self.configureAppearance()
   }
@@ -52,4 +40,21 @@ final class RootViewController: UIViewController {
           duration: Delay.long).show()
     Toast(text: "With delay, Toaster will be shown after delay.", delay: 1, duration: 5).show()
   }
+
+  @objc dynamic func keyboardButtonTouchUpInside(sender: RespondingButton) {
+    if sender.isFirstResponder {
+      sender.resignFirstResponder()
+    } else {
+      sender.becomeFirstResponder()
+    }
+  }
+}
+
+class RespondingButton: UIButton, UIKeyInput {
+  override var canBecomeFirstResponder: Bool {
+    return true
+  }
+  var hasText: Bool = true
+  func insertText(_ text: String) {}
+  func deleteBackward() {}
 }

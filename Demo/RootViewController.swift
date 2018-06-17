@@ -55,6 +55,7 @@ class RespondingButton: UIButton, UIKeyInput {
     return true
   }
   var hasText: Bool = true
+  var autocorrectionType: UITextAutocorrectionType = .no
   func insertText(_ text: String) {}
   func deleteBackward() {}
 }

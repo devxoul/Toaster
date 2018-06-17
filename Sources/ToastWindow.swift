@@ -7,7 +7,7 @@ open class ToastWindow: UIWindow {
   /// Will not return `rootViewController` while this value is `true`. Or the rotation will be fucked in iOS 9.
   var isStatusBarOrientationChanging = false
 
-  /// Returns original subviews. `ToastWindow` overrides `addSubview()` to add an subview to the
+  /// Returns original subviews. `ToastWindow` overrides `addSubview()` to add a subview to the
   /// top window instead itself.
   private var originalSubviews = NSPointerArray.weakObjects()
 
@@ -156,15 +156,13 @@ open class ToastWindow: UIWindow {
 
   @objc func keyboardWillShow() {
     self.bringWindowToTop()
-    for subview in self.originalSubviews.allObjects {
-      guard let subview = subview as? UIView else { continue }
+    for subview in self.originalSubviews.allObjects as! [UIView] {
       self.addSubviewToTopWindow(subview: subview)
     }
   }
 
   @objc func keyboardDidHide() {
-    for subview in self.originalSubviews.allObjects {
-      guard let subview = subview as? UIView else { continue }
+    for subview in self.originalSubviews.allObjects as! [UIView] {
       super.addSubview(subview)
     }
   }
@@ -185,7 +183,7 @@ open class ToastWindow: UIWindow {
   }
 
   private func addSubviewToTopWindow(subview: UIView) {
-    if let window = UIApplication.shared.windows.max(by: { $0.windowLevel < $1.windowLevel }), window !== self {
+    if let window = UIApplication.shared.windows.last, window !== self {
       window.addSubview(subview)
     }
   }

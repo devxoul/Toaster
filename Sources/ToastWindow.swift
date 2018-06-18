@@ -155,14 +155,16 @@ open class ToastWindow: UIWindow {
   }
 
   @objc func keyboardWillShow() {
-    self.bringWindowToTop()
-    for subview in self.originalSubviews.allObjects as! [UIView] {
-      self.addSubviewToTopWindow(subview: subview)
+    guard let topWindow = self.topWindow(),
+      let subviews = self.originalSubviews.allObjects as? [UIView] else { return }
+    for subview in subviews {
+      topWindow.addSubview(subview)
     }
   }
 
   @objc func keyboardDidHide() {
-    for subview in self.originalSubviews.allObjects as! [UIView] {
+    guard let subviews = self.originalSubviews.allObjects as? [UIView] else { return }
+    for subview in subviews {
       super.addSubview(subview)
     }
   }
@@ -179,13 +181,15 @@ open class ToastWindow: UIWindow {
   override open func addSubview(_ view: UIView) {
     super.addSubview(view)
     self.originalSubviews.addPointer(Unmanaged.passUnretained(view).toOpaque())
-    self.addSubviewToTopWindow(subview: view)
+    self.topWindow()?.addSubview(view)
   }
 
-  private func addSubviewToTopWindow(subview: UIView) {
+  /// Returns top window that isn't self
+  private func topWindow() -> UIWindow? {
     if let window = UIApplication.shared.windows.last, window !== self {
-      window.addSubview(subview)
+      return window
     }
+    return nil
   }
 
   /// Brings ToastWindow to top when another window is being shown.

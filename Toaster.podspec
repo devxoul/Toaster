@@ -11,4 +11,5 @@ Pod::Spec.new do |s|
   s.source_files = 'Sources/*.{swift,h}'
   s.frameworks   = 'UIKit', 'Foundation', 'QuartzCore'
   s.requires_arc = true
+  s.swift_version = '4.0'
 end

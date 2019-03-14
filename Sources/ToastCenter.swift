@@ -23,7 +23,7 @@ open class ToastCenter {
     #if swift(>=4.2)
     let name = UIDevice.orientationDidChangeNotification
     #else
-    let name = NSNotification.Name.UIDeviceOrientationDidChange
+    let name = UIDevice.orientationDidChangeNotification
     #endif
     NotificationCenter.default.addObserver(
       self,

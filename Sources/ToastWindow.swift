@@ -51,10 +51,10 @@ open class ToastWindow: UIWindow {
     let didBecomeActiveName = UIApplication.didBecomeActiveNotification
     #else
     self.windowLevel = .greatestFiniteMagnitude
-    let didBecomeVisibleName = NSNotification.Name.UIWindowDidBecomeVisible
-    let willChangeStatusBarOrientationName = NSNotification.Name.UIApplicationWillChangeStatusBarOrientation
-    let didChangeStatusBarOrientationName = NSNotification.Name.UIApplicationDidChangeStatusBarOrientation
-    let didBecomeActiveName = NSNotification.Name.UIApplicationDidBecomeActive
+    let didBecomeVisibleName = UIWindow.didBecomeVisibleNotification
+    let willChangeStatusBarOrientationName = UIApplication.willChangeStatusBarOrientationNotification
+    let didChangeStatusBarOrientationName = UIApplication.didChangeStatusBarOrientationNotification
+    let didBecomeActiveName = UIApplication.didBecomeActiveNotification
     #endif
     self.backgroundColor = .clear
     self.isHidden = false

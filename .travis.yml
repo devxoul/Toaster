@@ -4,7 +4,7 @@ sudo: false
 language: objective-c
 
 env:
-  - SDK="iphoneos11.0"
+  - SDK="iphoneos12.1"
 
 script:
   - xcodebuild clean build -sdk $SDK -configuration Debug CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO

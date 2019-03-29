@@ -17,6 +17,7 @@
 		0397CD2D1D85D6920077D82F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0306DB991D85D626007AE314 /* AppDelegate.swift */; };
 		0397CD2E1D85D6930077D82F /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0306DB9E1D85D626007AE314 /* RootViewController.swift */; };
 		03C23F3C1D8823AA00EE8424 /* Toaster.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03A75E2B1BCF2066002E46C4 /* Toaster.framework */; };
+		3706852A20D6A68800F09B36 /* Toaster.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 03A75E2B1BCF2066002E46C4 /* Toaster.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		C06FC9D41F95A8CC00782082 /* ToasterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C06FC9D31F95A8CC00782082 /* ToasterTests.swift */; };
 		C06FC9D61F95A8CC00782082 /* Toaster.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03A75E2B1BCF2066002E46C4 /* Toaster.framework */; };
 /* End PBXBuildFile section */
@@ -37,6 +38,20 @@
 			remoteInfo = Toaster;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		3706852B20D6A68800F09B36 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				3706852A20D6A68800F09B36 /* Toaster.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		0306DB991D85D626007AE314 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -185,6 +200,7 @@
 				03A75E4B1BCF20D4002E46C4 /* Sources */,
 				03A75E4C1BCF20D4002E46C4 /* Frameworks */,
 				03A75E4D1BCF20D4002E46C4 /* Resources */,
+				3706852B20D6A68800F09B36 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -494,6 +510,7 @@
 		03A75E5F1BCF20D4002E46C4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = "$(SRCROOT)/Demo/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -507,6 +524,7 @@
 		03A75E601BCF20D4002E46C4 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = "$(SRCROOT)/Demo/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;

@@ -1,10 +1,10 @@
 os: osx
-osx_image: xcode9
+osx_image: xcode10.2
 sudo: false
 language: objective-c
 
 env:
-  - SDK="iphoneos11.0"
+  - SDK="iphoneos12.2"
 
 script:
   - xcodebuild clean build -sdk $SDK -configuration Debug CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO

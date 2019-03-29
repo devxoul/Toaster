@@ -2,13 +2,11 @@ Toaster
 =======
 
 [![Build Status](https://travis-ci.org/devxoul/Toaster.svg?branch=master)](https://travis-ci.org/devxoul/Toaster)
-![Swift](https://img.shields.io/badge/Swift-3.0-orange.svg)
+![Swift](https://img.shields.io/badge/Swift-5.0-orange.svg)
 [![CocoaPods](http://img.shields.io/cocoapods/v/Toaster.svg?style=flat)](http://cocoapods.org/?q=name%3AToaster%20author%3Adevxoul)
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 
 Android-like toast with very simple interface. (formerly JLToast)
-
-Toaster is written in Swift 3.0. If you're looking for Swift 2 compatible version, see the [JLToast 1.4.2](https://github.com/devxoul/JLToast/tree/1.4.2).
 
 
 Features

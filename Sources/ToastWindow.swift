@@ -7,7 +7,7 @@ open class ToastWindow: UIWindow {
   /// Will not return `rootViewController` while this value is `true`. Or the rotation will be fucked in iOS 9.
   var isStatusBarOrientationChanging = false
 
-  /// Returns original subviews. `ToastWindow` overrides `addSubview()` to add an subview to the
+  /// Returns original subviews. `ToastWindow` overrides `addSubview()` to add a subview to the
   /// top window instead itself.
   private var originalSubviews = NSPointerArray.weakObjects()
 
@@ -155,16 +155,16 @@ open class ToastWindow: UIWindow {
   }
 
   @objc func keyboardWillShow() {
-    self.bringWindowToTop()
-    for subview in self.originalSubviews.allObjects {
-      guard let subview = subview as? UIView else { continue }
-      self.addSubviewToTopWindow(subview: subview)
+    guard let topWindow = self.topWindow(),
+      let subviews = self.originalSubviews.allObjects as? [UIView] else { return }
+    for subview in subviews {
+      topWindow.addSubview(subview)
     }
   }
 
   @objc func keyboardDidHide() {
-    for subview in self.originalSubviews.allObjects {
-      guard let subview = subview as? UIView else { continue }
+    guard let subviews = self.originalSubviews.allObjects as? [UIView] else { return }
+    for subview in subviews {
       super.addSubview(subview)
     }
   }
@@ -181,13 +181,15 @@ open class ToastWindow: UIWindow {
   override open func addSubview(_ view: UIView) {
     super.addSubview(view)
     self.originalSubviews.addPointer(Unmanaged.passUnretained(view).toOpaque())
-    self.addSubviewToTopWindow(subview: view)
+    self.topWindow()?.addSubview(view)
   }
 
-  private func addSubviewToTopWindow(subview: UIView) {
-    if let window = UIApplication.shared.windows.max(by: { $0.windowLevel < $1.windowLevel }), window !== self {
-      window.addSubview(subview)
+  /// Returns top window that isn't self
+  private func topWindow() -> UIWindow? {
+    if let window = UIApplication.shared.windows.last, window !== self {
+      return window
     }
+    return nil
   }
 
   /// Brings ToastWindow to top when another window is being shown.

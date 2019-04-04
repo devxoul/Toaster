@@ -1,21 +1,24 @@
 import UIKit
 
-public struct Delay {
-  public static let short: TimeInterval = 2.0
-  public static let long: TimeInterval = 3.5
+public class Delay: NSObject {
+  @available(*, unavailable) private override init() {}
+  // `short` and `long` (lowercase) are reserved words in Objective-C
+  // so we capitalize them instead of the default `short_` and `long_`
+  @objc(Short) public static let short: TimeInterval = 2.0
+  @objc(Long) public static let long: TimeInterval = 3.5
 }
 
 open class Toast: Operation {
 
   // MARK: Properties
 
-  public var text: String? {
+  @objc public var text: String? {
     get { return self.view.text }
     set { self.view.text = newValue }
   }
 
-  public var delay: TimeInterval
-  public var duration: TimeInterval
+  @objc public var delay: TimeInterval
+  @objc public var duration: TimeInterval
 
   private var _executing = false
   override open var isExecuting: Bool {
@@ -44,12 +47,12 @@ open class Toast: Operation {
 
   // MARK: UI
 
-  public var view: ToastView = ToastView()
+  @objc public var view: ToastView = ToastView()
 
 
   // MARK: Initializing
 
-  public init(text: String?, delay: TimeInterval = 0, duration: TimeInterval = Delay.short) {
+  @objc public init(text: String?, delay: TimeInterval = 0, duration: TimeInterval = Delay.short) {
     self.delay = delay
     self.duration = duration
     super.init()
@@ -77,7 +80,7 @@ open class Toast: Operation {
 
   // MARK: Showing
 
-  public func show() {
+  @objc public func show() {
     ToastCenter.default.add(self)
   }
 

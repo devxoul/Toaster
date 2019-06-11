@@ -7,6 +7,9 @@ open class ToastWindow: UIWindow {
   /// Will not return `rootViewController` while this value is `true`. Or the rotation will be fucked in iOS 9.
   var isStatusBarOrientationChanging = false
 
+  /// Will not return `rootViewController` while this value is `true`. Needed for iOS 13.
+  var isShowing = false
+
   /// Returns original subviews. `ToastWindow` overrides `addSubview()` to add a subview to the
   /// top window instead itself.
   private var originalSubviews = NSPointerArray.weakObjects()
@@ -37,6 +40,7 @@ open class ToastWindow: UIWindow {
 
   override open var rootViewController: UIViewController? {
     get {
+      guard !self.isShowing else { return nil }
       guard !self.isStatusBarOrientationChanging else { return nil }
       guard let firstWindow = UIApplication.shared.delegate?.window else { return nil }
       return firstWindow is ToastWindow ? nil : firstWindow?.rootViewController
@@ -182,6 +186,15 @@ open class ToastWindow: UIWindow {
     super.addSubview(view)
     self.originalSubviews.addPointer(Unmanaged.passUnretained(view).toOpaque())
     self.topWindow()?.addSubview(view)
+  }
+
+  override open var isHidden: Bool {
+    willSet {
+      isShowing = true
+    }
+    didSet {
+      isShowing = false
+    }
   }
 
   /// Returns top window that isn't self

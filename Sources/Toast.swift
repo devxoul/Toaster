@@ -52,6 +52,8 @@ open class Toast: Operation {
 
   // MARK: Initializing
 
+  /// Initializer.
+  /// Instantiates `self.view`, so must be called on main thread.
   @objc public init(text: String?, delay: TimeInterval = 0, duration: TimeInterval = Delay.short) {
     self.delay = delay
     self.duration = duration

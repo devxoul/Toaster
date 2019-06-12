@@ -54,28 +54,28 @@ open class Toast: Operation {
 
   /// Initializer.
   /// Instantiates `self.view`, so must be called on main thread.
-  @objc public init(text: NSAttributedString?, delay: TimeInterval = 0, duration: TimeInterval = Delay.short) {
+  @objc public init(text: String? = "", attributedText: NSAttributedString? = NSAttributedString(string:""), delay: TimeInterval = 0, duration: TimeInterval = Delay.short) {
     self.delay = delay
     self.duration = duration
     super.init()
-    self.text = text
+    self.text = (text != "") ? NSAttributedString(string:text!) : attributedText
   }
 
 
   // MARK: Factory (Deprecated)
 
   @available(*, deprecated, message: "Use 'init(text:)' instead.")
-  public class func makeText(_ text: NSAttributedString) -> Toast {
+  public class func makeText(_ text: String) -> Toast {
     return Toast(text: text)
   }
 
   @available(*, deprecated, message: "Use 'init(text:duration:)' instead.")
-  public class func makeText(_ text: NSAttributedString, duration: TimeInterval) -> Toast {
+  public class func makeText(_ text: String, duration: TimeInterval) -> Toast {
     return Toast(text: text, duration: duration)
   }
 
   @available(*, deprecated, message: "Use 'init(text:delay:duration:)' instead.")
-  public class func makeText(_ text: NSAttributedString?, delay: TimeInterval, duration: TimeInterval) -> Toast {
+  public class func makeText(_ text: String?, delay: TimeInterval, duration: TimeInterval) -> Toast {
     return Toast(text: text, delay: delay, duration: duration)
   }
 

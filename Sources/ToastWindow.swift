@@ -40,8 +40,7 @@ open class ToastWindow: UIWindow {
 
   override open var rootViewController: UIViewController? {
     get {
-      // TODO: avoid iOS 13 warning without breaking preferredStatusBarStyle
-      //guard !self.isShowing else { return nil }
+      guard !self.isShowing else { return nil }
       guard !self.isStatusBarOrientationChanging else { return nil }
       guard let firstWindow = UIApplication.shared.delegate?.window else { return nil }
       return firstWindow is ToastWindow ? nil : firstWindow?.rootViewController
@@ -54,7 +53,6 @@ open class ToastWindow: UIWindow {
     self.isUserInteractionEnabled = false
     #if swift(>=4.2)
     self.windowLevel = .init(rawValue: .greatestFiniteMagnitude)
-    let didBecomeVisibleName = UIWindow.didBecomeVisibleNotification
     let willChangeStatusBarOrientationName = UIApplication.willChangeStatusBarOrientationNotification
     let didChangeStatusBarOrientationName = UIApplication.didChangeStatusBarOrientationNotification
     let didBecomeActiveName = UIApplication.didBecomeActiveNotification
@@ -62,7 +60,6 @@ open class ToastWindow: UIWindow {
     let keyboardDidHideName = UIWindow.keyboardDidHideNotification
     #else
     self.windowLevel = .greatestFiniteMagnitude
-    let didBecomeVisibleName = NSNotification.Name.UIWindowDidBecomeVisible
     let willChangeStatusBarOrientationName = NSNotification.Name.UIApplicationWillChangeStatusBarOrientation
     let didChangeStatusBarOrientationName = NSNotification.Name.UIApplicationDidChangeStatusBarOrientation
     let didBecomeActiveName = NSNotification.Name.UIApplicationDidBecomeActive
@@ -73,12 +70,6 @@ open class ToastWindow: UIWindow {
     self.isHidden = false
     self.handleRotate(UIApplication.shared.statusBarOrientation)
 
-    NotificationCenter.default.addObserver(
-      self,
-      selector: #selector(self.windowDidBecomeVisible),
-      name: didBecomeVisibleName,
-      object: nil
-    )
     NotificationCenter.default.addObserver(
       self,
       selector: #selector(self.statusBarOrientationWillChange),
@@ -113,12 +104,6 @@ open class ToastWindow: UIWindow {
 
   required public init?(coder aDecoder: NSCoder) {
     fatalError("init(coder:) has not been implemented: please use ToastWindow.shared")
-  }
-
-  @objc func windowDidBecomeVisible(_ notification: Notification) {
-    if !(notification.object is ToastWindow) {
-      self.bringWindowToTop()
-    }
   }
 
   @objc dynamic func statusBarOrientationWillChange() {
@@ -204,11 +189,5 @@ open class ToastWindow: UIWindow {
       return window
     }
     return nil
-  }
-
-  /// Brings ToastWindow to top when another window is being shown.
-  private func bringWindowToTop() {
-    ToastWindow.shared.isHidden = true
-    ToastWindow.shared.isHidden = false
   }
 }

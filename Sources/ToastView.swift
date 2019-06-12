@@ -4,9 +4,9 @@ open class ToastView: UIView {
 
   // MARK: Properties
 
-  open var text: String? {
-    get { return self.textLabel.text }
-    set { self.textLabel.text = newValue }
+  open var text: NSAttributedString? {
+    get { return self.textLabel.attributedText }
+    set { self.textLabel.attributedText = newValue }
   }
 
 

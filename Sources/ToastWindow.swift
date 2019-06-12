@@ -40,7 +40,8 @@ open class ToastWindow: UIWindow {
 
   override open var rootViewController: UIViewController? {
     get {
-      guard !self.isShowing else { return nil }
+      // TODO: avoid iOS 13 warning without breaking preferredStatusBarStyle
+      //guard !self.isShowing else { return nil }
       guard !self.isStatusBarOrientationChanging else { return nil }
       guard let firstWindow = UIApplication.shared.delegate?.window else { return nil }
       return firstWindow is ToastWindow ? nil : firstWindow?.rootViewController

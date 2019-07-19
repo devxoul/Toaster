@@ -1,5 +1,6 @@
 import UIKit
 import Toaster
+import Photos
 
 final class RootViewController: UIViewController {
 
@@ -19,6 +20,14 @@ final class RootViewController: UIViewController {
     keyboardButton.autoresizingMask = [.flexibleBottomMargin, .flexibleLeftMargin, .flexibleRightMargin]
     keyboardButton.center = CGPoint(x: view.center.x, y: 125)
     self.view.addSubview(keyboardButton)
+
+    let imagePickerButton = UIButton(type: .system)
+    imagePickerButton.setTitle("Open imagePicker", for: .normal)
+    imagePickerButton.sizeToFit()
+    imagePickerButton.addTarget(self, action: #selector(self.imagePickerButtonTouchUpInside), for: .touchUpInside)
+    imagePickerButton.autoresizingMask = [.flexibleBottomMargin, .flexibleLeftMargin, .flexibleRightMargin]
+    imagePickerButton.center = CGPoint(x: view.center.x, y: 155)
+    self.view.addSubview(imagePickerButton)
 
     self.configureAppearance()
   }
@@ -46,6 +55,48 @@ final class RootViewController: UIViewController {
       sender.resignFirstResponder()
     } else {
       sender.becomeFirstResponder()
+    }
+  }
+
+  @objc dynamic func imagePickerButtonTouchUpInside(sender: UIButton) {
+    pickImage()
+  }
+
+  private func pickImage() {
+    let authorizationStatus = PHPhotoLibrary.authorizationStatus()
+    if authorizationStatus == .denied {
+      print("You didn't grant photo album permission. Please check your settings.")
+      return
+    } else if authorizationStatus == .notDetermined {
+      // prompt the user about permissions before opening photo album
+      if #available(iOS 11.0, *) {
+        // nothing to do: no permission request needed on iOS 11+
+      } else {
+        PHPhotoLibrary.requestAuthorization { success in
+          if success == .authorized {
+            DispatchQueue.main.async {
+              self.pickImage()
+            }
+          }
+        }
+        return
+      }
+    }
+    let mediaPicker = UIImagePickerController()
+    mediaPicker.delegate = self
+    present(mediaPicker, animated: true, completion: nil)
+  }
+}
+
+extension RootViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+  func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+    Toast(text: "Hello, Great image.").show()
+    picker.dismiss(animated: true, completion: nil)
+  }
+
+  func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+    picker.dismiss(animated: true) {
+      print("User cancelled")
     }
   }
 }

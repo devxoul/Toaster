@@ -52,6 +52,7 @@ open class ToastWindow: UIWindow {
   public override init(frame: CGRect) {
     super.init(frame: frame)
     self.isUserInteractionEnabled = false
+    self.gestureRecognizers = nil
     #if swift(>=4.2)
     self.windowLevel = .init(rawValue: .greatestFiniteMagnitude)
     let didBecomeVisibleName = UIWindow.didBecomeVisibleNotification

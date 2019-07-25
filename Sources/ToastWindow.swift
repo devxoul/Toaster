@@ -14,6 +14,8 @@ open class ToastWindow: UIWindow {
   /// top window instead itself.
   private var originalSubviews = NSPointerArray.weakObjects()
 
+  var keyboardDidShow = false
+
   /// Don't rotate manually if the application:
   ///
   /// - is running on iPad
@@ -160,6 +162,7 @@ open class ToastWindow: UIWindow {
   }
 
   @objc func keyboardWillShow() {
+    keyboardDidShow = true
     guard let topWindow = self.topWindow(),
       let subviews = self.originalSubviews.allObjects as? [UIView] else { return }
     for subview in subviews {
@@ -200,7 +203,10 @@ open class ToastWindow: UIWindow {
 
   /// Returns top window that isn't self
   private func topWindow() -> UIWindow? {
-    if let window = UIApplication.shared.windows.last, window !== self {
+    if let window = UIApplication.shared.windows.last(where: {
+      // https://github.com/devxoul/Toaster/issues/152
+      keyboardDidShow || $0.isOpaque
+    }), window !== self {
       return window
     }
     return nil

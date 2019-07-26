@@ -126,6 +126,13 @@ open class Toast: Operation {
           self.view.alpha = 1
         },
         completion: { completed in
+          if ToastCenter.default.isSupportAccessibility {
+            #if swift(>=4.2)
+            UIAccessibility.post(notification: .announcement, argument: self.view.text)
+            #else
+            UIAccessibilityPostNotification(UIAccessibilityAnnouncementNotification, self.view.text)
+            #endif
+          }
           UIView.animate(
             withDuration: self.duration,
             animations: {

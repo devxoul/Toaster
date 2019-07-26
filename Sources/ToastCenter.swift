@@ -13,7 +13,11 @@ open class ToastCenter {
   open var currentToast: Toast? {
     return self.queue.operations.first { !$0.isCancelled && !$0.isFinished } as? Toast
   }
-
+  
+  /// If this value is `true` and the user is using VoiceOver,
+  /// VoiceOver will announce the text in the toast when `ToastView` is displayed.
+  public var isSupportAccessibility: Bool = true
+  
   public static let `default` = ToastCenter()
 
 

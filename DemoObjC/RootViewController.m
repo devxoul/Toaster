@@ -41,6 +41,7 @@
     [self.view addSubview:keyboardButton];
     
     [self configureAppearance];
+    [self configureAccessibility];
 }
 
 - (void)configureAppearance {
@@ -51,6 +52,10 @@
     appearance.textInsets = UIEdgeInsetsMake(15, 20, 15, 20);
     appearance.bottomOffsetPortrait = 100;
     appearance.cornerRadius = 20;
+}
+
+- (void)configureAccessibility {
+    [ToastCenter default].isSupportAccessibility = YES;
 }
 
 - (void)showButtonTouchUpInside {

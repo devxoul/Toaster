@@ -30,6 +30,7 @@ final class RootViewController: UIViewController {
     self.view.addSubview(imagePickerButton)
 
     self.configureAppearance()
+    self.configureAccessibility()
   }
 
   func configureAppearance() {
@@ -40,6 +41,10 @@ final class RootViewController: UIViewController {
     appearance.textInsets = UIEdgeInsets(top: 15, left: 20, bottom: 15, right: 20)
     appearance.bottomOffsetPortrait = 100
     appearance.cornerRadius = 20
+  }
+  
+  func configureAccessibility() {
+    ToastCenter.default.isSupportAccessibility = true
   }
 
   @objc dynamic func showButtonTouchUpInside() {

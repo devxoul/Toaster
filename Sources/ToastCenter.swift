@@ -48,7 +48,7 @@ open class ToastCenter: NSObject {
 
   // MARK: Cancelling Toasts
 
-  open func cancelAll() {
+  @objc open func cancelAll() {
     queue.cancelAllOperations()
   }
 

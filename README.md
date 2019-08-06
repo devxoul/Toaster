@@ -3,7 +3,7 @@ Toaster
 
 [![Build Status](https://travis-ci.org/devxoul/Toaster.svg?branch=master)](https://travis-ci.org/devxoul/Toaster)
 ![Swift](https://img.shields.io/badge/Swift-5.0-orange.svg)
-[![CocoaPods](http://img.shields.io/cocoapods/v/Toaster.svg?style=flat)](http://cocoapods.org/?q=name%3AToaster%20author%3Adevxoul)
+[![CocoaPods](https://img.shields.io/cocoapods/v/Toaster.svg?style=flat)](https://cocoapods.org/?q=name%3AToaster%20author%3Adevxoul)
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 
 Android-like toast with very simple interface. (formerly JLToast)
@@ -14,6 +14,8 @@ Features
 
 - **Queueing**: Centralized toast center manages the toast queue.
 - **Customizable**: See the [Appearance](#appearance) section.
+- **String** or **AttributedString**: Both supported.
+- **UIAccessibility**: VoiceOver support.
 
 
 At a Glance
@@ -84,7 +86,6 @@ Since Toaster 2.0.0, you can use `UIAppearance` to set default appearance. This 
 ToastView.appearance().backgroundColor = .red
 ```
 
-
 Supported appearance properties are:
 
 | Property | Type | Description |
@@ -95,7 +96,22 @@ Supported appearance properties are:
 | `textColor` | `UIColor` | Text color |
 | `font` | `UIFont` | Font |
 | `bottomOffsetPortrait` | `CGFloat` | Vertical offfset from bottom in portrait mode |
-|` bottomOffsetLandscape` | `CGFloat` | Vertical offfset from bottom in landscape mode |
+| `bottomOffsetLandscape` | `CGFloat` | Vertical offfset from bottom in landscape mode |
+
+### Attributed string
+
+Since Toaster 2.3.0, you can also set an attributed string:
+
+```swift
+Toast(attributedText: NSAttributedString(string: "AttributedString Toast", attributes: [NSAttributedString.Key.backgroundColor: UIColor.yellow]))
+```
+
+### Accessibility
+
+By default, VoiceOver with UIAccessibility is enabled since Toaster 2.3.0. To disable it:
+```
+ToastCenter.default.isSupportAccessibility = false
+```
 
 
 Screenshots

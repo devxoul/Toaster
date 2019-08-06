@@ -60,6 +60,7 @@
 
 - (void)showButtonTouchUpInside {
     [[[Toast alloc] initWithText:@"Basic Toast" delay:0 duration:Delay.Short] show];
+    [[[Toast alloc] initWithAttributedText:[[NSAttributedString alloc] initWithString:@"AttributedString Toast" attributes:@{NSBackgroundColorAttributeName: [UIColor yellowColor]}] delay:0 duration:Delay.Short] show];
     [[[Toast alloc] initWithText:@"You can set duration. `Delay.Short` means 2 seconds.\n`Delay.Long` means 3.5 seconds." delay:0 duration:Delay.Long] show];
     [[[Toast alloc] initWithText:@"With delay, Toaster will be shown after delay." delay:1 duration:5] show];
 }

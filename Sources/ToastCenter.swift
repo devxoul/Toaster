@@ -1,6 +1,6 @@
 import UIKit
 
-@objc open class ToastCenter: NSObject {
+open class ToastCenter: NSObject {
 
   // MARK: Properties
 

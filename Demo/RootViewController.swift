@@ -42,7 +42,7 @@ final class RootViewController: UIViewController {
     appearance.bottomOffsetPortrait = 100
     appearance.cornerRadius = 20
   }
-  
+
   func configureAccessibility() {
     ToastCenter.default.isSupportAccessibility = true
   }

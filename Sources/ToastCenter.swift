@@ -18,6 +18,8 @@ open class ToastCenter: NSObject {
   /// VoiceOver will announce the text in the toast when `ToastView` is displayed.
   @objc public var isSupportAccessibility: Bool = true
   
+  @objc public var isQueueEnabled: Bool = true
+  
   @objc public static let `default` = ToastCenter()
 
 
@@ -42,6 +44,9 @@ open class ToastCenter: NSObject {
   // MARK: Adding Toasts
 
   open func add(_ toast: Toast) {
+    if !isQueueEnabled {
+      cancelAll()
+    }
     self.queue.addOperation(toast)
   }
 

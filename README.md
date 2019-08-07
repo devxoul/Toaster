@@ -109,7 +109,7 @@ Toast(attributedText: NSAttributedString(string: "AttributedString Toast", attri
 ### Accessibility
 
 By default, VoiceOver with UIAccessibility is enabled since Toaster 2.3.0. To disable it:
-```
+```swift
 ToastCenter.default.isSupportAccessibility = false
 ```
 

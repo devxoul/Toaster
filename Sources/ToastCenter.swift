@@ -18,6 +18,8 @@ open class ToastCenter: NSObject {
   /// VoiceOver will announce the text in the toast when `ToastView` is displayed.
   @objc public var isSupportAccessibility: Bool = true
   
+  /// By default, queueing for toast is enabled.
+  /// If this value is `false`, only the last requested toast will be shown.
   @objc public var isQueueEnabled: Bool = true
   
   @objc public static let `default` = ToastCenter()

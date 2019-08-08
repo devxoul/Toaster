@@ -1,5 +1,31 @@
 import UIKit
 
+public class ToastShadow: NSObject {
+  public var color: CGColor?
+  public var opacity: Float?
+  public var offset: CGSize?
+  public var raidus: CGFloat?
+  public var path: CGPath?
+  
+  public init(color: CGColor? = nil, opacity: Float? = nil, offset: CGSize? = nil, raidus: CGFloat? = nil, path: CGPath? = nil) {
+    super.init()
+    self.color = color
+    self.opacity = opacity
+    self.offset = offset
+    self.raidus = raidus
+    self.path = path
+  }
+  
+  @objc public init(color: CGColor?, opacity: NSNumber?, offset: NSValue?, raidus: NSNumber?, path: CGPath?) {
+    super.init()
+    self.color = color
+    self.opacity = opacity?.floatValue
+    self.offset = offset?.cgSizeValue
+    self.raidus = raidus.flatMap { CGFloat(exactly: $0) }
+    self.path = path
+  }
+}
+
 open class ToastView: UIView {
 
   // MARK: Properties
@@ -71,6 +97,9 @@ open class ToastView: UIView {
     @unknown default: return 20
     }
   }()
+  
+  /// The appearance of layer's shadow.
+  @objc open dynamic var shadow: ToastShadow?
 
   /// The width ratio of toast view in window, specified as a value from 0.0 to 1.0.
   /// Default value: 0.875
@@ -169,6 +198,16 @@ open class ToastView: UIView {
       width: backgroundViewSize.width,
       height: backgroundViewSize.height
     )
+    self.configureShadow()
+  }
+  
+  private func configureShadow() {
+    guard let shadow = self.shadow else { return }
+    shadow.color.flatMap { layer.shadowColor = $0 }
+    shadow.opacity.flatMap { layer.shadowOpacity = $0 }
+    shadow.offset.flatMap { layer.shadowOffset = $0 }
+    shadow.raidus.flatMap { layer.shadowRadius = $0 }
+    shadow.path.flatMap { layer.shadowPath = $0 }
   }
 
   override open func hitTest(_ point: CGPoint, with event: UIEvent!) -> UIView? {

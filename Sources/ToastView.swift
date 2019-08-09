@@ -124,7 +124,7 @@ open class ToastView: UIView {
     super.layoutSubviews()
     let containerSize = ToastWindow.shared.frame.size
     let constraintSize = CGSize(
-      width: containerSize.width * (280.0 / 320.0),
+      width: containerSize.width * (280.0 / 320.0) - self.textInsets.left - self.textInsets.right,
       height: CGFloat.greatestFiniteMagnitude
     )
     let textLabelSize = self.textLabel.sizeThatFits(constraintSize)

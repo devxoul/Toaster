@@ -52,7 +52,7 @@
     appearance.textInsets = UIEdgeInsetsMake(15, 20, 15, 20);
     appearance.bottomOffsetPortrait = 100;
     appearance.cornerRadius = 20;
-    appearance.widthRatioInWindow = 0.7;
+    appearance.maxWidthRatio = 0.7;
 }
 
 - (void)configureAccessibility {

@@ -4,24 +4,24 @@ public class ToastShadow: NSObject {
   public var color: CGColor?
   public var opacity: Float?
   public var offset: CGSize?
-  public var raidus: CGFloat?
+  public var radius: CGFloat?
   public var path: CGPath?
   
-  public init(color: CGColor? = nil, opacity: Float? = nil, offset: CGSize? = nil, raidus: CGFloat? = nil, path: CGPath? = nil) {
+  public init(color: CGColor? = nil, opacity: Float? = nil, offset: CGSize? = nil, radius: CGFloat? = nil, path: CGPath? = nil) {
     super.init()
     self.color = color
     self.opacity = opacity
     self.offset = offset
-    self.raidus = raidus
+    self.radius = radius
     self.path = path
   }
   
-  @objc public init(color: CGColor?, opacity: NSNumber?, offset: NSValue?, raidus: NSNumber?, path: CGPath?) {
+  @objc public init(color: CGColor?, opacity: NSNumber?, offset: NSValue?, radius: NSNumber?, path: CGPath?) {
     super.init()
     self.color = color
     self.opacity = opacity?.floatValue
     self.offset = offset?.cgSizeValue
-    self.raidus = raidus.flatMap { CGFloat(exactly: $0) }
+    self.radius = radius.flatMap { CGFloat(exactly: $0) }
     self.path = path
   }
 }
@@ -206,7 +206,7 @@ open class ToastView: UIView {
     shadow.color.flatMap { layer.shadowColor = $0 }
     shadow.opacity.flatMap { layer.shadowOpacity = $0 }
     shadow.offset.flatMap { layer.shadowOffset = $0 }
-    shadow.raidus.flatMap { layer.shadowRadius = $0 }
+    shadow.radius.flatMap { layer.shadowRadius = $0 }
     shadow.path.flatMap { layer.shadowPath = $0 }
   }
 

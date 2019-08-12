@@ -79,10 +79,16 @@ final class RootViewController: UIViewController {
   
   @objc dynamic func shadowButtonTouchUpInside(sender: UIButton) {
     let appearance = ToastView.appearance()
-    if appearance.shadow == nil {
-      appearance.shadow = ToastShadow(color: UIColor.black.cgColor, opacity: 0.2, offset: CGSize(width: 0, height: 1), radius: 10)
+    if appearance.shadowColor == nil {
+      appearance.shadowColor = .black
+      appearance.shadowOpacity = 0.2
+      appearance.shadowOffset = CGSize(width: 0, height: 1)
+      appearance.shadowRadius = 10
     } else {
-      appearance.shadow = nil
+      appearance.shadowColor = nil
+      appearance.shadowOpacity = 0
+      appearance.shadowOffset = .zero
+      appearance.shadowRadius = 0
     }
   }
 

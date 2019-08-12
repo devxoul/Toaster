@@ -1,31 +1,5 @@
 import UIKit
 
-public class ToastShadow: NSObject {
-  public var color: CGColor?
-  public var opacity: Float?
-  public var offset: CGSize?
-  public var radius: CGFloat?
-  public var path: CGPath?
-  
-  public init(color: CGColor? = nil, opacity: Float? = nil, offset: CGSize? = nil, radius: CGFloat? = nil, path: CGPath? = nil) {
-    super.init()
-    self.color = color
-    self.opacity = opacity
-    self.offset = offset
-    self.radius = radius
-    self.path = path
-  }
-  
-  @objc public init(color: CGColor?, opacity: NSNumber?, offset: NSValue?, radius: NSNumber?, path: CGPath?) {
-    super.init()
-    self.color = color
-    self.opacity = opacity?.floatValue
-    self.offset = offset?.cgSizeValue
-    self.radius = radius.flatMap { CGFloat(exactly: $0) }
-    self.path = path
-  }
-}
-
 open class ToastView: UIView {
 
   // MARK: Properties
@@ -98,12 +72,39 @@ open class ToastView: UIView {
     }
   }()
   
-  /// The appearance of layer's shadow.
-  @objc open dynamic var shadow: ToastShadow?
-
   /// The width ratio of toast view in window, specified as a value from 0.0 to 1.0.
   /// Default value: 0.875
   @objc open dynamic var maxWidthRatio: CGFloat = (280.0 / 320.0)
+  
+  /// The shape of the layer’s shadow.
+  @objc open dynamic var shadowPath: CGPath? {
+    get { return self.layer.shadowPath }
+    set { self.layer.shadowPath = newValue }
+  }
+  
+  /// The color of the layer’s shadow.
+  @objc open dynamic var shadowColor: UIColor? {
+    get { return self.layer.shadowColor.flatMap { UIColor(cgColor: $0) } }
+    set { self.layer.shadowColor = newValue?.cgColor }
+  }
+  
+  /// The opacity of the layer’s shadow.
+  @objc open dynamic var shadowOpacity: Float {
+    get { return self.layer.shadowOpacity }
+    set { self.layer.shadowOpacity = newValue }
+  }
+  
+  /// The offset (in points) of the layer’s shadow.
+  @objc open dynamic var shadowOffset: CGSize {
+    get { return self.layer.shadowOffset }
+    set { self.layer.shadowOffset = newValue }
+  }
+  
+  /// The blur radius (in points) used to render the layer’s shadow.
+  @objc open dynamic var shadowRadius: CGFloat {
+    get { return self.layer.shadowRadius }
+    set { self.layer.shadowRadius = newValue }
+  }
 
   // MARK: UI
 
@@ -114,6 +115,7 @@ open class ToastView: UIView {
     self.clipsToBounds = true
     return self
   }()
+  
   private let textLabel: UILabel = {
     let `self` = UILabel()
     self.textColor = .white
@@ -198,16 +200,6 @@ open class ToastView: UIView {
       width: backgroundViewSize.width,
       height: backgroundViewSize.height
     )
-    self.configureShadow()
-  }
-  
-  private func configureShadow() {
-    guard let shadow = self.shadow else { return }
-    shadow.color.flatMap { layer.shadowColor = $0 }
-    shadow.opacity.flatMap { layer.shadowOpacity = $0 }
-    shadow.offset.flatMap { layer.shadowOffset = $0 }
-    shadow.radius.flatMap { layer.shadowRadius = $0 }
-    shadow.path.flatMap { layer.shadowPath = $0 }
   }
 
   override open func hitTest(_ point: CGPoint, with event: UIEvent!) -> UIView? {

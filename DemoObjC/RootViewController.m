@@ -84,10 +84,16 @@
 
 - (void)shadowButtonTouchUpInside:(UIButton *)sender {
     ToastView *appearance = [ToastView appearance];
-    if (appearance.shadow) {
-        appearance.shadow = nil;
+    if (appearance.shadowColor) {
+        appearance.shadowColor = nil;
+        appearance.shadowOpacity = 0;
+        appearance.shadowOffset = CGSizeZero;
+        appearance.shadowRadius = 0;
     } else {
-        appearance.shadow = [[ToastShadow alloc] initWithColor:UIColor.blackColor.CGColor opacity:@(0.2) offset:[NSValue valueWithCGSize:CGSizeMake(0, 1)] radius:@(10) path:nil];
+        appearance.shadowColor = [UIColor blackColor];
+        appearance.shadowOpacity = 0.2;
+        appearance.shadowOffset = CGSizeMake(0, 1);
+        appearance.shadowRadius = 10;
     }
 }
 

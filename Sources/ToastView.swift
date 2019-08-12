@@ -74,7 +74,8 @@ open class ToastView: UIView {
   
   /// If this value is `true` and SafeArea is available,
   /// `safeAreaInsets.bottom` will be added to the `bottomOffsetPortrait` and `bottomOffsetLandscape`.
-  @objc open dynamic var useSafeAreaForBottomOffset: Bool = true
+  /// Default value: false
+  @objc open dynamic var useSafeAreaForBottomOffset: Bool = false
 
   /// The width ratio of toast view in window, specified as a value from 0.0 to 1.0.
   /// Default value: 0.875

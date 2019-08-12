@@ -72,6 +72,9 @@ open class ToastView: UIView {
     }
   }()
 
+  /// The width ratio of toast view in window, specified as a value from 0.0 to 1.0.
+  /// Default value: 0.875
+  @objc open dynamic var maxWidthRatio: CGFloat = (280.0 / 320.0)
 
   // MARK: UI
 
@@ -124,7 +127,7 @@ open class ToastView: UIView {
     super.layoutSubviews()
     let containerSize = ToastWindow.shared.frame.size
     let constraintSize = CGSize(
-      width: containerSize.width * (280.0 / 320.0) - self.textInsets.left - self.textInsets.right,
+      width: containerSize.width * maxWidthRatio - self.textInsets.left - self.textInsets.right,
       height: CGFloat.greatestFiniteMagnitude
     )
     let textLabelSize = self.textLabel.sizeThatFits(constraintSize)

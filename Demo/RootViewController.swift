@@ -28,6 +28,14 @@ final class RootViewController: UIViewController {
     imagePickerButton.autoresizingMask = [.flexibleBottomMargin, .flexibleLeftMargin, .flexibleRightMargin]
     imagePickerButton.center = CGPoint(x: view.center.x, y: 155)
     self.view.addSubview(imagePickerButton)
+    
+    let shadowButton = UIButton(type: .system)
+    shadowButton.setTitle("Toggle shadow", for: .normal)
+    shadowButton.sizeToFit()
+    shadowButton.addTarget(self, action: #selector(self.shadowButtonTouchUpInside), for: .touchUpInside)
+    shadowButton.autoresizingMask = [.flexibleBottomMargin, .flexibleLeftMargin, .flexibleRightMargin]
+    shadowButton.center = CGPoint(x: view.center.x, y: 185)
+    self.view.addSubview(shadowButton)
 
     self.configureAppearance()
     self.configureAccessibility()
@@ -67,6 +75,15 @@ final class RootViewController: UIViewController {
 
   @objc dynamic func imagePickerButtonTouchUpInside(sender: UIButton) {
     pickImage()
+  }
+  
+  @objc dynamic func shadowButtonTouchUpInside(sender: UIButton) {
+    let appearance = ToastView.appearance()
+    if appearance.shadow == nil {
+      appearance.shadow = ToastShadow(color: UIColor.black.cgColor, opacity: 0.2, offset: CGSize(width: 0, height: 1), radius: 10)
+    } else {
+      appearance.shadow = nil
+    }
   }
 
   private func pickImage() {

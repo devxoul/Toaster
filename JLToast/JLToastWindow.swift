@@ -24,7 +24,7 @@ public class JLToastWindow: UIWindow {
     public static let sharedWindow: JLToastWindow = {
         let window = JLToastWindow(frame: UIScreen.main.bounds)
         window.isUserInteractionEnabled = false
-        window.windowLevel = CGFloat.greatestFiniteMagnitude
+        window.windowLevel = UIWindow.Level(rawValue: CGFloat.greatestFiniteMagnitude)
         window.backgroundColor = UIColor.clear
         window.rootViewController = JLToastWindowRootViewController()
         window.isHidden = false
@@ -35,7 +35,7 @@ public class JLToastWindow: UIWindow {
         super.init(frame: frame)
         NotificationCenter.default.addObserver(self,
             selector: #selector(JLToastWindow.bringWindowToTop(_:)),
-            name: NSNotification.Name.UIWindowDidBecomeVisible,
+            name: UIWindow.didBecomeVisibleNotification,
             object: nil
         )
     }

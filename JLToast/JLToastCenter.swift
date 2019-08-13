@@ -44,7 +44,7 @@ protocol JLToastDelegate: class {
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(JLToastCenter.deviceOrientationDidChange(_:)),
-            name: NSNotification.Name.UIDeviceOrientationDidChange,
+            name: UIDevice.orientationDidChangeNotification,
             object: nil
         )
     }

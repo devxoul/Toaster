@@ -117,14 +117,14 @@ public let JLToastViewLandscapeOffsetYAttributeName = "JLToastViewLandscapeOffse
             forUserInterfaceIdiom: userInterfaceIdiom
         ) as! Double)
 
-        if UIInterfaceOrientationIsLandscape(orientation) && systemVersion < 8.0 {
+        if orientation.isLandscape && systemVersion < 8.0 {
             width = screenSize.height
             height = screenSize.width
             y = landscapeOffsetY
         } else {
             width = screenSize.width
             height = screenSize.height
-            if UIInterfaceOrientationIsLandscape(orientation) {
+            if orientation.isLandscape {
                 y = landscapeOffsetY
             } else {
                 y = portraitOffsetY

@@ -71,10 +71,40 @@ open class ToastView: UIView {
     @unknown default: return 20
     }
   }()
-
+  
   /// The width ratio of toast view in window, specified as a value from 0.0 to 1.0.
   /// Default value: 0.875
   @objc open dynamic var maxWidthRatio: CGFloat = (280.0 / 320.0)
+  
+  /// The shape of the layer’s shadow.
+  @objc open dynamic var shadowPath: CGPath? {
+    get { return self.layer.shadowPath }
+    set { self.layer.shadowPath = newValue }
+  }
+  
+  /// The color of the layer’s shadow.
+  @objc open dynamic var shadowColor: UIColor? {
+    get { return self.layer.shadowColor.flatMap { UIColor(cgColor: $0) } }
+    set { self.layer.shadowColor = newValue?.cgColor }
+  }
+  
+  /// The opacity of the layer’s shadow.
+  @objc open dynamic var shadowOpacity: Float {
+    get { return self.layer.shadowOpacity }
+    set { self.layer.shadowOpacity = newValue }
+  }
+  
+  /// The offset (in points) of the layer’s shadow.
+  @objc open dynamic var shadowOffset: CGSize {
+    get { return self.layer.shadowOffset }
+    set { self.layer.shadowOffset = newValue }
+  }
+  
+  /// The blur radius (in points) used to render the layer’s shadow.
+  @objc open dynamic var shadowRadius: CGFloat {
+    get { return self.layer.shadowRadius }
+    set { self.layer.shadowRadius = newValue }
+  }
 
   // MARK: UI
 
@@ -85,6 +115,7 @@ open class ToastView: UIView {
     self.clipsToBounds = true
     return self
   }()
+  
   private let textLabel: UILabel = {
     let `self` = UILabel()
     self.textColor = .white

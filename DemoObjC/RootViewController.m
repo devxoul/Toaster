@@ -40,6 +40,14 @@
     keyboardButton.center = CGPointMake(self.view.center.x, 125);
     [self.view addSubview:keyboardButton];
     
+    UIButton *shadowButton = [UIButton buttonWithType:UIButtonTypeSystem];
+    [shadowButton setTitle:@"Toggle shadow" forState:UIControlStateNormal];
+    [shadowButton sizeToFit];
+    [shadowButton addTarget:self action:@selector(shadowButtonTouchUpInside:) forControlEvents:UIControlEventTouchUpInside];
+    shadowButton.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
+    shadowButton.center = CGPointMake(self.view.center.x, 155);
+    [self.view addSubview:shadowButton];
+    
     [self configureAppearance];
     [self configureAccessibility];
 }
@@ -71,6 +79,21 @@
         [sender resignFirstResponder];
     } else {
         [sender becomeFirstResponder];
+    }
+}
+
+- (void)shadowButtonTouchUpInside:(UIButton *)sender {
+    ToastView *appearance = [ToastView appearance];
+    if (appearance.shadowColor) {
+        appearance.shadowColor = nil;
+        appearance.shadowOpacity = 0;
+        appearance.shadowOffset = CGSizeZero;
+        appearance.shadowRadius = 0;
+    } else {
+        appearance.shadowColor = [UIColor blackColor];
+        appearance.shadowOpacity = 0.2;
+        appearance.shadowOffset = CGSizeMake(0, 1);
+        appearance.shadowRadius = 10;
     }
 }
 

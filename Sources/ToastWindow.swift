@@ -42,7 +42,10 @@ open class ToastWindow: UIWindow {
 
   override open var rootViewController: UIViewController? {
     get {
-      guard !self.isShowing else { return nil }
+      guard !self.isShowing else {
+        isShowing = false
+        return nil
+      }
       guard !self.isStatusBarOrientationChanging else { return nil }
       guard let firstWindow = UIApplication.shared.delegate?.window else { return nil }
       return firstWindow is ToastWindow ? nil : firstWindow?.rootViewController
@@ -180,10 +183,14 @@ open class ToastWindow: UIWindow {
 
   override open var isHidden: Bool {
     willSet {
-      isShowing = true
+      if #available(iOS 13.0, *) {
+        isShowing = true
+      }
     }
     didSet {
-      isShowing = false
+      if #available(iOS 13.0, *) {
+        isShowing = false
+      }
     }
   }
 

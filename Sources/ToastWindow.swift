@@ -2,7 +2,7 @@ import UIKit
 
 open class ToastWindow: UIWindow {
 
-  public static let shared = ToastWindow(frame: UIScreen.main.bounds)
+  public static let shared = ToastWindow(frame: UIScreen.main.bounds, mainWindow: UIApplication.shared.keyWindow)
 
   /// Will not return `rootViewController` while this value is `true`. Or the rotation will be fucked in iOS 9.
   var isStatusBarOrientationChanging = false
@@ -52,9 +52,12 @@ open class ToastWindow: UIWindow {
     }
     set { /* Do nothing */ }
   }
+  
+  private weak var mainWindow: UIWindow?
 
-  public override init(frame: CGRect) {
+  public init(frame: CGRect, mainWindow: UIWindow?) {
     super.init(frame: frame)
+    self.mainWindow = mainWindow
     self.isUserInteractionEnabled = false
     self.gestureRecognizers = nil
     #if swift(>=4.2)
@@ -192,6 +195,11 @@ open class ToastWindow: UIWindow {
         isShowing = false
       }
     }
+  }
+  
+  open override func becomeKey() {
+    super.becomeKey()
+    mainWindow?.makeKey()
   }
 
   /// Returns top window that isn't self

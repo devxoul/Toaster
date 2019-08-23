@@ -80,4 +80,13 @@ class ToasterTests: XCTestCase {
         wait(for: [disappearExpectation], timeout: 3)
     }
     
+    func testToastWindowNotToBeKeyWindow() {
+        let existingKeyWindow = UIWindow(frame: .zero)
+        existingKeyWindow.makeKey()
+        let toastWindow = ToastWindow(frame: .zero, mainWindow: existingKeyWindow)
+        toastWindow.makeKey()
+        XCTAssertTrue(existingKeyWindow.isKeyWindow)
+        XCTAssertFalse(toastWindow.isKeyWindow)
+    }
+    
 }

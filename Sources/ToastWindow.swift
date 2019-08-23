@@ -178,6 +178,7 @@ open class ToastWindow: UIWindow {
   }
 
   @objc private func keyboardDidHide() {
+    didKeyboardShow = false
     guard let subviews = self.originalSubviews.allObjects as? [UIView] else { return }
     for subview in subviews {
       super.addSubview(subview)

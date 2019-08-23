@@ -4,10 +4,21 @@ sudo: false
 language: objective-c
 
 env:
-  - SDK="iphoneos12.4"
+  global:
+    - PROJECT="Toaster.xcodeproj"
+    - SCHEME="Toaster"
+    - SDK="iphoneos12.4"
+  matrix:
+    - DESTINATION="id=3A381AFE-A894-425F-A503-92C84DA4086A"
 
 script:
-  - xcodebuild clean build -sdk $SDK -configuration Debug CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
-  
+  - xcodebuild clean build test
+    -project $PROJECT
+    -scheme $SCHEME
+    -sdk $SDK
+    -destination $DESTINATION
+    -configuration Debug
+    CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO | xcpretty
+
 before_install:
   - xcodebuild -showsdks

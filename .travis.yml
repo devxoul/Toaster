@@ -1,24 +1,7 @@
 os: osx
 osx_image: xcode10.3
 sudo: false
-language: objective-c
-
-env:
-  global:
-    - PROJECT="Toaster.xcodeproj"
-    - SCHEME="Toaster"
-    - SDK="iphoneos12.4"
-  matrix:
-    - DESTINATION="id=3A381AFE-A894-425F-A503-92C84DA4086A"
-
-script:
-  - xcodebuild clean build test
-    -project $PROJECT
-    -scheme $SCHEME
-    -sdk $SDK
-    -destination $DESTINATION
-    -configuration Debug
-    CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO | xcpretty
-
-before_install:
-  - xcodebuild -showsdks
+language: swift
+xcode_project: Toaster.xcodeproj
+xcode_scheme: Toaster
+xcode_destination: platform=iOS Simulator,OS=12.4,name=iPhone Xʀ

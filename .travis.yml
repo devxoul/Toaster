@@ -1,13 +1,7 @@
 os: osx
 osx_image: xcode10.3
 sudo: false
-language: objective-c
-
-env:
-  - SDK="iphoneos12.4"
-
-script:
-  - xcodebuild clean build -sdk $SDK -configuration Debug CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
-  
-before_install:
-  - xcodebuild -showsdks
+language: swift
+xcode_project: Toaster.xcodeproj
+xcode_scheme: Toaster
+xcode_destination: platform=iOS Simulator,OS=12.4,name=iPhone Xʀ

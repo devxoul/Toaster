@@ -65,8 +65,6 @@ open class ToastWindow: UIWindow {
   /// Will not return `rootViewController` while this value is `true`. Needed for iOS 13.
   private var isShowing = false
   
-  private var didKeyboardShow = false
-  
   /// Returns original subviews. `ToastWindow` overrides `addSubview()` to add a subview to the
   /// top window instead itself.
   private var originalSubviews = NSPointerArray.weakObjects()
@@ -169,7 +167,6 @@ open class ToastWindow: UIWindow {
   }
 
   @objc private func keyboardWillShow() {
-    didKeyboardShow = true
     guard let topWindow = self.topWindow(),
       let subviews = self.originalSubviews.allObjects as? [UIView] else { return }
     for subview in subviews {
@@ -220,7 +217,7 @@ open class ToastWindow: UIWindow {
   private func topWindow() -> UIWindow? {
     if let window = UIApplication.shared.windows.last(where: {
       // https://github.com/devxoul/Toaster/issues/152
-      didKeyboardShow || $0.isOpaque
+      ToastKeyboardObserver.shared().didKeyboardShow || $0.isOpaque
     }), window !== self {
       return window
     }

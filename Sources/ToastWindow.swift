@@ -217,7 +217,7 @@ open class ToastWindow: UIWindow {
   private func topWindow() -> UIWindow? {
     if let window = UIApplication.shared.windows.last(where: {
       // https://github.com/devxoul/Toaster/issues/152
-      ToastKeyboardObserver.shared().didKeyboardShow || $0.isOpaque
+      KeyboardObserver.shared.didKeyboardShow || $0.isOpaque
     }), window !== self {
       return window
     }

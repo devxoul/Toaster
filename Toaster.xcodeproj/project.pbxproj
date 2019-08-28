@@ -27,8 +27,8 @@
 		3719A73F2255991B009EAFCD /* Toaster.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 03A75E2B1BCF2066002E46C4 /* Toaster.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		C06FC9D41F95A8CC00782082 /* ToasterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C06FC9D31F95A8CC00782082 /* ToasterTests.swift */; };
 		C06FC9D61F95A8CC00782082 /* Toaster.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03A75E2B1BCF2066002E46C4 /* Toaster.framework */; };
-		C104FC202314D92D0034B9AB /* ToastKeyboardObserver.h in Headers */ = {isa = PBXBuildFile; fileRef = C104FC1E2314D92D0034B9AB /* ToastKeyboardObserver.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		C104FC212314D92D0034B9AB /* ToastKeyboardObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = C104FC1F2314D92D0034B9AB /* ToastKeyboardObserver.m */; };
+		C1C0178D23163F5000446CED /* KeyboardObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C0178C23163F4F00446CED /* KeyboardObserver.swift */; };
+		C1C017922316419900446CED /* UIApplication+Load.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C017912316419900446CED /* UIApplication+Load.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -106,8 +106,8 @@
 		C06FC9D11F95A8CC00782082 /* ToasterTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ToasterTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C06FC9D31F95A8CC00782082 /* ToasterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToasterTests.swift; sourceTree = "<group>"; };
 		C06FC9D51F95A8CC00782082 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		C104FC1E2314D92D0034B9AB /* ToastKeyboardObserver.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ToastKeyboardObserver.h; sourceTree = "<group>"; };
-		C104FC1F2314D92D0034B9AB /* ToastKeyboardObserver.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ToastKeyboardObserver.m; sourceTree = "<group>"; };
+		C1C0178C23163F4F00446CED /* KeyboardObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardObserver.swift; sourceTree = "<group>"; };
+		C1C017912316419900446CED /* UIApplication+Load.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Load.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -165,8 +165,8 @@
 				0306DBA71D85D62A007AE314 /* ToastCenter.swift */,
 				0306DBA81D85D62A007AE314 /* ToastView.swift */,
 				0306DBA91D85D62A007AE314 /* ToastWindow.swift */,
-				C104FC1E2314D92D0034B9AB /* ToastKeyboardObserver.h */,
-				C104FC1F2314D92D0034B9AB /* ToastKeyboardObserver.m */,
+				C1C0178C23163F4F00446CED /* KeyboardObserver.swift */,
+				C1C017912316419900446CED /* UIApplication+Load.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -234,7 +234,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				0306DBAA1D85D62A007AE314 /* Toaster.h in Headers */,
-				C104FC202314D92D0034B9AB /* ToastKeyboardObserver.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -406,8 +405,9 @@
 			files = (
 				0306DBAC1D85D62A007AE314 /* ToastCenter.swift in Sources */,
 				0306DBAE1D85D62A007AE314 /* ToastWindow.swift in Sources */,
+				C1C017922316419900446CED /* UIApplication+Load.swift in Sources */,
 				0306DBAB1D85D62A007AE314 /* Toast.swift in Sources */,
-				C104FC212314D92D0034B9AB /* ToastKeyboardObserver.m in Sources */,
+				C1C0178D23163F5000446CED /* KeyboardObserver.swift in Sources */,
 				0306DBAD1D85D62A007AE314 /* ToastView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -9,6 +9,12 @@ Toaster
 Android-like toast with very simple interface. (formerly JLToast)
 
 
+Screenshots
+-----------
+
+![Toaster Screenshot](https://raw.github.com/devxoul/Toaster/master/Screenshots/Toaster.png)
+
+
 Features
 --------
 
@@ -63,7 +69,7 @@ Toast(text: "Hello, world!", delay: Delay.short, duration: Delay.long)
     toast.show()
     toast.cancel() // remove toast immediately
     ```
-    
+
 - **Removing current toast**:
 
     ```swift
@@ -71,7 +77,7 @@ Toast(text: "Hello, world!", delay: Delay.short, duration: Delay.long)
         currentToast.cancel()
     }
     ```
-    
+
 - **Removing all toasts**:
 
     ```swift
@@ -97,6 +103,13 @@ Supported appearance properties are:
 | `font` | `UIFont` | Font |
 | `bottomOffsetPortrait` | `CGFloat` | Vertical offfset from bottom in portrait mode |
 | `bottomOffsetLandscape` | `CGFloat` | Vertical offfset from bottom in landscape mode |
+| `shadowPath` | `CGPath` | The shape of the layer’s shadow |
+| `shadowColor` | `UIColor` | The color of the layer’s shadow |
+| `shadowOpacity` | `Float` | The opacity of the layer’s shadow |
+| `shadowOffset` | `CGSize` | The offset (in points) of the layer’s shadow |
+| `shadowRadius` | `CGFloat` | The blur radius (in points) used to render the layer’s shadow |
+| `maxWidthRatio` | `CGFloat` | The width ratio of toast view in window |
+| `useSafeAreaForBottomOffset` | `Bool` | A Boolean value that determines `safeAreaInsets.bottom` is added to `bottomOffset` |
 
 ### Attributed string
 
@@ -112,12 +125,6 @@ By default, VoiceOver with UIAccessibility is enabled since Toaster 2.3.0. To di
 ```swift
 ToastCenter.default.isSupportAccessibility = false
 ```
-
-
-Screenshots
------------
-
-![Toaster Screenshot](https://raw.github.com/devxoul/Toaster/master/Screenshots/Toaster.png)
 
 
 License

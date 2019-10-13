@@ -6,7 +6,7 @@
 //  Copyright © 2019 Suyeol Jeon. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 extension UIApplication {
   

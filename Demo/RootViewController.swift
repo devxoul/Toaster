@@ -5,6 +5,8 @@ import Photos
 final class RootViewController: UIViewController {
 
   override func viewDidLoad() {
+    super.viewDidLoad()
+    
     let button = UIButton(type: .system)
     button.setTitle("Show", for: .normal)
     button.sizeToFit()

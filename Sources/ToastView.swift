@@ -196,7 +196,7 @@ open class ToastView: UIView {
       y = self.bottomOffsetLandscape
     }
     if #available(iOS 11.0, *), useSafeAreaForBottomOffset {
-      y += ToastWindow.shared.safeAreaInsets.bottom
+      y += ToastWindow.shared.rootViewController?.view.safeAreaInsets.bottom ?? 0
     }
 
     let backgroundViewSize = self.backgroundView.frame.size

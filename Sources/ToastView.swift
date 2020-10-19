@@ -52,7 +52,7 @@ open class ToastView: UIView {
     case .pad: return 60
     case .tv: return 90
     case .carPlay: return 30
-    #if swift(>=5.3)
+    #if compiler(>=5.3)
     case .mac: return 60
     #endif
     // default values
@@ -69,7 +69,7 @@ open class ToastView: UIView {
     case .pad: return 40
     case .tv: return 60
     case .carPlay: return 20
-    #if swift(>=5.3)
+    #if compiler(>=5.3)
     case .mac: return 40
     #endif
     // default values
@@ -138,7 +138,7 @@ open class ToastView: UIView {
       case .pad: return .systemFont(ofSize: 16)
       case .tv: return .systemFont(ofSize: 20)
       case .carPlay: return .systemFont(ofSize: 12)
-      #if swift(>=5.3)
+      #if compiler(>=5.3)
       case .mac: return .systemFont(ofSize: 16)
       #endif
       // default values

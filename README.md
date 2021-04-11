@@ -49,6 +49,16 @@ Installation
     github "devxoul/Toaster"
     ```
 
+- **For iOS 8+ and Xcode 11+ projects with [Swift Package Manager](https://github.com/apple/swift-package-manager):**
+
+
+    ```
+    dependencies: [
+        .package(url: "https://github.com/devxoul/Toaster.git", from: "master")
+    ]
+    ```
+
+
 
 Getting Started
 ---------------

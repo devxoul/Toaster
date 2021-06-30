@@ -37,19 +37,19 @@ Toast(text: "Hello, world!").show()
 Installation
 ------------
 
-- **For iOS 8+ projects with [CocoaPods](https://cocoapods.org):**
+- **For iOS 9+ projects with [CocoaPods](https://cocoapods.org):**
 
     ```ruby
     pod 'Toaster'
     ```
 
-- **For iOS 8+ projects with [Carthage](https://github.com/Carthage/Carthage):**
+- **For iOS 9+ projects with [Carthage](https://github.com/Carthage/Carthage):**
 
     ```
     github "devxoul/Toaster"
     ```
 
-- **For iOS 8+ and Xcode 11+ projects with [Swift Package Manager](https://github.com/apple/swift-package-manager):**
+- **For iOS 9+ and Xcode 11+ projects with [Swift Package Manager](https://github.com/apple/swift-package-manager):**
 
 
     ```

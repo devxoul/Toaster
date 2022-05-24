@@ -230,4 +230,9 @@ open class ToastView: UIView {
     return nil
   }
 
+  /// Helper function for setting cornerRadius to avoid conflicting with UIView extension.
+  @objc public dynamic func cornerRadius(_ cornerRadius: CGFloat) {
+    self.cornerRadius = cornerRadius
+  }
+  
 }

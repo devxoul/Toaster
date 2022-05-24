@@ -4,6 +4,10 @@ import Photos
 
 final class RootViewController: UIViewController {
 
+  override var preferredStatusBarStyle: UIStatusBarStyle {
+    .lightContent
+  }
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     

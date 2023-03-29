@@ -58,7 +58,7 @@
     appearance.textColor = UIColor.blackColor;
     appearance.font = [UIFont boldSystemFontOfSize: 16];
     appearance.textInsets = UIEdgeInsetsMake(15, 20, 15, 20);
-    appearance.bottomOffsetPortrait = 100;
+    appearance.offsetPortrait = 100;
     appearance.cornerRadius = 20;
     appearance.maxWidthRatio = 0.7;
 }

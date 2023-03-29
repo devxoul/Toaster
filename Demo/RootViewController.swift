@@ -49,9 +49,11 @@ final class RootViewController: UIViewController {
     appearance.textColor = .black
     appearance.font = .boldSystemFont(ofSize: 16)
     appearance.textInsets = UIEdgeInsets(top: 15, left: 20, bottom: 15, right: 20)
-    appearance.bottomOffsetPortrait = 100
+    appearance.offsetPortrait = 10
+    appearance.toastOrientation = .top
     appearance.cornerRadius = 20
     appearance.maxWidthRatio = 0.7
+    appearance.useSafeAreaForOffset = true
   }
 
   func configureAccessibility() {

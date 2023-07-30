@@ -31,12 +31,20 @@ final class RootViewController: UIViewController {
     imagePickerButton.center = CGPoint(x: view.center.x, y: 155)
     self.view.addSubview(imagePickerButton)
     
+    let showCameraButton = UIButton(type: .system)
+    showCameraButton.setTitle("Show Camera", for: .normal)
+    showCameraButton.sizeToFit()
+    showCameraButton.addTarget(self, action: #selector(self.showCameraButtonTouchUpInside), for: .touchUpInside)
+    showCameraButton.autoresizingMask = [.flexibleBottomMargin, .flexibleLeftMargin, .flexibleRightMargin]
+    showCameraButton.center = CGPoint(x: view.center.x, y: 185)
+    self.view.addSubview(showCameraButton)
+    
     let shadowButton = UIButton(type: .system)
     shadowButton.setTitle("Toggle shadow", for: .normal)
     shadowButton.sizeToFit()
     shadowButton.addTarget(self, action: #selector(self.shadowButtonTouchUpInside), for: .touchUpInside)
     shadowButton.autoresizingMask = [.flexibleBottomMargin, .flexibleLeftMargin, .flexibleRightMargin]
-    shadowButton.center = CGPoint(x: view.center.x, y: 185)
+    shadowButton.center = CGPoint(x: view.center.x, y: 215)
     self.view.addSubview(shadowButton)
 
     self.configureAppearance()
@@ -59,7 +67,7 @@ final class RootViewController: UIViewController {
   }
 
   @objc dynamic func showButtonTouchUpInside() {
-    Toast(text: "Basic Toast").show()
+    Toast(text: "Basic Toast").show(position: .top)
     Toast(attributedText: NSAttributedString(string: "AttributedString Toast", attributes: [NSAttributedString.Key.backgroundColor: UIColor.yellow])).show()
     Toast(text: "You can set duration. `Delay.short` means 2 seconds.\n" +
       "`Delay.long` means 3.5 seconds.",
@@ -77,6 +85,10 @@ final class RootViewController: UIViewController {
 
   @objc dynamic func imagePickerButtonTouchUpInside(sender: UIButton) {
     pickImage()
+  }
+  
+  @objc dynamic func showCameraButtonTouchUpInside(sender: UIButton) {
+    showCamera()
   }
   
   @objc dynamic func shadowButtonTouchUpInside(sender: UIButton) {
@@ -115,6 +127,14 @@ final class RootViewController: UIViewController {
       }
     }
     let mediaPicker = UIImagePickerController()
+    mediaPicker.sourceType = .camera
+    mediaPicker.delegate = self
+    present(mediaPicker, animated: true, completion: nil)
+  }
+  
+  private func showCamera() {
+    let mediaPicker = UIImagePickerController()
+    mediaPicker.sourceType = .camera
     mediaPicker.delegate = self
     present(mediaPicker, animated: true, completion: nil)
   }

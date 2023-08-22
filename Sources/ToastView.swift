@@ -13,6 +13,11 @@ open class ToastView: UIView {
     get { return self.textLabel.attributedText }
     set { self.textLabel.attributedText = newValue }
   }
+
+  open var numberOfLines: Int {
+    get { return self.textLabel.numberOfLines }
+    set { self.textLabel.numberOfLines = newValue }
+  }
   
 
   // MARK: Appearance

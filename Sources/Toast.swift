@@ -94,7 +94,8 @@ open class Toast: Operation {
 
   // MARK: Showing
 
-  @objc public func show() {
+  @objc public func show(position: ToastPosition = .bottom) {
+    self.view.position = position
     ToastCenter.default.add(self)
   }
 

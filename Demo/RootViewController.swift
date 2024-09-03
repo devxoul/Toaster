@@ -50,7 +50,7 @@ final class RootViewController: UIViewController {
     appearance.font = .boldSystemFont(ofSize: 16)
     appearance.textInsets = UIEdgeInsets(top: 15, left: 20, bottom: 15, right: 20)
     appearance.bottomOffsetPortrait = 100
-    appearance.cornerRadius = 20
+    appearance.cornerRadius = 20 // or use `appearance.cornerRadius(20)` if you are facing `Ambiguous use of cornerRadius` error.
     appearance.maxWidthRatio = 0.7
   }
 

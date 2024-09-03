@@ -34,30 +34,40 @@ Toast(text: "Hello, world!").show()
 ```
 
 
+Compatibility
+-------------
+
+Toaster supports the same minimum Xcode version as App Store submission (https://developer.apple.com/ios/submit/):
+- Xcode 15 and newer
+
+Toaster supports the same Swift versions as Xcode (https://developer.apple.com/support/xcode/):
+- Swift 4 and newer
+
+Toaster supports all Apple platforms.
+
+
 Installation
 ------------
 
-- **For iOS 9+ projects with [CocoaPods](https://cocoapods.org):**
+- **For projects with [CocoaPods](https://cocoapods.org):**
 
     ```ruby
     pod 'Toaster'
     ```
 
-- **For iOS 9+ projects with [Carthage](https://github.com/Carthage/Carthage):**
+- **For projects with [Carthage](https://github.com/Carthage/Carthage):**
 
     ```
     github "devxoul/Toaster"
     ```
 
-- **For iOS 9+ and Xcode 11+ projects with [Swift Package Manager](https://github.com/apple/swift-package-manager):**
-
+- **For projects with [Swift Package Manager](https://github.com/apple/swift-package-manager):**
 
     ```
     dependencies: [
         .package(url: "https://github.com/devxoul/Toaster.git", from: "master")
     ]
     ```
-
 
 
 Getting Started

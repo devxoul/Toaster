@@ -1,7 +1,7 @@
 os: osx
-osx_image: xcode12
+osx_image: xcode15
 sudo: false
 language: swift
 xcode_project: Toaster.xcodeproj
 xcode_scheme: Toaster
-xcode_destination: platform=iOS Simulator,OS=12.4,name=iPhone Xʀ
+xcode_destination: platform=iOS Simulator,OS=17.4,name=iPhone 15

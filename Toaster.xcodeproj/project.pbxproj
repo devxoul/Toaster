@@ -17,6 +17,7 @@
 		0397CD2D1D85D6920077D82F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0306DB991D85D626007AE314 /* AppDelegate.swift */; };
 		0397CD2E1D85D6930077D82F /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0306DB9E1D85D626007AE314 /* RootViewController.swift */; };
 		03C23F3C1D8823AA00EE8424 /* Toaster.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03A75E2B1BCF2066002E46C4 /* Toaster.framework */; };
+		18C31E1E29D416C300E663E3 /* ToastOrientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C31E1D29D416C300E663E3 /* ToastOrientation.swift */; };
 		3706852A20D6A68800F09B36 /* Toaster.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 03A75E2B1BCF2066002E46C4 /* Toaster.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3719A72C225598E4009EAFCD /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3719A72B225598E4009EAFCD /* AppDelegate.m */; };
 		3719A72F225598E4009EAFCD /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3719A72E225598E4009EAFCD /* RootViewController.m */; };
@@ -94,6 +95,7 @@
 		0306DBB01D85D62E007AE314 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		03A75E2B1BCF2066002E46C4 /* Toaster.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Toaster.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		03A75E4F1BCF20D4002E46C4 /* ToasterDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ToasterDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		18C31E1D29D416C300E663E3 /* ToastOrientation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastOrientation.swift; sourceTree = "<group>"; };
 		3719A728225598E4009EAFCD /* ToasterDemoObjC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ToasterDemoObjC.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3719A72A225598E4009EAFCD /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		3719A72B225598E4009EAFCD /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -168,6 +170,7 @@
 				0306DBA91D85D62A007AE314 /* ToastWindow.swift */,
 				C1C0178C23163F4F00446CED /* KeyboardObserver.swift */,
 				C1C017912316419900446CED /* UIApplication+Load.swift */,
+				18C31E1D29D416C300E663E3 /* ToastOrientation.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -407,6 +410,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0306DBAC1D85D62A007AE314 /* ToastCenter.swift in Sources */,
+				18C31E1E29D416C300E663E3 /* ToastOrientation.swift in Sources */,
 				0306DBAE1D85D62A007AE314 /* ToastWindow.swift in Sources */,
 				C1C017922316419900446CED /* UIApplication+Load.swift in Sources */,
 				0306DBAB1D85D62A007AE314 /* Toast.swift in Sources */,

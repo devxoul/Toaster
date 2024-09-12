@@ -43,9 +43,11 @@ open class ToastView: UIView {
     get { return self.textLabel.font }
     set { self.textLabel.font = newValue }
   }
+  
+  @objc open dynamic var toastOrientation: ToastOrientation = .bottom
 
   /// The bottom offset from the screen's bottom in portrait mode.
-  @objc open dynamic var bottomOffsetPortrait: CGFloat = {
+  @objc open dynamic var offsetPortrait: CGFloat = {
     switch UIDevice.current.userInterfaceIdiom {
     // specific values
     case .phone: return 30
@@ -61,7 +63,7 @@ open class ToastView: UIView {
   }()
 
   /// The bottom offset from the screen's bottom in landscape mode.
-  @objc open dynamic var bottomOffsetLandscape: CGFloat = {
+  @objc open dynamic var offsetLandscape: CGFloat = {
     switch UIDevice.current.userInterfaceIdiom {
     // specific values
     case .phone: return 20
@@ -79,7 +81,7 @@ open class ToastView: UIView {
   /// If this value is `true` and SafeArea is available,
   /// `safeAreaInsets.bottom` will be added to the `bottomOffsetPortrait` and `bottomOffsetLandscape`.
   /// Default value: false
-  @objc open dynamic var useSafeAreaForBottomOffset: Bool = false
+  @objc open dynamic var useSafeAreaForOffset: Bool = false
 
   /// The width ratio of toast view in window, specified as a value from 0.0 to 1.0.
   /// Default value: 0.875
@@ -195,19 +197,27 @@ open class ToastView: UIView {
     if orientation.isPortrait || !ToastWindow.shared.shouldRotateManually {
       width = containerSize.width
       height = containerSize.height
-      y = self.bottomOffsetPortrait
+      y = self.offsetPortrait
     } else {
       width = containerSize.height
       height = containerSize.width
-      y = self.bottomOffsetLandscape
+      y = self.offsetLandscape
     }
-    if #available(iOS 11.0, *), useSafeAreaForBottomOffset {
-      y += ToastWindow.shared.safeAreaInsets.bottom
+    if #available(iOS 11.0, *), useSafeAreaForOffset {
+      switch self.toastOrientation {
+      case .bottom:
+        y += ToastWindow.shared.safeAreaInsets.bottom
+      case .top:
+        y += ToastWindow.shared.safeAreaInsets.top
+      }
     }
 
     let backgroundViewSize = self.backgroundView.frame.size
     x = (width - backgroundViewSize.width) * 0.5
-    y = height - (backgroundViewSize.height + y)
+    if self.toastOrientation == .bottom {
+      y = height - (backgroundViewSize.height + y)
+    }
+    
     self.frame = CGRect(
       x: x,
       y: y,

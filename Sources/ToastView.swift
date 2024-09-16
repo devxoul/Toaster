@@ -29,6 +29,9 @@ open class ToastView: UIView {
     set { self.backgroundView.layer.cornerRadius = newValue }
   }
 
+   /// The background view's width
+  @objc open dynamic var backgroundWidth: NSNumber?
+
   /// The inset of the text label.
   @objc open dynamic var textInsets = UIEdgeInsets(top: 6, left: 10, bottom: 6, right: 10)
 
@@ -182,7 +185,7 @@ open class ToastView: UIView {
     self.backgroundView.frame = CGRect(
       x: 0,
       y: 0,
-      width: self.textLabel.frame.size.width + self.textInsets.left + self.textInsets.right,
+      width: self.backgroundWidth?.doubleValue ?? self.textLabel.frame.size.width + self.textInsets.left + self.textInsets.right,
       height: self.textLabel.frame.size.height + self.textInsets.top + self.textInsets.bottom
     )
 

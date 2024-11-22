@@ -159,6 +159,7 @@ open class ToastWindow: UIWindow {
     let orientation = UIApplication.shared.statusBarOrientation
     self.handleRotate(orientation)
     self.isStatusBarOrientationChanging = false
+    rootViewController?.setNeedsStatusBarAppearanceUpdate()
   }
 
   @objc private func applicationDidBecomeActive() {
